@@ -6,63 +6,31 @@
     <title>GLOCARBON - Ecosystem Economy</title>
     
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#10B981">
+    <meta name="theme-color" content="#064E3B">
     <link rel="apple-touch-icon" href="icon.png">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="stylesheet" href="style.css">
-    
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
-<body>
+<body class="theme-home"> <div class="bg-overlay"></div>
+    <div class="bg-image"></div>
+    
+    <div id="globe-container">
+        <div class="earth"></div>
+    </div>
 
     <section id="auth-section" class="active-section">
-        <div class="auth-container">
-            <div class="auth-card glass-effect">
-                <div class="logo-area">
-                    <i class="fa-solid fa-leaf logo-icon"></i>
-                    <h1>GLOCARBON</h1>
-                    <p>Monetize Your Ecosystem</p>
-                </div>
-
-                <form id="login-form" onsubmit="handleLogin(event)">
-                    <div class="input-group">
-                        <i class="fa-solid fa-envelope"></i>
-                        <input type="email" id="login-email" placeholder="Email Address" required>
-                    </div>
-                    <div class="input-group">
-                        <i class="fa-solid fa-lock"></i>
-                        <input type="password" id="login-password" placeholder="Password" required>
-                    </div>
-                    <button type="submit" class="btn-primary">Log In</button>
-                    <p class="switch-text">New here? <a href="#" onclick="toggleAuth('signup')">Create Account</a></p>
-                </form>
-
-                <form id="signup-form" style="display:none;" onsubmit="handleRegister(event)">
-                    <div class="input-group">
-                        <i class="fa-solid fa-user"></i>
-                        <input type="text" id="reg-name" placeholder="Full Name" required>
-                    </div>
-                    <div class="input-group">
-                        <i class="fa-solid fa-envelope"></i>
-                        <input type="email" id="reg-email" placeholder="Email Address" required>
-                    </div>
-                    <div class="input-group">
-                        <i class="fa-solid fa-lock"></i>
-                        <input type="password" id="reg-password" placeholder="Create Password" required>
-                    </div>
-                    <div class="input-group">
-                        <select id="reg-role">
-                            <option value="Farmer">I am a Farmer (Seller)</option>
-                            <option value="Buyer">I am a Buyer (Investor)</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn-primary">Sign Up</button>
-                    <p class="switch-text">Have an account? <a href="#" onclick="toggleAuth('login')">Log In</a></p>
-                </form>
+        <div class="glass-card auth-card">
+            <div class="logo-area">
+                <i class="fa-solid fa-earth-africa logo-icon"></i>
+                <h1>GLOCARBON</h1>
+                <p>AI-Powered Environmental Platform</p>
             </div>
+            <button class="btn-primary" onclick="enterApp()">Get Started</button>
+            <p class="login-sub">Already have an account? <b>Log In</b></p>
         </div>
     </section>
 
@@ -70,96 +38,97 @@
         
         <aside class="sidebar">
             <div class="brand">
-                <i class="fa-solid fa-leaf"></i> <span>GLOCARBON</span>
+                <i class="fa-solid fa-leaf"></i> <span>GLO<b>CARBON</b></span>
             </div>
             <nav class="desktop-nav">
-                <a href="#" class="nav-link active" onclick="navTo('home')"><i class="fa-solid fa-house"></i> <span>Dashboard</span></a>
-                <a href="#" class="nav-link" onclick="navTo('marketplace')"><i class="fa-solid fa-store"></i> <span>Marketplace</span></a>
-                <a href="#" class="nav-link" onclick="navTo('scan')"><i class="fa-solid fa-camera"></i> <span>Scan Farm</span></a>
-                <a href="#" class="nav-link" onclick="navTo('learn')"><i class="fa-solid fa-book-open"></i> <span>Learn</span></a>
-                <a href="#" class="nav-link" onclick="navTo('profile')"><i class="fa-solid fa-user"></i> <span>Profile</span></a>
+                <a href="#" class="nav-link active" onclick="navTo('home')">
+                    <i class="fa-solid fa-chart-pie"></i> <span>Overview</span>
+                </a>
+                <a href="#" class="nav-link" onclick="navTo('marketplace')">
+                    <i class="fa-solid fa-globe"></i> <span>Marketplace</span>
+                </a>
+                <a href="#" class="nav-link" onclick="navTo('scan')">
+                    <i class="fa-solid fa-satellite"></i> <span>AI Scan</span>
+                </a>
+                <a href="#" class="nav-link" onclick="navTo('profile')">
+                    <i class="fa-solid fa-user-astronaut"></i> <span>Profile</span>
+                </a>
             </nav>
-            <div class="sidebar-footer">
-                <button onclick="logout()" class="btn-logout"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+            <div class="user-mini-profile">
+                <div class="avatar">U</div>
+                <div class="user-info">
+                    <h4>User</h4>
+                    <p>Free Plan</p>
+                </div>
             </div>
         </aside>
 
         <header class="mobile-header">
-            <button onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
-            <h2>GLOCARBON</h2>
-            <div class="user-avatar" id="header-avatar">U</div>
+            <div class="brand-mobile">GLOCARBON</div>
+            <div class="avatar-mobile">U</div>
         </header>
 
         <main class="content-area">
             
             <div id="view-home" class="app-view active-view">
-                <div class="welcome-banner">
-                    <h1 id="welcome-msg">Hello, Farmer</h1>
-                    <p>Track your impact and earnings.</p>
+                <div class="hero-text">
+                    <h1>AI-Powered<br>Environmental Platform</h1>
+                    <p>Harness the power of artificial intelligence to monitor, manage, and optimize carbon offset projects.</p>
                 </div>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <h3><i class="fa-solid fa-tree"></i> Trees</h3>
-                        <span id="stat-trees">0</span>
+                
+                <div class="stats-row">
+                    <div class="glass-card stat">
+                        <i class="fa-solid fa-tree"></i>
+                        <h3>1,204</h3>
+                        <p>Trees Monitored</p>
                     </div>
-                    <div class="stat-card">
-                        <h3><i class="fa-solid fa-coins"></i> Credits</h3>
-                        <span id="stat-credits">0</span>
+                    <div class="glass-card stat">
+                        <i class="fa-solid fa-coins"></i>
+                        <h3>450</h3>
+                        <p>Credits Earned</p>
                     </div>
-                    <div class="stat-card">
-                        <h3><i class="fa-solid fa-wallet"></i> Wallet</h3>
-                        <span>$0.00</span>
-                    </div>
-                </div>
-                <div class="cta-box">
-                    <h3>Ready to Monetize?</h3>
-                    <p>Upload your farm data today and get verified instantly.</p>
-                    <button class="btn-primary" onclick="navTo('scan')">Start Scanning</button>
                 </div>
             </div>
 
             <div id="view-marketplace" class="app-view">
-                <h2>Carbon Marketplace</h2>
-                <div id="map"></div> <div class="filter-bar">
-                    <input type="text" placeholder="Search projects...">
-                    <button class="btn-filter"><i class="fa-solid fa-sliders"></i></button>
-                </div>
-                <div id="project-grid">
-                    </div>
+                <h2>Verified Projects</h2>
+                <div id="map"></div>
+                <div id="project-grid"></div>
             </div>
 
             <div id="view-scan" class="app-view">
-                <h2>Upload Project</h2>
-                <div class="upload-card">
+                <h2>AI Satellite Scan</h2>
+                <div class="glass-card upload-zone">
+                    <div class="scan-animation"></div>
                     <form id="upload-form" onsubmit="handleUpload(event)">
-                        <label>Project Name</label>
-                        <input type="text" name="farm_name" required placeholder="e.g. Rift Valley Forest">
-                        
-                        <label>Farm Image (Satellite/Drone)</label>
-                        <div class="file-drop-area">
-                            <i class="fa-solid fa-cloud-arrow-up"></i>
-                            <p>Tap to select image</p>
-                            <input type="file" name="file" accept="image/*" required>
-                        </div>
-                        
-                        <button type="submit" class="btn-primary">Analyze & Upload</button>
+                        <p>Upload drone or satellite imagery</p>
+                        <input type="file" name="file" required>
+                        <button class="btn-primary">Analyze Terrain</button>
                     </form>
                     <div id="upload-result"></div>
                 </div>
             </div>
 
-             <div id="view-learn" class="app-view">
-                <h2>Education Hub</h2>
-                <div class="calculator-card">
-                    <h3>Tree Carbon Calculator</h3>
-                    <p>Estimate your potential.</p>
-                    <input type="number" id="calc-hectares" placeholder="Hectares">
-                    <select id="calc-region">
-                        <option value="5">Savanna (5 tons/ha)</option>
-                        <option value="10">Rainforest (10 tons/ha)</option>
-                    </select>
-                    <button class="btn-outline" onclick="calculate()">Estimate</button>
-                    <p id="calc-result">Result: 0 Tons</p>
+            <div id="view-profile" class="app-view">
+                <div class="glass-card profile-header">
+                    <div class="big-avatar">U</div>
+                    <h2>Demo User</h2>
+                    <p class="tag">Verified Farmer</p>
+                </div>
+                <div class="glass-card profile-details">
+                    <div class="detail-row">
+                        <span>Email</span>
+                        <strong>user@glocarbon.com</strong>
+                    </div>
+                    <div class="detail-row">
+                        <span>Location</span>
+                        <strong>Nairobi, Kenya</strong>
+                    </div>
+                    <div class="detail-row">
+                        <span>Total Earnings</span>
+                        <strong class="highlight">$1,250.00</strong>
+                    </div>
+                    <button class="btn-danger" onclick="logout()">Log Out</button>
                 </div>
             </div>
 
@@ -167,9 +136,8 @@
 
         <nav class="mobile-nav">
             <button onclick="navTo('home')" class="nav-item active"><i class="fa-solid fa-house"></i></button>
-            <button onclick="navTo('marketplace')" class="nav-item"><i class="fa-solid fa-store"></i></button>
-            <button onclick="navTo('scan')" class="nav-item center-fab"><i class="fa-solid fa-plus"></i></button>
-            <button onclick="navTo('learn')" class="nav-item"><i class="fa-solid fa-book"></i></button>
+            <button onclick="navTo('marketplace')" class="nav-item"><i class="fa-solid fa-globe"></i></button>
+            <button onclick="navTo('scan')" class="nav-item fab"><i class="fa-solid fa-plus"></i></button>
             <button onclick="navTo('profile')" class="nav-item"><i class="fa-solid fa-user"></i></button>
         </nav>
 
@@ -177,8 +145,8 @@
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>
-    
     <script>
+        // SERVICE WORKER REGISTRATION
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js');

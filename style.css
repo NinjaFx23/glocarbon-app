@@ -1,155 +1,147 @@
-/* --- GLOCARBON MODERN UI --- */
+/* --- GLOCARBON DARK THEME (v3) --- */
 :root {
-    --primary: #10B981;
-    --primary-dark: #059669;
-    --dark-bg: #111827; /* Dark mode base */
-    --light-bg: #F3F4F6;
-    --white: #FFFFFF;
-    --text-dark: #1F2937;
-    --text-gray: #6B7280;
-    --radius: 16px;
-    --sidebar-width: 250px;
+    --bg-dark: #000000;
+    --primary: #10B981; /* Emerald Green */
+    --primary-glow: rgba(16, 185, 129, 0.4);
+    --glass: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-white: #FFFFFF;
+    --text-gray: #9CA3AF;
+    --sidebar-w: 260px;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-body { background-color: var(--light-bg); color: var(--text-dark); height: 100vh; overflow: hidden; }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+body { 
+    background-color: var(--bg-dark); 
+    color: var(--text-white); 
+    height: 100vh; overflow: hidden; 
+    transition: background-image 0.5s ease;
+}
 
-/* --- 1. AUTH SCREEN (Login) --- */
-#auth-section {
+/* --- DYNAMIC BACKGROUNDS --- */
+.bg-image {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: url('https://images.unsplash.com/photo-1511497584788-876760111969?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
-    display: flex; align-items: center; justify-content: center;
-    z-index: 2000;
+    background-size: cover; background-position: center;
+    z-index: -2; opacity: 0.4; /* Dim the image so text pops */
+    transition: background-image 0.8s ease-in-out;
 }
-.glass-effect {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 24px;
-    padding: 40px; width: 90%; max-width: 400px;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    color: white; text-align: center;
-}
-.logo-area i { font-size: 3rem; color: #6EE7B7; margin-bottom: 10px; }
-.logo-area h1 { font-size: 2rem; margin-bottom: 5px; }
+/* By default (Home) */
+body.theme-home .bg-image { background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop'); } /* Space/Earth */
+body.theme-market .bg-image { background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2232&auto=format&fit=crop'); } /* Forest */
+body.theme-scan .bg-image { background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1948&auto=format&fit=crop'); } /* Nature/Mist */
+body.theme-profile .bg-image { background-image: url('https://images.unsplash.com/photo-1534081333815-ae5019106622?q=80&w=2070&auto=format&fit=crop'); } /* Ocean */
 
-.input-group {
-    position: relative; margin-bottom: 15px; text-align: left;
+/* --- ROTATING GLOBE (CSS ONLY) --- */
+#globe-container {
+    position: fixed; top: -10%; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 600px; z-index: -1;
+    pointer-events: none; opacity: 0.8;
 }
-.input-group i {
-    position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
-    color: var(--text-gray);
+.earth {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Earthmap1000x500.jpg/1000px-Earthmap1000x500.jpg');
+    background-size: 200% 100%; /* Important for seamless loop */
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.8), 0 0 50px var(--primary-glow);
+    animation: spin 60s linear infinite;
 }
-.input-group input, .input-group select {
-    width: 100%; padding: 12px 12px 12px 40px;
-    border: none; border-radius: 12px;
-    background: rgba(255,255,255,0.9);
-    font-size: 1rem;
+@keyframes spin { from { background-position: 0 0; } to { background-position: -200% 0; } }
+
+/* --- GLASSMORPHISM CARDS --- */
+.glass-card {
+    background: var(--glass);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px; padding: 25px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-/* --- 2. MAIN APP LAYOUT --- */
-#main-app { display: flex; height: 100vh; }
-
-/* SIDEBAR (Desktop) */
+/* --- SIDEBAR (FIXED) --- */
 .sidebar {
-    width: var(--sidebar-width); background: var(--white);
-    display: flex; flex-direction: column;
-    padding: 20px; border-right: 1px solid #E5E7EB;
+    position: fixed; top: 0; left: 0; height: 100%; width: var(--sidebar-w);
+    background: rgba(0,0,0,0.8); backdrop-filter: blur(20px);
+    border-right: 1px solid var(--glass-border);
+    padding: 30px; display: flex; flex-direction: column;
+    z-index: 100;
 }
-.brand { 
-    font-size: 1.5rem; font-weight: 700; color: var(--primary); 
-    display: flex; align-items: center; gap: 10px; margin-bottom: 40px; 
-}
-.desktop-nav { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.brand { font-size: 1.5rem; color: white; margin-bottom: 50px; display: flex; align-items: center; gap: 10px; }
+.brand b { color: var(--primary); }
 .nav-link {
     display: flex; align-items: center; gap: 15px;
-    padding: 12px 15px; color: var(--text-gray); text-decoration: none;
-    border-radius: 12px; transition: 0.2s; font-weight: 500;
+    padding: 16px; color: var(--text-gray); text-decoration: none;
+    margin-bottom: 5px; border-radius: 12px; transition: 0.3s;
 }
-.nav-link:hover, .nav-link.active {
-    background: #ECFDF5; color: var(--primary);
-}
-.sidebar-footer { border-top: 1px solid #eee; padding-top: 20px; }
-.btn-logout { background: none; border: none; color: #EF4444; cursor: pointer; font-size: 1rem; }
+.nav-link:hover, .nav-link.active { background: var(--primary-glow); color: white; border-left: 4px solid var(--primary); }
+.user-mini-profile { margin-top: auto; display: flex; gap: 10px; align-items: center; padding-top: 20px; border-top: 1px solid var(--glass-border); }
 
-/* CONTENT AREA */
+/* --- MAIN CONTENT (OFFSET) --- */
 .content-area {
-    flex: 1; padding: 20px; overflow-y: auto;
+    margin-left: var(--sidebar-w); /* Pushes content right */
+    padding: 40px; height: 100vh; overflow-y: auto;
     position: relative;
-    padding-bottom: 80px; /* Space for mobile nav */
 }
 
-/* MOBILE NAV (Bottom) */
-.mobile-nav {
-    position: fixed; bottom: 0; left: 0; width: 100%;
-    background: var(--white); border-top: 1px solid #eee;
-    display: flex; justify-content: space-around; padding: 10px 0;
-    z-index: 1000;
-}
-.nav-item {
-    background: none; border: none; font-size: 1.4rem; color: var(--text-gray);
-}
-.nav-item.active { color: var(--primary); }
-.center-fab {
-    background: var(--primary); color: white;
-    width: 50px; height: 50px; border-radius: 50%;
-    transform: translateY(-20px);
-    box-shadow: 0 4px 10px rgba(16, 185, 129, 0.4);
+/* --- DASHBOARD HERO --- */
+.hero-text { text-align: center; margin-top: 40px; margin-bottom: 60px; }
+.hero-text h1 { font-size: 3rem; font-weight: 700; background: -webkit-linear-gradient(white, #9CA3AF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-text p { color: var(--text-gray); max-width: 500px; margin: 20px auto; }
+.stats-row { display: flex; gap: 20px; justify-content: center; }
+.stat { text-align: center; min-width: 150px; }
+.stat i { font-size: 2rem; color: var(--primary); margin-bottom: 10px; }
+.stat h3 { font-size: 2rem; }
+
+/* --- AUTH SCREEN --- */
+#auth-section {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2000;
+    background: black;
     display: flex; align-items: center; justify-content: center;
 }
-
-.mobile-header {
-    display: none; padding: 15px; background: white;
-    align-items: center; justify-content: space-between;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin: -20px -20px 20px -20px;
-}
-.user-avatar {
-    width: 35px; height: 35px; background: var(--primary); color: white;
-    border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;
-}
-
-/* VIEWS & CARDS */
-.app-view { display: none; animation: fadeIn 0.3s ease; }
-.active-view { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-.welcome-banner {
-    background: linear-gradient(135deg, var(--primary), #34D399);
-    padding: 30px; border-radius: 20px; color: white; margin-bottom: 20px;
-}
-.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
-.stat-card {
-    background: white; padding: 15px; border-radius: 16px; text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-.stat-card h3 { font-size: 0.8rem; color: var(--text-gray); margin-bottom: 5px; }
-.stat-card span { font-size: 1.2rem; font-weight: 700; color: var(--text-dark); }
-
-/* BUTTONS */
+.logo-icon { font-size: 4rem; color: var(--primary); margin-bottom: 20px; }
 .btn-primary {
-    background: var(--primary); color: white; border: none;
-    padding: 12px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; width: 100%;
+    background: var(--primary); color: black; border: none; padding: 15px 30px; 
+    border-radius: 30px; font-weight: 700; cursor: pointer; margin-top: 20px; font-size: 1.1rem;
+    box-shadow: 0 0 20px var(--primary-glow); transition: 0.3s;
 }
-.switch-text { margin-top: 15px; font-size: 0.9rem; }
-.switch-text a { color: #6EE7B7; text-decoration: none; font-weight: bold; }
+.btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 40px var(--primary-glow); }
 
-/* RESPONSIVE */
+/* --- PROFILE PAGE --- */
+.profile-header { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 20px; }
+.big-avatar { width: 80px; height: 80px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: black; font-weight: bold; margin-bottom: 15px; }
+.detail-row { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--glass-border); }
+.highlight { color: var(--primary); font-size: 1.2rem; }
+.btn-danger { background: #EF4444; color: white; padding: 10px 20px; border: none; border-radius: 10px; margin-top: 20px; cursor: pointer; width: 100%; }
+
+/* --- RESPONSIVE --- */
+.mobile-header, .mobile-nav { display: none; }
+
 @media (max-width: 768px) {
-    .sidebar { display: none; } /* Hide sidebar on mobile */
-    .mobile-nav { display: flex; }
-    .mobile-header { display: flex; }
-    .stats-grid { grid-template-columns: 1fr; }
-}
-@media (min-width: 769px) {
-    .mobile-nav { display: none; } /* Hide bottom nav on desktop */
-    .mobile-header { display: none; }
+    .sidebar { display: none; } /* Hide Sidebar */
+    .content-area { margin-left: 0; padding: 20px; padding-bottom: 100px; } /* Reset Margin */
+    
+    .mobile-header {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 20px; position: sticky; top: 0; z-index: 50;
+        background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+    }
+    .brand-mobile { font-weight: bold; font-size: 1.2rem; color: white; }
+    .avatar-mobile { width: 35px; height: 35px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: black; font-weight: bold; }
+    
+    .mobile-nav {
+        display: flex; position: fixed; bottom: 0; width: 100%;
+        background: #000; border-top: 1px solid var(--glass-border);
+        justify-content: space-around; padding: 15px 0; z-index: 100;
+    }
+    .nav-item { background: none; border: none; font-size: 1.4rem; color: var(--text-gray); }
+    .nav-item.active { color: var(--primary); }
+    .fab { 
+        background: var(--primary); color: black; width: 55px; height: 55px; 
+        border-radius: 50%; transform: translateY(-25px); 
+        box-shadow: 0 0 15px var(--primary-glow);
+    }
+    
+    #globe-container { top: -20%; width: 100%; height: auto; aspect-ratio: 1; }
+    .hero-text h1 { font-size: 2rem; }
 }
 
-/* File Upload Pretty */
-.file-drop-area {
-    border: 2px dashed #D1D5DB; padding: 30px; text-align: center;
-    border-radius: 12px; margin: 15px 0; cursor: pointer; position: relative;
-}
-.file-drop-area input {
-    position: absolute; left: 0; top: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;
-}
+/* MAP Fix */
+#map { height: 300px; width: 100%; border-radius: 15px; margin-bottom: 20px; }

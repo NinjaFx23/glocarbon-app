@@ -1,4 +1,4 @@
-const CACHE_NAME = 'glocarbon-v2'; // <--- We changed this to v2
+const CACHE_NAME = 'glocarbon-v3'; 
 const ASSETS = [
   '/',
   '/index.html',
