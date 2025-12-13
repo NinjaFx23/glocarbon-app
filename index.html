@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLOCARBON | AI-Powered Carbon Ecosystem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1B5E20">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to Main Content</a>
+
+    <header role="banner">
+        <div class="logo">
+            <h1>GLOCARBON</h1>
+        </div>
+        <nav role="navigation" aria-label="Main Navigation">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#education">Learn (Education)</a></li>
+                <li><a href="#marketplace">Marketplace</a></li>
+                <li><a href="#login">Login / Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content" role="main">
+        
+        <section id="home" aria-labelledby="hero-heading">
+            <h2 id="hero-heading">Monetize Your Green Ecosystem</h2>
+            <p>Leveraging AI, Satellite Mapping, and MindSpore Technology to verify carbon credits for Forests and Grasslands.</p>
+            <p>Connecting Farmers directly to Buyers. No Brokers.</p>
+            
+            <div class="cta-group">
+                <button aria-label="Register as a Farmer to sell credits">I am a Farmer</button>
+                <button aria-label="Register as a Buyer to purchase credits">I am a Buyer</button>
+            </div>
+        </section>
+
+        <section id="auth-section" class="auth-container">
+            <div id="login-form-box">
+                <h2>Welcome Back</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password:</label>
+                        <input type="password" id="login-pass" required>
+                    </div>
+                    <button type="submit">Login</button>
+                    <p>New here? <a href="#" id="show-register">Create an account</a></p>
+                </form>
+            </div>
+
+            <div id="register-form-box" style="display:none;">
+                <h2>Create Account</h2>
+                <form id="register-form">
+                    <div class="form-group">
+                        <label>Full Name:</label>
+                        <input type="text" id="reg-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" id="reg-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password:</label>
+                        <input type="password" id="reg-pass" required>
+                    </div>
+                    <div class="form-group">
+                        <label>I am a:</label>
+                        <select id="reg-role">
+                            <option value="farmer">Farmer (I want to sell credits)</option>
+                            <option value="buyer">Buyer (I want to offset carbon)</option>
+                        </select>
+                    </div>
+                    <button type="submit">Sign Up</button>
+                    <p>Already have an account? <a href="#" id="show-login">Login here</a></p>
+                </form>
+            </div>
+            
+            <div id="user-dashboard" style="display:none; text-align: center; background-color: #e3f2fd; padding: 20px; border-radius: 8px;">
+                <h2 id="welcome-msg">Welcome!</h2>
+                <p>You are logged in as a <strong id="user-role-display">User</strong>.</p>
+                <button onclick="logout()" style="background-color: #d32f2f;">Logout</button>
+            </div>
+        </section>
+
+        <section id="education" aria-labelledby="education-heading">
+            <h2 id="education-heading">What are Carbon Credits?</h2>
+            
+            <article>
+                <h3>For Beginners</h3>
+                <p>Think of a carbon credit as a certificate. If your farm absorbs 1 ton of carbon dioxide from the air (using trees or grass), you earn 1 credit. Companies that emit smoke or pollution buy these credits from you to balance out their impact.</p>
+            </article>
+            
+            <article>
+                <h3>Why Grasslands Matter</h3>
+                <p>Trees are not the only answer. Grasslands store massive amounts of carbon in the soil. AFRICARBON uses advanced technology to measure this.</p>
+            </article>
+        </section>
+
+        <section id="features" aria-labelledby="features-heading">
+            <h2 id="features-heading">How It Works</h2>
+            <ul>
+                <li>
+                    <strong>Step 1: Scan</strong>
+                    <p>Use our AI & Satellite tools to map your farm's vegetation.</p>
+                </li>
+                <li>
+                    <strong>Step 2: Verify</strong>
+                    <p>We use the Verra Standard and MindSpore Earth AI to prove your credits are real.</p>
+                </li>
+                <li>
+                    <strong>Step 3: Trade</strong>
+                    <p>Sell directly to global companies. Transparent pricing.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="calculator" aria-labelledby="calc-heading">
+            <h2 id="calc-heading">Carbon Potential Calculator</h2>
+            <p>Estimate your farm's potential before you sign up.</p>
+            
+            <form id="carbon-form">
+                <div class="form-group">
+                    <label for="region">Select Your Region:</label>
+                    <select id="region" name="region" required>
+                        <option value="savanna">African Savanna (Grasslands)</option>
+                        <option value="rainforest">Tropical Rainforest</option>
+                        <option value="semi-arid">Semi-Arid Region</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="hectares">Land Size (Hectares):</label>
+                    <input type="number" id="hectares" name="hectares" min="1" placeholder="e.g., 10" required>
+                </div>
+
+                <button type="submit">Calculate Potential</button>
+            </form>
+
+            <div id="result" class="result-box" style="display:none;" aria-live="polite">
+                <h3>Estimated Results:</h3>
+                <p id="carbon-output">0 tons of CO2/year</p>
+                <p id="tree-recommendation">0 trees recommended</p>
+            </div>
+        </section>
+
+        <section id="verification" aria-labelledby="verify-heading">
+            <h2 id="verify-heading">Verify Your Project (AI Scan)</h2>
+            <p>Upload a photo of your farm section or satellite map for AI analysis.</p>
+
+            <form id="upload-form" enctype="multipart/form-data">
+                
+                <div class="form-group">
+                    <label for="farm-name">Project Name:</label>
+                    <input type="text" id="farm-name" name="farm_name" placeholder="e.g., My Green Valley" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="farm-photo">Upload Farm Photo (JPG/PNG):</label>
+                    <input type="file" id="farm-photo" name="file" accept="image/*" required>
+                </div>
+
+                <button type="submit">Upload for Analysis</button>
+            </form>
+
+            <div id="upload-status" class="result-box" style="display:none;">
+                <p id="status-message"></p>
+            </div>
+        </section>
+
+        <section id="marketplace" aria-labelledby="market-heading">
+            <h2 id="market-heading">Live Carbon Marketplace</h2>
+            <p>Directly connect with verified projects. No brokers.</p>
+            
+            <button onclick="loadMarketplace()">Refresh Marketplace</button>
+
+            <div id="map-container" style="height: 400px; margin-bottom: 20px; border-radius: 8px; border: 2px solid var(--primary-green);"></div>
+
+            <div id="project-grid" class="grid-container">
+                <p>Loading projects...</p>
+            </div>
+        </section>
+
+        <section id="download" aria-labelledby="download-heading">
+            <h2 id="download-heading">Get the App</h2>
+            <p>Available on Android and iOS for on-the-go farm scanning.</p>
+            <button aria-label="Download AFRICARBON for Android devices">Download for Android</button>
+            <button aria-label="Download AFRICARBON for iOS devices">Download for iOS</button>
+        </section>
+
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2024 GLOCARBON. All rights reserved.</p>
+        <p>Powered by MindSpore Earth & Verra Standards.</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('App Installed!', reg.scope))
+                    .catch(err => console.log('App Failed:', err));
+            });
+        }
+    </script>
+
+</body>
+</html>

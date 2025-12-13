@@ -1,0 +1,23 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Persistent Farmer",
+            "email": "persistentfarmer1@gmail.com",
+            "password": "1234567",
+            "role": "farmer"
+        }
+    ],
+    "projects": [
+        {
+            "id": 1,
+            "name": "MemoryTest Farm",
+            "image_url": "Karura_forest_arielview.jpg",
+            "credits": 10,
+            "status": "SOLD",
+            "lat": -1.5170602387313465,
+            "lng": 36.32858664524896,
+            "buyer": "Current User"
+        }
+    ]
+}

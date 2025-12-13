@@ -1,0 +1,207 @@
+/* --- VARIABLES (The Brand Palette) --- */
+:root {
+    --primary-dark: #1B5E20;    /* Deep Forest Green */
+    --primary-light: #4CAF50;   /* Standard Green */
+    --accent-lime: #C6FF00;     /* Tech/Action Green */
+    --bg-color: #F8F9FA;        /* Very light gray/white */
+    --card-bg: #FFFFFF;         /* Pure white for cards */
+    --text-main: #2C3E50;       /* Dark Blue-Grey for text */
+    --text-muted: #607D8B;      /* Softer grey for descriptions */
+    --shadow-soft: 0 4px 20px rgba(0,0,0,0.08); /* Soft floating shadow */
+    --radius-std: 12px;         /* Rounded corners */
+}
+
+/* --- RESET & TYPOGRAPHY --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Poppins', sans-serif; /* The new font */
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    padding-bottom: 80px;
+}
+
+/* --- HEADER (Modern Gradient) --- */
+header {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    position: sticky; /* Keeps header visible when scrolling */
+    top: 0;
+    z-index: 1000;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+nav ul { list-style: none; margin-top: 10px; }
+nav ul li { display: inline-block; margin: 0 10px; }
+
+nav a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+nav a:hover { color: var(--accent-lime); }
+
+/* --- SECTIONS (Cards) --- */
+section {
+    background: var(--card-bg);
+    margin: 2rem auto;
+    padding: 2rem;
+    max-width: 900px;
+    border-radius: var(--radius-std);
+    box-shadow: var(--shadow-soft);
+    animation: fadeIn 0.8s ease-in-out; /* Smooth entry animation */
+}
+
+h2 {
+    color: var(--primary-dark);
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+/* Little green line under headings */
+h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 4px;
+    background: var(--accent-lime);
+    margin-top: 5px;
+    border-radius: 2px;
+}
+
+/* --- BUTTONS (High Tech) --- */
+button {
+    background: var(--primary-dark);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 30px; /* Pill shape */
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+button:hover {
+    background: var(--primary-light);
+    transform: translateY(-2px); /* Slight lift */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* --- FORMS (Clean Inputs) --- */
+.form-group { margin-bottom: 1.2rem; }
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #E0E0E0;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-light);
+}
+
+/* --- MARKETPLACE GRID (Polished) --- */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.project-card {
+    background: white;
+    border-radius: var(--radius-std);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #eee;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.project-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-details { padding: 1.2rem; }
+
+.status-badge {
+    background-color: #E8F5E9;
+    color: var(--primary-dark);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* --- MAP CONTAINER --- */
+#map-container {
+    height: 400px;
+    width: 100%;
+    border-radius: var(--radius-std);
+    border: 4px solid white;
+    box-shadow: var(--shadow-soft);
+    margin-bottom: 2rem;
+}
+
+/* --- UTILITIES --- */
+.result-box {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- RESPONSIVE --- */
+@media (min-width: 768px) {
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    nav ul { margin-top: 0; }
+    
+    .cta-group {
+        display: flex;
+        gap: 1rem;
+    }
+    
+    button { width: auto; } /* Auto width on desktop */
+}
