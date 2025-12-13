@@ -1,289 +1,181 @@
-// Wait for the DOM (HTML) to fully load before running logic
-document.addEventListener('DOMContentLoaded', function() {
+/* --- GLOCARBON LOGIC --- */
+let currentUser = null; // Stores who is logged in
+
+// 1. NAVIGATION SYSTEM (The Router)
+function navTo(viewId) {
+    // Hide all views
+    document.querySelectorAll('.app-view').forEach(el => el.classList.remove('active-view'));
+    // Show target view
+    document.getElementById('view-' + viewId).classList.add('active-view');
     
-    // Get the form and result elements
-    const form = document.getElementById('carbon-form');
-    const resultBox = document.getElementById('result');
-    const carbonOutput = document.getElementById('carbon-output');
-    const treeOutput = document.getElementById('tree-recommendation');
+    // Update Bottom Nav (Mobile)
+    document.querySelectorAll('.mobile-nav .nav-item').forEach(el => el.classList.remove('active'));
+    // (Optional: You could add ID matching here for active state, but simple is fine for now)
 
-    // Absorption Rates (Simplified Estimates based on Verra/Scientific averages)
-    // Unit: Tons of CO2 per hectare per year
-    const absorptionRates = {
-        'savanna': 3.5,     // Grasslands absorb less per year but store more in soil
-        'rainforest': 10.0, // Trees absorb rapidly
-        'semi-arid': 1.2    // Lower absorption
-    };
+    // Update Desktop Nav
+    document.querySelectorAll('.desktop-nav .nav-link').forEach(el => el.classList.remove('active'));
+    
+    // Special Actions
+    if (viewId === 'marketplace') loadMarketplace();
+}
 
-    // Tree Density Recommendations (Trees per hectare)
-    const treeRecommendations = {
-        'savanna': 50,      // Keep it grassy, sparse trees (Acacia)
-        'rainforest': 500,  // Dense forest
-        'semi-arid': 20     // Very sparse, drought resistant
-    };
+// 2. AUTHENTICATION (Login/Signup)
+function toggleAuth(mode) {
+    if (mode === 'signup') {
+        document.getElementById('login-form').style.display = 'none';
+        document.getElementById('signup-form').style.display = 'block';
+    } else {
+        document.getElementById('login-form').style.display = 'block';
+        document.getElementById('signup-form').style.display = 'none';
+    }
+}
 
-    // Listen for the "Submit" event (when user clicks Calculate)
-    form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Stop the page from reloading
+function handleLogin(e) {
+    e.preventDefault();
+    const email = document.getElementById('login-email').value;
+    
+    // Call the API
+    fetch('/api/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ email: email, password: "demo" }) // Simplified for demo
+    })
+    .then(res => res.json())
+    .then(data => {
+        // FOR DEMO: We accept any login to let you test easily
+        currentUser = { name: "Demo User", role: "Farmer" }; 
+        enterApp();
+    })
+    .catch(err => {
+        // Fallback for offline testing
+        currentUser = { name: "Offline User", role: "Farmer" };
+        enterApp();
+    });
+}
 
-        // 1. Get User Inputs
-        const region = document.getElementById('region').value;
-        const hectares = parseFloat(document.getElementById('hectares').value);
+function handleRegister(e) {
+    e.preventDefault();
+    const name = document.getElementById('reg-name').value;
+    const role = document.getElementById('reg-role').value;
+    
+    currentUser = { name: name, role: role };
+    enterApp();
+}
 
-        // 2. Validate Input
-        if (isNaN(hectares) || hectares <= 0) {
-            alert("Please enter a valid land size.");
+function enterApp() {
+    // Hide Login Screen
+    document.getElementById('auth-section').style.display = 'none';
+    // Show Main App
+    document.getElementById('main-app').style.display = 'flex';
+    
+    // Update Personalization
+    document.getElementById('welcome-msg').innerText = `Hello, ${currentUser.name}`;
+    document.getElementById('header-avatar').innerText = currentUser.name.charAt(0);
+    
+    // Load Dashboard Data
+    navTo('home');
+}
+
+function logout() {
+    location.reload(); // Simple reload to clear state
+}
+
+// 3. MARKETPLACE LOGIC
+let map; // Store map instance
+
+function loadMarketplace() {
+    const grid = document.getElementById('project-grid');
+    grid.innerHTML = '<p>Loading projects...</p>';
+
+    fetch('/api/projects')
+    .then(res => res.json())
+    .then(projects => {
+        grid.innerHTML = '';
+        if (projects.length === 0) {
+            grid.innerHTML = '<p>No projects yet.</p>';
             return;
         }
 
-        // 3. Perform Calculations (The "AI" Logic placeholder)
-        const rate = absorptionRates[region];
-        const treesPerHectare = treeRecommendations[region];
-
-        const totalCarbon = (rate * hectares).toFixed(2); // Round to 2 decimals
-        const totalTrees = (treesPerHectare * hectares);
-
-        // 4. Update the UI
-        carbonOutput.textContent = `Potential Absorption: ${totalCarbon} Tons of CO2 / Year`;
-        
-        // Dynamic message based on region (Grassland vs Forest)
-        if (region === 'savanna') {
-             treeOutput.textContent = `Recommended: Plant ${totalTrees} Acacia trees to support the grass ecosystem.`;
-        } else {
-             treeOutput.textContent = `Recommended: You have space for approximately ${totalTrees} trees.`;
+        // Init Map if not exists
+        if (!map) {
+            map = L.map('map').setView([-1.29, 36.82], 6);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
         }
 
-        // 5. Show the result
-        resultBox.style.display = 'block';
-    });
-
-    // --- UPLOAD LOGIC ---
-    const uploadForm = document.getElementById('upload-form');
-    const statusBox = document.getElementById('upload-status');
-    const statusMsg = document.getElementById('status-message');
-
-    if (uploadForm) { // Check if form exists to prevent errors
-        uploadForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Create a package containing the file and the text
-            const formData = new FormData(uploadForm);
-
-            // Send it to the Python server
-            fetch('/api/upload', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Show the result
-                statusBox.style.display = 'block';
-                statusMsg.textContent = data.message;
-                
-                if(data.status === 'success') {
-                    statusBox.style.borderColor = 'green';
-                    statusBox.style.backgroundColor = '#E8F5E9';
-                } else {
-                    statusBox.style.borderColor = 'red';
-                    statusBox.style.backgroundColor = '#FFEBEE';
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                statusBox.style.display = 'block';
-                statusMsg.textContent = "An error occurred during upload.";
-            });
-        });
-    }
-
-    // --- MARKETPLACE LOGIC ---
-    const grid = document.getElementById('project-grid');
-
-    window.loadMarketplace = function() {
-        fetch('/api/projects')
-        .then(response => response.json())
-        .then(projects => {
-            grid.innerHTML = ''; 
-
-            if (projects.length === 0) {
-                grid.innerHTML = '<p>No projects uploaded yet.</p>';
-                return;
-            }
-
-            plotProjectsOnMap(projects);
-
-            projects.forEach(project => {
-                const card = document.createElement('div');
-                card.className = 'project-card';
-                
-                // LOGIC: Disable button if already sold
-                const isSold = project.status === 'SOLD';
-                const btnState = isSold ? 'disabled' : '';
-                const btnText = isSold ? 'Sold Out' : 'Buy Credits';
-                const btnColor = isSold ? '#9E9E9E' : 'var(--primary-dark)'; // Grey if sold
-                
-                card.innerHTML = `
-                    <img src="/uploads/${project.image_url}" alt="${project.name}">
-                    <div class="card-details">
-                        <h3>${project.name}</h3>
-                        <p><span class="status-badge" style="background:${isSold ? '#ffebee' : '#E8F5E9'}">${project.status}</span></p>
-                        <p><strong>Credits:</strong> ${project.credits} Tons</p>
-                        <button 
-                            onclick="buyProject(${project.id})" 
-                            style="background-color: ${btnColor}" 
-                            ${btnState}>
-                            ${btnText}
-                        </button>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        })
-        .catch(err => console.error('Error loading marketplace:', err));
-    };
-
-    // NEW FUNCTION: Handle the Buy Action
-    window.buyProject = function(projectId) {
-        // Simple check: Is user logged in? (In a real app, we check the token)
-        // For this demo, we assume the user is "Guest Buyer" if not logged in
-        const buyerName = "Current User"; 
-
-        if(!confirm("Confirm purchase of these carbon credits?")) return;
-
-        fetch('/api/buy', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ project_id: projectId, buyer_name: buyerName })
-        })
-        .then(res => res.json())
-        .then(data => {
-            alert(data.message);
-            if(data.status === 'success') {
-                loadMarketplace(); // Refresh to show "Sold Out"
-            }
-        });
-    };
-    
-    // Load automatically when page opens
-    loadMarketplace();
-
-    // --- MAPPING LOGIC (Leaflet.js) ---
-    
-    // 1. Initialize the Map (Centered on Nairobi, Kenya)
-    // 'map-container' matches the ID we put in HTML
-    var map = L.map('map-container').setView([-1.2921, 36.8219], 10);
-
-    // 2. Add the "Satellite" Look (Esri World Imagery)
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-    }).addTo(map);
-
-    // 3. Function to Plot Pins
-    function plotProjectsOnMap(projects) {
         projects.forEach(project => {
-            if(project.lat && project.lng) {
-                // Create a marker
-                var marker = L.marker([project.lat, project.lng]).addTo(map);
-                
-                // Add a popup that appears when you click the pin
-                marker.bindPopup(`
-                    <b>${project.name}</b><br>
-                    Credits: ${project.credits}<br>
-                    <img src="/uploads/${project.image_url}" style="width:100px; margin-top:5px;">
-                `);
-            }
-        });
-    }
+            // Add Marker
+            L.marker([project.lat, project.lng]).addTo(map)
+                .bindPopup(`<b>${project.name}</b><br>${project.credits} Credits`);
 
-    // --- AUTHENTICATION LOGIC ---
+            // Add Card
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.innerHTML = `
+                <img src="/uploads/${project.image_url}" alt="${project.name}">
+                <div class="card-details">
+                    <span class="tag">${project.status}</span>
+                    <h3>${project.name}</h3>
+                    <p>${project.credits} Carbon Credits</p>
+                    <button class="btn-primary" onclick="buyProject(${project.id})">
+                        ${project.status === 'SOLD' ? 'Sold Out' : 'Buy Credits'}
+                    </button>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    });
+}
+
+function buyProject(id) {
+    if(!confirm("Purchase these credits?")) return;
+    fetch('/api/buy', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ project_id: id, buyer_name: currentUser.name })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message);
+        loadMarketplace();
+    });
+}
+
+// 4. UPLOAD LOGIC
+function handleUpload(e) {
+    e.preventDefault();
+    const formData = new FormData(document.getElementById('upload-form'));
+
+    document.getElementById('upload-result').innerText = "Scanning vegetation...";
     
-    // Toggle between Login and Register forms
-    document.getElementById('show-register').addEventListener('click', (e) => {
-        e.preventDefault();
-        document.getElementById('login-form-box').style.display = 'none';
-        document.getElementById('register-form-box').style.display = 'block';
-    });
-
-    document.getElementById('show-login').addEventListener('click', (e) => {
-        e.preventDefault();
-        document.getElementById('register-form-box').style.display = 'none';
-        document.getElementById('login-form-box').style.display = 'block';
-    });
-
-    // Handle Registration
-    document.getElementById('register-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const name = document.getElementById('reg-name').value;
-        const email = document.getElementById('reg-email').value;
-        const password = document.getElementById('reg-pass').value;
-        const role = document.getElementById('reg-role').value;
-
-        fetch('/api/register', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({name, email, password, role})
-        })
-        .then(res => res.json())
-        .then(data => {
-            alert(data.message);
-            if(data.status === 'success') {
-                document.getElementById('show-login').click(); // Switch to login view
-            }
-        });
-    });
-
-    // Handle Login
-    document.getElementById('login-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-pass').value;
-
-        fetch('/api/login', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({email, password})
-        })
-        .then(res => res.json())
-        .then(data => {
-            if(data.status === 'success') {
-                // Login Success!
-                handleLoginSuccess(data.user);
-            } else {
-                alert(data.message);
-            }
-        });
-    });
-
-    // Function to update the UI based on Role
-    function handleLoginSuccess(user) {
-        // 1. Hide forms, show dashboard
-        document.getElementById('login-form-box').style.display = 'none';
-        document.getElementById('user-dashboard').style.display = 'block';
-        document.getElementById('welcome-msg').textContent = `Welcome, ${user.name}!`;
-        document.getElementById('user-role-display').textContent = user.role.toUpperCase();
-
-        // 2. Control Features based on Role
-        const uploadSection = document.getElementById('verification');
-        const marketSection = document.getElementById('marketplace');
-
-        if (user.role === 'farmer') {
-            // Farmer: Needs Upload, maybe doesn't need to buy credits
-            uploadSection.style.display = 'block';
-            marketSection.style.display = 'block'; // Farmers want to see their competition
+    fetch('/api/upload', {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.status === 'success') {
+            document.getElementById('upload-result').innerHTML = 
+                `<span style="color:green">✅ Verified! ${data.message}</span>`;
+            // Update stats
+            let currentCredits = parseInt(document.getElementById('stat-credits').innerText);
+            document.getElementById('stat-credits').innerText = currentCredits + 50; // Simulation
         } else {
-            // Buyer: Needs Market, definitely NOT Upload
-            uploadSection.style.display = 'none';
-            marketSection.style.display = 'block';
+            document.getElementById('upload-result').innerText = "Upload failed.";
         }
-    }
+    });
+}
 
-    // Logout Function
-    window.logout = function() {
-        location.reload(); // Simple logout: just reload the page to reset everything
-    };
+// 5. CALCULATOR LOGIC
+function calculate() {
+    const hectares = document.getElementById('calc-hectares').value;
+    const factor = document.getElementById('calc-region').value;
+    const result = hectares * factor;
+    document.getElementById('calc-result').innerText = `Estimated: ${result} Tons of Carbon`;
+}
 
-    // UPDATE the loadMarketplace function to also plot the map
-    // Find your existing window.loadMarketplace function and add this line inside the .then() block:
-    // plotProjectsOnMap(projects);
-
-});
+// 6. MOBILE SIDEBAR TOGGLE
+function toggleSidebar() {
+    // For now, we just alert. In a real app, we'd slide out a menu.
+    // Since we used bottom nav for mobile, this is less critical.
+    alert("Menu opened");
+}
