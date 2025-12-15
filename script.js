@@ -1,97 +1,68 @@
-/* --- GLOCARBON v3 LOGIC --- */
+/* --- GLOCARBON LOGIC v2.5 --- */
 
-// 1. NAVIGATION & THEMING
 function navTo(viewId) {
-    // A. Hide all views
+    // 1. Hide all views
     document.querySelectorAll('.app-view').forEach(el => el.classList.remove('active-view'));
+    // 2. Show target view
     document.getElementById('view-' + viewId).classList.add('active-view');
     
-    // B. Update Sidebar/Nav Active State
-    document.querySelectorAll('.nav-link, .nav-item').forEach(el => el.classList.remove('active'));
-    // (Simple logic: re-highlight manually for now or add IDs)
-    
-    // C. CHANGE THEME (Dynamic Backgrounds)
-    document.body.className = `theme-${viewId}`;
+    // 3. Update Nav Active State
+    document.querySelectorAll('.nav-item, .nav-link').forEach(el => el.classList.remove('active'));
+    // (In a real app, you'd match IDs here, but this is fine for now)
 
-    // D. GLOBE VISIBILITY (Only show on Home)
-    const globe = document.getElementById('globe-container');
-    if (viewId === 'home') {
-        globe.style.display = 'block';
-    } else {
-        globe.style.display = 'none';
-    }
+    // 4. CHANGE BACKGROUND (The Nature Feature)
+    document.body.className = `bg-${viewId}`; // bg-home, bg-marketplace, etc.
 
-    // E. SPECIFIC ACTIONS
+    // 5. Update Header Title (Desktop)
+    const titles = { home: 'Dashboard', marketplace: 'Marketplace', scan: 'Scan Farm', profile: 'My Profile' };
+    const headerTitle = document.querySelector('.desktop-header h2');
+    if(headerTitle) headerTitle.innerText = titles[viewId];
+
+    // 6. Special Loaders
     if (viewId === 'marketplace') loadMarketplace();
 }
 
-// 2. AUTH MOCK
 function enterApp() {
-    document.getElementById('auth-section').style.opacity = '0';
-    setTimeout(() => {
-        document.getElementById('auth-section').style.display = 'none';
-        document.getElementById('main-app').style.display = 'block';
-        navTo('home');
-    }, 500); // Fade out effect
+    document.getElementById('auth-section').style.display = 'none';
+    document.getElementById('main-app').style.display = 'block';
+    navTo('home');
 }
 
 function logout() {
     location.reload();
 }
 
-// 3. MARKETPLACE (Leaflet Map)
+// MARKETPLACE MOCK
 let map;
 function loadMarketplace() {
     const grid = document.getElementById('project-grid');
-    grid.innerHTML = ''; // Clear
-
-    // Mock Data
-    const projects = [
-        { name: "Rift Valley Reforest", credits: 500, type: "Forest" },
-        { name: "Serengeti Soil Project", credits: 1200, type: "Soil" },
-        { name: "Congo Peatlands", credits: 3000, type: "Peat" }
-    ];
-
+    grid.innerHTML = '';
+    
+    // Init Map (Leaflet)
     if (!map) {
-        setTimeout(() => { // Delay to let div render
-            map = L.map('map').setView([-1.29, 36.82], 5);
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; OpenStreetMap &copy; CARTO'
-            }).addTo(map);
+        setTimeout(() => {
+            map = L.map('map').setView([-1.29, 36.82], 6);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
         }, 100);
     }
 
-    projects.forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'glass-card';
-        card.style.marginBottom = '15px';
-        card.innerHTML = `
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-                <div>
-                    <h3 style="margin-bottom:5px;">${p.name}</h3>
-                    <span style="color:var(--primary); font-size:0.9rem;">${p.type} • Verified</span>
-                </div>
-                <button class="btn-primary" style="padding: 8px 15px; margin:0; font-size:0.9rem;">Buy</button>
-            </div>
-        `;
-        grid.appendChild(card);
-    });
-}
+    // Mock Projects
+    const projects = [
+        { name: "Mau Forest Project", credits: 500, img: "forest" },
+        { name: "Rift Valley Soil", credits: 1200, img: "soil" }
+    ];
 
-// 4. UPLOAD MOCK
-function handleUpload(e) {
-    e.preventDefault();
-    const resultDiv = document.getElementById('upload-result');
-    resultDiv.innerHTML = '<p style="margin-top:10px; color:#aaa;">Analyzing satellite data...</p>';
-    
-    setTimeout(() => {
-        resultDiv.innerHTML = `
-            <div class="glass-card" style="margin-top:15px; border-color:var(--primary);">
-                <h3 style="color:var(--primary);">Analysis Complete</h3>
-                <p>Vegetation Cover: <strong>85%</strong></p>
-                <p>Estimated Carbon: <strong>120 Tons</strong></p>
-                <button class="btn-primary" style="width:100%; margin-top:10px;">Tokenize Now</button>
+    projects.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'glass-panel';
+        div.style.padding = '15px';
+        div.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <strong>${p.name}</strong>
+                <span style="color:var(--primary); font-weight:bold;">${p.credits} Credits</span>
             </div>
+            <button class="btn-primary" style="margin-top:10px; padding:8px;">View Details</button>
         `;
-    }, 2000);
+        grid.appendChild(div);
+    });
 }

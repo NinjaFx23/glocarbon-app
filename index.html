@@ -3,34 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GLOCARBON - Ecosystem Economy</title>
+    <title>GLOCARBON</title>
     
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#064E3B">
+    <meta name="theme-color" content="#10B981">
     <link rel="apple-touch-icon" href="icon.png">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
-<body class="theme-home"> <div class="bg-overlay"></div>
-    <div class="bg-image"></div>
-    
-    <div id="globe-container">
-        <div class="earth"></div>
-    </div>
+<body class="bg-home">
 
-    <section id="auth-section" class="active-section">
-        <div class="glass-card auth-card">
+    <div class="background-overlay"></div>
+
+    <section id="auth-section">
+        <div class="auth-card">
             <div class="logo-area">
-                <i class="fa-solid fa-earth-africa logo-icon"></i>
+                <i class="fa-solid fa-leaf logo-icon"></i>
                 <h1>GLOCARBON</h1>
-                <p>AI-Powered Environmental Platform</p>
+                <p>Monetize Your Ecosystem</p>
             </div>
-            <button class="btn-primary" onclick="enterApp()">Get Started</button>
-            <p class="login-sub">Already have an account? <b>Log In</b></p>
+            <button class="btn-primary" onclick="enterApp()">Log In (Demo)</button>
         </div>
     </section>
 
@@ -38,95 +34,97 @@
         
         <aside class="sidebar">
             <div class="brand">
-                <i class="fa-solid fa-leaf"></i> <span>GLO<b>CARBON</b></span>
+                <i class="fa-solid fa-leaf"></i> <span>GLOCARBON</span>
             </div>
             <nav class="desktop-nav">
-                <a href="#" class="nav-link active" onclick="navTo('home')">
-                    <i class="fa-solid fa-chart-pie"></i> <span>Overview</span>
-                </a>
-                <a href="#" class="nav-link" onclick="navTo('marketplace')">
-                    <i class="fa-solid fa-globe"></i> <span>Marketplace</span>
-                </a>
-                <a href="#" class="nav-link" onclick="navTo('scan')">
-                    <i class="fa-solid fa-satellite"></i> <span>AI Scan</span>
-                </a>
-                <a href="#" class="nav-link" onclick="navTo('profile')">
-                    <i class="fa-solid fa-user-astronaut"></i> <span>Profile</span>
-                </a>
+                <a href="#" class="nav-link active" onclick="navTo('home')"><i class="fa-solid fa-house"></i> <span>Dashboard</span></a>
+                <a href="#" class="nav-link" onclick="navTo('marketplace')"><i class="fa-solid fa-store"></i> <span>Marketplace</span></a>
+                <a href="#" class="nav-link" onclick="navTo('scan')"><i class="fa-solid fa-camera"></i> <span>Scan Farm</span></a>
+                <a href="#" class="nav-link" onclick="navTo('profile')"><i class="fa-solid fa-user"></i> <span>Profile</span></a>
             </nav>
-            <div class="user-mini-profile">
-                <div class="avatar">U</div>
-                <div class="user-info">
-                    <h4>User</h4>
-                    <p>Free Plan</p>
+            <div class="sidebar-footer">
+                <div class="mini-profile">
+                    <div class="avatar-small">U</div>
+                    <span>Demo User</span>
                 </div>
             </div>
         </aside>
 
+        <header class="desktop-header">
+            <h2>Dashboard</h2> <button onclick="logout()" class="btn-text">Log Out</button>
+        </header>
+
         <header class="mobile-header">
-            <div class="brand-mobile">GLOCARBON</div>
-            <div class="avatar-mobile">U</div>
+            <div class="header-left">
+                <i class="fa-solid fa-leaf"></i> <strong>GLOCARBON</strong>
+            </div>
+            <div class="header-right">
+                <div class="avatar-small">U</div>
+            </div>
         </header>
 
         <main class="content-area">
             
             <div id="view-home" class="app-view active-view">
-                <div class="hero-text">
-                    <h1>AI-Powered<br>Environmental Platform</h1>
-                    <p>Harness the power of artificial intelligence to monitor, manage, and optimize carbon offset projects.</p>
+                <div class="glass-panel welcome-panel">
+                    <h1>Hello, Farmer</h1>
+                    <p>Track your impact and earnings.</p>
                 </div>
-                
-                <div class="stats-row">
-                    <div class="glass-card stat">
+                <div class="stats-grid">
+                    <div class="stat-card">
                         <i class="fa-solid fa-tree"></i>
-                        <h3>1,204</h3>
-                        <p>Trees Monitored</p>
+                        <h3>1,200</h3>
+                        <p>Trees</p>
                     </div>
-                    <div class="glass-card stat">
+                    <div class="stat-card">
                         <i class="fa-solid fa-coins"></i>
                         <h3>450</h3>
-                        <p>Credits Earned</p>
+                        <p>Credits</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fa-solid fa-wallet"></i>
+                        <h3>$1,250</h3>
+                        <p>Wallet</p>
                     </div>
                 </div>
             </div>
 
             <div id="view-marketplace" class="app-view">
-                <h2>Verified Projects</h2>
-                <div id="map"></div>
-                <div id="project-grid"></div>
+                <div class="glass-panel">
+                    <h2>Marketplace</h2>
+                    <div id="map"></div>
+                    <div id="project-grid"></div>
+                </div>
             </div>
 
             <div id="view-scan" class="app-view">
-                <h2>AI Satellite Scan</h2>
-                <div class="glass-card upload-zone">
-                    <div class="scan-animation"></div>
-                    <form id="upload-form" onsubmit="handleUpload(event)">
-                        <p>Upload drone or satellite imagery</p>
-                        <input type="file" name="file" required>
-                        <button class="btn-primary">Analyze Terrain</button>
-                    </form>
-                    <div id="upload-result"></div>
+                <div class="glass-panel center-content">
+                    <h2>New Scan</h2>
+                    <div class="upload-zone">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <p>Tap to upload drone imagery</p>
+                        <button class="btn-primary" onclick="alert('Scanning...')">Select File</button>
+                    </div>
                 </div>
             </div>
 
             <div id="view-profile" class="app-view">
-                <div class="glass-card profile-header">
-                    <div class="big-avatar">U</div>
-                    <h2>Demo User</h2>
-                    <p class="tag">Verified Farmer</p>
-                </div>
-                <div class="glass-card profile-details">
-                    <div class="detail-row">
-                        <span>Email</span>
-                        <strong>user@glocarbon.com</strong>
+                <div class="glass-panel profile-card">
+                    <div class="profile-header">
+                        <div class="avatar-large">U</div>
+                        <h3>Demo User</h3>
+                        <span class="badge">Verified Farmer</span>
                     </div>
-                    <div class="detail-row">
-                        <span>Location</span>
-                        <strong>Nairobi, Kenya</strong>
-                    </div>
-                    <div class="detail-row">
-                        <span>Total Earnings</span>
-                        <strong class="highlight">$1,250.00</strong>
+                    <div class="profile-details">
+                        <div class="row">
+                            <span>Email</span> <strong>user@glocarbon.com</strong>
+                        </div>
+                        <div class="row">
+                            <span>Location</span> <strong>Nairobi, Kenya</strong>
+                        </div>
+                        <div class="row">
+                            <span>Farm Size</span> <strong>12 Hectares</strong>
+                        </div>
                     </div>
                     <button class="btn-danger" onclick="logout()">Log Out</button>
                 </div>
@@ -136,7 +134,7 @@
 
         <nav class="mobile-nav">
             <button onclick="navTo('home')" class="nav-item active"><i class="fa-solid fa-house"></i></button>
-            <button onclick="navTo('marketplace')" class="nav-item"><i class="fa-solid fa-globe"></i></button>
+            <button onclick="navTo('marketplace')" class="nav-item"><i class="fa-solid fa-store"></i></button>
             <button onclick="navTo('scan')" class="nav-item fab"><i class="fa-solid fa-plus"></i></button>
             <button onclick="navTo('profile')" class="nav-item"><i class="fa-solid fa-user"></i></button>
         </nav>
@@ -146,11 +144,8 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>
     <script>
-        // SERVICE WORKER REGISTRATION
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js');
-            });
+            window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js'); });
         }
     </script>
 </body>
