@@ -1,4 +1,4 @@
-const CACHE_NAME = 'glocarbon-v5';
+const CACHE_NAME = 'glocarbon-v6'; // <--- UPDATED TO v6
 const ASSETS = [
   '/',
   '/index.html',
@@ -7,9 +7,9 @@ const ASSETS = [
   '/manifest.json'
 ];
 
-// Install Event
+// Install Event (Force immediate update)
 self.addEventListener('install', (e) => {
-  self.skipWaiting(); // <--- FORCE UPDATE: Don't wait!
+  self.skipWaiting();
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll(ASSETS);
@@ -17,18 +17,18 @@ self.addEventListener('install', (e) => {
   );
 });
 
-// Activate Event (Clean up old versions)
+// Activate Event (Delete old v1-v5 caches)
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((keyList) => {
       return Promise.all(keyList.map((key) => {
         if (key !== CACHE_NAME) {
-          return caches.delete(key); // Delete v1
+          return caches.delete(key);
         }
       }));
     })
   );
-  return self.clients.claim(); // Take control immediately
+  return self.clients.claim();
 });
 
 // Fetch Event

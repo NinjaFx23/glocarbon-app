@@ -1,45 +1,153 @@
-/* --- UPDATED SCRIPT.JS (Fixes Roles & Profile Click) --- */
+/* --- GLOCARBON BRAIN (Synced Version) --- */
 
-// ... (Keep existing currentUser and selectRole functions at the top) ...
+// STATE MANAGEMENT
+let currentUser = {
+    role: 'Farmer', // Default
+    name: 'Demo User',
+    email: ''
+};
 
-// 1. UPDATED LOGIN LOGIC (Requires Password)
-function handleLogin(e) {
-    e.preventDefault();
+// 1. AUTHENTICATION LOGIC
+function selectRole(role) {
+    currentUser.role = role;
     
-    const email = document.querySelector('input[type="email"]').value;
-    const password = document.querySelector('input[type="password"]').value;
+    // Update Visuals
+    document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
+    
+    // Highlight the correct button
+    const buttons = document.querySelectorAll('.role-btn');
+    if (role === 'Farmer' && buttons[0]) buttons[0].classList.add('active');
+    if (role === 'Buyer' && buttons[1]) buttons[1].classList.add('active');
+}
+
+function handleLogin(e) {
+    e.preventDefault(); // Stop page reload
+    
+    // Get values safely
+    const emailInput = document.querySelector('input[type="email"]');
+    const passInput = document.querySelector('input[type="password"]');
+    
+    const email = emailInput ? emailInput.value : '';
+    const password = passInput ? passInput.value : '';
 
     if (!email || !password) {
         alert("Please enter both email and password.");
         return;
     }
 
-    // Logic: If email contains "buyer", make them a Buyer (for testing)
-    // Otherwise, default to the selected role button
-    if (email.includes('buyer')) currentUser.role = 'Buyer';
+    // Role Logic
+    if (email.toLowerCase().includes('buyer')) currentUser.role = 'Buyer';
     
     currentUser.email = email;
     currentUser.name = email.split('@')[0];
 
-    // Simulate "Verifying"
+    // Simulate API Call
     const btn = document.querySelector('.btn-cta');
-    const originalText = btn.innerText;
-    btn.innerText = "Verifying Credentials...";
-    btn.style.opacity = "0.7";
-    
-    setTimeout(() => {
-        enterApp();
-        btn.innerText = originalText;
-        btn.style.opacity = "1";
-    }, 1000);
+    if(btn) {
+        const originalText = btn.innerText;
+        btn.innerText = "Verifying...";
+        btn.style.opacity = "0.7";
+        
+        setTimeout(() => {
+            enterApp();
+            btn.innerText = originalText;
+            btn.style.opacity = "1";
+        }, 800);
+    }
 }
 
-// 2. UPDATED MARKETPLACE (Farmer vs. Buyer Logic)
+function enterApp() {
+    // Hide Auth, Show Main
+    const authSection = document.getElementById('auth-section');
+    const mainApp = document.getElementById('main-app');
+
+    if(authSection) authSection.style.display = 'none';
+    if(mainApp) mainApp.style.display = 'block';
+    
+    // Customize UI based on Role
+    updateUIForUser();
+    
+    // Start at Home
+    navTo('home');
+}
+
+function updateUIForUser() {
+    // Update Sidebar Profile safely
+    const largeAvatar = document.querySelector('.avatar-large');
+    if(largeAvatar) largeAvatar.innerText = currentUser.name.charAt(0).toUpperCase();
+
+    const headerName = document.querySelector('.profile-header-card h3');
+    if(headerName) headerName.innerText = currentUser.name;
+    
+    const smallAvatar = document.querySelector('.user-avatar-small');
+    if(smallAvatar) smallAvatar.innerText = currentUser.name.charAt(0).toUpperCase();
+    
+    // Update Badge
+    const badge = document.querySelector('.badge-gold');
+    if(badge) badge.innerText = currentUser.role === 'Farmer' ? 'Verified Farmer' : 'Certified Buyer';
+    
+    // Update Welcome Message
+    const welcome = document.querySelector('.welcome-card h2');
+    if(welcome) welcome.innerHTML = `Welcome back, <span class="gold-text">${currentUser.name}</span>`;
+}
+
+function logout() {
+    window.location.reload();
+}
+
+// 2. NAVIGATION LOGIC
+function navTo(viewId) {
+    // Switch Content Views
+    document.querySelectorAll('.app-view').forEach(el => el.classList.remove('active-view'));
+    const targetView = document.getElementById('view-' + viewId);
+    if(targetView) targetView.classList.add('active-view');
+    
+    // Update Bottom Nav Active State
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    
+    // Close Sidebar (if open)
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar && sidebar.classList.contains('open')) {
+        toggleSidebar();
+    }
+
+    // Dynamic Backgrounds
+    updateBackground(viewId);
+
+    // Special Actions
+    if (viewId === 'marketplace') loadMarketplace();
+}
+
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    if(sidebar) sidebar.classList.toggle('open');
+}
+
+// 3. BACKGROUND MANAGER
+function updateBackground(viewId) {
+    const bgLayer = document.querySelector('.bg-layer');
+    if(!bgLayer) return;
+
+    let imgUrl = '';
+    switch(viewId) {
+        case 'home': imgUrl = 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=2070&auto=format&fit=crop'; break;
+        case 'marketplace': imgUrl = 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop'; break;
+        case 'scan': imgUrl = 'https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?q=80&w=1935&auto=format&fit=crop'; break;
+        case 'learn': imgUrl = 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=2073&auto=format&fit=crop'; break;
+        case 'profile': imgUrl = 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2232&auto=format&fit=crop'; break;
+        default: imgUrl = 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=2070&auto=format&fit=crop';
+    }
+    bgLayer.style.backgroundImage = `url('${imgUrl}')`;
+}
+
+// 4. MARKETPLACE LOGIC
+let map;
 function loadMarketplace() {
     const grid = document.getElementById('project-grid');
+    if(!grid) return;
     grid.innerHTML = ''; 
 
-    // Init Map Logic (Keep existing map code)...
+    // Init Map
     if (!map && document.getElementById('map')) {
         setTimeout(() => {
             map = L.map('map').setView([-1.29, 36.82], 5);
@@ -54,13 +162,11 @@ function loadMarketplace() {
     ];
 
     projects.forEach(p => {
-        // LOGIC: What does the button say?
         let actionBtn = '';
         if (currentUser.role === 'Buyer') {
-            actionBtn = `<button class="btn-cta" onclick="alert('Payment Gateway Integration (Coming Phase 3)')">Buy @ ${p.price}</button>`;
+            actionBtn = `<button class="btn-cta" style="font-size:0.8rem" onclick="alert('Payment Integration Coming Soon')">Buy @ ${p.price}</button>`;
         } else {
-            // Farmers see stats, not buy buttons
-            actionBtn = `<div class="tag-status"><i class="fa-solid fa-chart-line"></i> Market View</div>`;
+            actionBtn = `<div class="tag-status" style="color:var(--primary); font-weight:bold"><i class="fa-solid fa-chart-line"></i> Analytics</div>`;
         }
 
         const card = document.createElement('div');
@@ -70,38 +176,29 @@ function loadMarketplace() {
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <div>
                     <h3>${p.name}</h3>
-                    <p style="font-size:0.9rem; color:var(--text-light)">${p.type} • ${p.credits} Credits</p>
+                    <p style="font-size:0.9rem; color:var(--text-light)">${p.type} • ${p.credits} CR</p>
                 </div>
-                <div style="text-align:right; display:flex; flex-direction:column; gap:5px;">
-                   ${actionBtn}
-                </div>
+                <div style="text-align:right;">${actionBtn}</div>
             </div>
         `;
         grid.appendChild(card);
     });
 }
 
-// 3. MAKE HEADER CLICKABLE
-function enterApp() {
-    document.getElementById('auth-section').style.display = 'none';
-    document.getElementById('main-app').style.display = 'block';
+// 5. SCAN TRIGGER
+function triggerScan() {
+    const statusBox = document.getElementById('scan-status');
+    const btn = document.querySelector('.upload-container .btn-cta');
     
-    updateUIForUser();
-    navTo('home');
-
-    // ADD CLICK EVENT TO DESKTOP HEADER PROFILE
-    const desktopProfile = document.querySelector('.desktop-header .header-right'); // Use a specific class if needed
-    if(desktopProfile) {
-        desktopProfile.style.cursor = 'pointer';
-        desktopProfile.onclick = () => navTo('profile');
-    }
-    
-    // ADD CLICK EVENT TO MOBILE HEADER AVATAR
-    const mobileProfile = document.querySelector('.user-avatar-small');
-    if(mobileProfile) {
-        mobileProfile.style.cursor = 'pointer';
-        mobileProfile.onclick = () => navTo('profile');
+    if(statusBox && btn) {
+        statusBox.innerText = "Uploading Imagery...";
+        statusBox.style.color = "var(--secondary)";
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
+        
+        setTimeout(() => {
+            statusBox.innerHTML = `<strong style="color:var(--primary)">Scan Complete!</strong><br>Vegetation Index: High`;
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> Verified';
+            btn.style.background = "var(--primary)";
+        }, 3000);
     }
 }
-
-// ... (Keep the rest of your navTo, toggleSidebar, updateBackground functions as they were) ...
