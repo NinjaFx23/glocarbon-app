@@ -3,140 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GLOCARBON</title>
+    <title>GLOCARBON - Ecosystem Economy</title>
     
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#10B981">
     <link rel="apple-touch-icon" href="icon.png">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
-<body class="bg-home">
+<body class="bg-default">
 
-    <div class="background-overlay"></div>
+    <div class="bg-layer"></div>
+    <div class="bg-overlay"></div>
 
     <section id="auth-section">
-        <div class="auth-card">
-            <div class="logo-area">
-                <i class="fa-solid fa-leaf logo-icon"></i>
-                <h1>GLOCARBON</h1>
-                <p>Monetize Your Ecosystem</p>
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="logo-area">
+                    <i class="fa-solid fa-leaf logo-icon"></i>
+                    <h1>GLOCARBON</h1>
+                    <p class="tagline">Monetize Your Ecosystem</p>
+                </div>
+
+                <div class="role-selector">
+                    <label>I am a:</label>
+                    <div class="role-options">
+                        <button class="role-btn active" onclick="selectRole('Farmer')">
+                            <i class="fa-solid fa-seedling"></i> Farmer
+                        </button>
+                        <button class="role-btn" onclick="selectRole('Buyer')">
+                            <i class="fa-solid fa-briefcase"></i> Buyer
+                        </button>
+                    </div>
+                </div>
+
+                <form id="login-form" onsubmit="handleLogin(event)">
+                    <div class="input-group">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn-cta">Access Platform</button>
+                </form>
+                
+                <p class="auth-footer">Aligned with <span class="gold-text">UN SDG 13 & 15</span></p>
             </div>
-            <button class="btn-primary" onclick="enterApp()">Log In (Demo)</button>
         </div>
     </section>
 
     <div id="main-app" style="display:none;">
         
-        <aside class="sidebar">
-            <div class="brand">
-                <i class="fa-solid fa-leaf"></i> <span>GLOCARBON</span>
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <i class="fa-solid fa-leaf"></i> <span>GLO<b class="blue-text">CARBON</b></span>
+                </div>
+                <button class="close-sidebar-btn" onclick="toggleSidebar()"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <nav class="desktop-nav">
-                <a href="#" class="nav-link active" onclick="navTo('home')"><i class="fa-solid fa-house"></i> <span>Dashboard</span></a>
-                <a href="#" class="nav-link" onclick="navTo('marketplace')"><i class="fa-solid fa-store"></i> <span>Marketplace</span></a>
-                <a href="#" class="nav-link" onclick="navTo('scan')"><i class="fa-solid fa-camera"></i> <span>Scan Farm</span></a>
-                <a href="#" class="nav-link" onclick="navTo('profile')"><i class="fa-solid fa-user"></i> <span>Profile</span></a>
+
+            <nav class="side-nav">
+                <a href="#" class="nav-link active" onclick="navTo('home')">
+                    <i class="fa-solid fa-chart-pie"></i> <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-link" onclick="navTo('marketplace')">
+                    <i class="fa-solid fa-globe"></i> <span>Marketplace</span>
+                </a>
+                <a href="#" class="nav-link" onclick="navTo('scan')">
+                    <i class="fa-solid fa-satellite"></i> <span>AI Scan</span>
+                </a>
+                <a href="#" class="nav-link" onclick="navTo('learn')">
+                    <i class="fa-solid fa-book-open"></i> <span>Learn & SDGs</span>
+                </a>
+                <a href="#" class="nav-link" onclick="navTo('profile')">
+                    <i class="fa-solid fa-user-shield"></i> <span>Profile</span>
+                </a>
             </nav>
-            <div class="sidebar-footer">
-                <div class="mini-profile">
-                    <div class="avatar-small">U</div>
-                    <span>Demo User</span>
+
+            <div class="sidebar-footer-area">
+                <div class="standards-badge">
+                    <i class="fa-solid fa-certificate"></i> Verified by <b>VeraCarbon</b>
                 </div>
             </div>
         </aside>
 
-        <header class="desktop-header">
-            <h2>Dashboard</h2> <button onclick="logout()" class="btn-text">Log Out</button>
-        </header>
-
         <header class="mobile-header">
-            <div class="header-left">
-                <i class="fa-solid fa-leaf"></i> <strong>GLOCARBON</strong>
-            </div>
-            <div class="header-right">
-                <div class="avatar-small">U</div>
-            </div>
+            <button class="icon-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+            <div class="header-brand">GLO<span class="blue-text">CARBON</span></div>
+            <div class="user-avatar-small">U</div>
         </header>
 
         <main class="content-area">
             
             <div id="view-home" class="app-view active-view">
-                <div class="glass-panel welcome-panel">
-                    <h1>Hello, Farmer</h1>
-                    <p>Track your impact and earnings.</p>
+                <div class="welcome-card">
+                    <h2>Welcome back, <span class="gold-text">Partner</span></h2>
+                    <p>Track your contribution to the Paris Agreement goals.</p>
                 </div>
-                <div class="stats-grid">
+                
+                <div class="stats-container">
                     <div class="stat-card">
-                        <i class="fa-solid fa-tree"></i>
-                        <h3>1,200</h3>
-                        <p>Trees</p>
+                        <div class="icon-box green"><i class="fa-solid fa-tree"></i></div>
+                        <div>
+                            <h3>1,240</h3>
+                            <p>Trees Monitored</p>
+                        </div>
                     </div>
                     <div class="stat-card">
-                        <i class="fa-solid fa-coins"></i>
-                        <h3>450</h3>
-                        <p>Credits</p>
+                        <div class="icon-box gold"><i class="fa-solid fa-coins"></i></div>
+                        <div>
+                            <h3>450</h3>
+                            <p>Carbon Credits</p>
+                        </div>
                     </div>
                     <div class="stat-card">
-                        <i class="fa-solid fa-wallet"></i>
-                        <h3>$1,250</h3>
-                        <p>Wallet</p>
+                        <div class="icon-box blue"><i class="fa-solid fa-wallet"></i></div>
+                        <div>
+                            <h3>$1,250</h3>
+                            <p>Wallet Balance</p>
+                        </div>
                     </div>
+                </div>
+
+                <div class="info-block">
+                    <h4><i class="fa-solid fa-bullhorn"></i> Platform Update</h4>
+                    <p>We have updated our verification protocols to align with <b>VeraCarbon Standard v4.0</b>. Your credits are now tradeable globally.</p>
                 </div>
             </div>
 
             <div id="view-marketplace" class="app-view">
-                <div class="glass-panel">
-                    <h2>Marketplace</h2>
-                    <div id="map"></div>
-                    <div id="project-grid"></div>
+                <div class="section-header">
+                    <h2>Global Marketplace</h2>
+                    <p>Trade credits verified under SDG 13 (Climate Action).</p>
                 </div>
+                <div id="map"></div>
+                <div id="project-grid"></div>
             </div>
 
             <div id="view-scan" class="app-view">
-                <div class="glass-panel center-content">
-                    <h2>New Scan</h2>
-                    <div class="upload-zone">
-                        <i class="fa-solid fa-cloud-arrow-up"></i>
-                        <p>Tap to upload drone imagery</p>
-                        <button class="btn-primary" onclick="alert('Scanning...')">Select File</button>
+                <div class="section-header">
+                    <h2>AI Verification</h2>
+                    <p>Upload drone/satellite imagery for carbon stock analysis.</p>
+                </div>
+                <div class="upload-container">
+                    <div class="scan-visual">
+                        <i class="fa-solid fa-drone"></i>
                     </div>
+                    <button class="btn-cta" onclick="triggerScan()">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Upload Imagery
+                    </button>
+                    <div id="scan-status" class="status-box">Ready to scan...</div>
+                </div>
+            </div>
+
+            <div id="view-learn" class="app-view">
+                <div class="section-header">
+                    <h2>Education Hub</h2>
+                    <p>Understanding Carbon Markets & The Paris Agreement.</p>
+                </div>
+                
+                <div class="learn-card">
+                    <i class="fa-solid fa-earth-americas accent-icon"></i>
+                    <h3>The Paris Agreement</h3>
+                    <p>Glocarbon helps nations meet their NDCs (Nationally Determined Contributions) by allowing local farmers to sell offsets to global buyers.</p>
+                </div>
+
+                <div class="learn-card">
+                    <i class="fa-solid fa-check-double accent-icon"></i>
+                    <h3>VeraCarbon Standards</h3>
+                    <p>Our credits undergo a rigorous 3-step validation: AI Analysis, Ground Truthing, and Third-Party Auditing.</p>
+                </div>
+
+                <div class="learn-card">
+                    <i class="fa-solid fa-hand-holding-dollar accent-icon"></i>
+                    <h3>How Pricing Works</h3>
+                    <p>1 Credit = 1 Ton of CO2 sequestered. Prices fluctuate based on market demand and project quality (Gold Standard).</p>
                 </div>
             </div>
 
             <div id="view-profile" class="app-view">
-                <div class="glass-panel profile-card">
-                    <div class="profile-header">
-                        <div class="avatar-large">U</div>
-                        <h3>Demo User</h3>
-                        <span class="badge">Verified Farmer</span>
-                    </div>
-                    <div class="profile-details">
-                        <div class="row">
-                            <span>Email</span> <strong>user@glocarbon.com</strong>
-                        </div>
-                        <div class="row">
-                            <span>Location</span> <strong>Nairobi, Kenya</strong>
-                        </div>
-                        <div class="row">
-                            <span>Farm Size</span> <strong>12 Hectares</strong>
-                        </div>
-                    </div>
-                    <button class="btn-danger" onclick="logout()">Log Out</button>
+                <div class="profile-header-card">
+                    <div class="avatar-large">U</div>
+                    <h3>Demo Farmer</h3>
+                    <span class="badge-gold">Gold Member</span>
                 </div>
+                <button class="btn-danger" onclick="logout()">Log Out</button>
             </div>
+
+            <footer class="app-footer">
+                <div class="footer-links">
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">VeraCarbon</a>
+                </div>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+                <p>&copy; 2025 GLOCARBON Inc.</p>
+            </footer>
 
         </main>
 
-        <nav class="mobile-nav">
-            <button onclick="navTo('home')" class="nav-item active"><i class="fa-solid fa-house"></i></button>
-            <button onclick="navTo('marketplace')" class="nav-item"><i class="fa-solid fa-store"></i></button>
-            <button onclick="navTo('scan')" class="nav-item fab"><i class="fa-solid fa-plus"></i></button>
-            <button onclick="navTo('profile')" class="nav-item"><i class="fa-solid fa-user"></i></button>
+        <nav class="mobile-bottom-nav">
+            <button onclick="navTo('home')" class="nav-item active">
+                <i class="fa-solid fa-house"></i>
+            </button>
+            <button onclick="navTo('marketplace')" class="nav-item">
+                <i class="fa-solid fa-globe"></i>
+            </button>
+            
+            <div class="fab-container">
+                <button onclick="navTo('scan')" class="fab-btn">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+
+            <button onclick="navTo('learn')" class="nav-item">
+                <i class="fa-solid fa-book-open"></i>
+            </button>
+            <button onclick="navTo('profile')" class="nav-item">
+                <i class="fa-solid fa-user"></i>
+            </button>
         </nav>
 
     </div>
@@ -144,6 +239,7 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>
     <script>
+        // PWA Register
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js'); });
         }
