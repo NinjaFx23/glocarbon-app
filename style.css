@@ -1,13 +1,13 @@
-/* --- GLOCARBON FINAL FIX (v10) --- */
+/* --- GLOCARBON V12 (Desktop Toggle & Structure Fix) --- */
 
 /* 1. RESET & BASICS */
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
 
 body {
-    background-color: #111827; /* Dark fallback */
+    background-color: #111827;
     color: #1F2937;
     min-height: 100vh;
-    overflow-x: hidden; /* Stop horizontal scrolling */
+    overflow-x: hidden;
 }
 
 /* 2. BACKGROUNDS */
@@ -18,36 +18,65 @@ body {
 }
 .bg-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-    background: rgba(0, 0, 0, 0.6); /* Dark tint for text readability */
+    background: rgba(0, 0, 0, 0.6);
 }
 
-/* 3. LAYOUT FIXES (The "Dumped Page" Killer) */
-.app-view {
-    display: none !important; /* HIDE EVERYTHING BY DEFAULT */
-    padding-bottom: 100px; /* Space for bottom nav */
-}
-.active-view {
-    display: block !important; /* SHOW ONLY ACTIVE */
-    animation: fadeIn 0.4s ease;
-}
+/* 3. LAYOUT LOGIC */
+.app-view { display: none !important; padding-bottom: 100px; }
+.active-view { display: block !important; animation: fadeIn 0.4s ease; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* 4. SIDEBAR (Vertical Menu) */
+/* 4. SIDEBAR (The Core Structure) */
 .sidebar {
     position: fixed; top: 0; left: 0; bottom: 0; width: 260px;
     background: white; border-right: 1px solid #ddd;
     z-index: 2000; padding: 20px;
     display: flex; flex-direction: column;
-    transform: translateX(0); transition: transform 0.3s ease;
+    transition: transform 0.3s ease; /* Smooth slide for both mobile/desktop */
 }
-.side-nav { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+
+/* DESKTOP TOGGLE STATES */
+/* When this class is added, sidebar slides left (hides) */
+.sidebar.desktop-closed { transform: translateX(-100%); }
+
+.sidebar-header {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;
+}
+/* The "X" Button - Visible on both now */
+.sidebar-close-btn {
+    background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #4B5563;
+}
+.sidebar-close-btn:hover { color: #EF4444; }
+
+.side-nav { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
 .nav-link {
     display: flex; align-items: center; gap: 15px; padding: 15px;
     text-decoration: none; color: #4B5563; font-weight: 500; border-radius: 8px;
 }
 .nav-link.active { background: #ECFDF5; color: #10B981; font-weight: bold; }
 
-/* 5. MOBILE HEADER (Gold Brand) */
+/* 5. CONTENT AREA (Dynamic Resizing) */
+.content-area {
+    margin-left: 260px; /* Default Desktop State */
+    padding: 30px; padding-top: 80px;
+    transition: margin-left 0.3s ease; /* Smooth resize */
+}
+/* When Sidebar is closed, Content fills screen */
+.content-area.expanded { margin-left: 0; }
+
+/* 6. DESKTOP TOGGLE BUTTON (New!) */
+/* This button sits in the content area to open sidebar if closed */
+.desktop-menu-btn {
+    position: fixed; top: 20px; left: 20px; z-index: 1000;
+    background: white; border: 1px solid #ddd; border-radius: 8px;
+    padding: 10px 15px; cursor: pointer; font-size: 1.2rem;
+    display: none; /* Hidden unless needed */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+/* Show this button ONLY when sidebar is hidden on desktop */
+.content-area.expanded .desktop-menu-btn { display: block; }
+
+/* 7. MOBILE HEADER & BOTTOM NAV */
 .mobile-header {
     position: fixed; top: 0; left: 0; right: 0; height: 60px;
     background: white; border-bottom: 1px solid #ddd;
@@ -56,46 +85,35 @@ body {
     padding: 0 20px; z-index: 1500;
 }
 .brand-text {
-    font-size: 1.4rem; font-weight: 800;
-    color: #FFD700; /* SOLID GOLD */
+    font-size: 1.4rem; font-weight: 800; color: #FFD700; 
     text-transform: uppercase; letter-spacing: 1px;
 }
 
-/* 6. BOTTOM NAV (Grid Layout = Equal Spacing) */
+/* BOTTOM NAV - STRICTLY HIDDEN ON DESKTOP */
 .mobile-bottom-nav {
     position: fixed; bottom: 0; left: 0; right: 0; height: 70px;
     background: white; border-top: 1px solid #ddd;
-    display: none; z-index: 1500;
-    /* GRID SYSTEM */
-    display: grid; grid-template-columns: repeat(5, 1fr);
-    align-items: center; justify-items: center;
+    z-index: 1500;
+    display: none; /* Default Hidden */
 }
 .nav-item {
     background: none; border: none; font-size: 1.4rem; color: #9CA3AF;
     width: 100%; height: 100%;
 }
 .nav-item.active { color: #10B981; }
-
-/* FAB Button (Center) */
-.fab-container {
-    position: relative; top: -20px; width: 55px; height: 55px;
-}
+.fab-container { position: relative; top: -20px; width: 55px; height: 55px; }
 .fab-btn {
-    width: 100%; height: 100%; border-radius: 50%;
-    background: #FFD700; border: 4px solid #fff;
-    color: white; font-size: 1.5rem;
+    width: 100%; height: 100%; border-radius: 50%; background: #FFD700;
+    border: 4px solid #fff; color: white; font-size: 1.5rem;
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-/* 7. CARDS & CONTENT */
-.content-area { margin-left: 260px; padding: 30px; padding-top: 80px; }
+/* 8. CARDS & AUTH */
 .card {
     background: white; border-radius: 16px; padding: 20px; margin-bottom: 20px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
-
-/* AUTH SCREEN */
 #auth-section {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 3000;
     background: url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=2070') center/cover;
@@ -114,15 +132,24 @@ body {
 .role-btn.active { background: #ECFDF5; border-color: #10B981; color: #10B981; font-weight: bold; }
 input { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px; }
 
-/* RESPONSIVE RESET */
+/* 9. RESPONSIVE RULES */
 @media (max-width: 768px) {
-    .sidebar { transform: translateX(-100%); } /* Hide Sidebar */
-    .sidebar.open { transform: translateX(0); } /* Slide In */
+    /* Mobile Logic: Sidebar hidden by default (-100%) */
+    .sidebar { transform: translateX(-100%); width: 280px; }
+    /* Mobile Logic: 'open' class brings it in (0) */
+    .sidebar.mobile-open { transform: translateX(0); }
     
-    .content-area { margin-left: 0; padding: 20px; padding-top: 80px; padding-bottom: 90px; }
+    .content-area { margin-left: 0 !important; padding: 20px; padding-top: 80px; padding-bottom: 90px; }
     
     .mobile-header { display: flex; }
-    .mobile-bottom-nav { display: grid; } /* Force Grid */
+    .desktop-menu-btn { display: none !important; } /* Never show desktop toggle on phone */
+
+    /* SHOW BOTTOM NAV GRID ON MOBILE ONLY */
+    .mobile-bottom-nav { 
+        display: grid; 
+        grid-template-columns: repeat(5, 1fr);
+        align-items: center; justify-items: center;
+    }
     
     .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .stat-full { grid-column: span 2; }

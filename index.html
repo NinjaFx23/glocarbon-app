@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GLOCARBON</title>
-
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css?v=10">
+    <link rel="stylesheet" href="style.css?v=12">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="manifest" href="manifest.json">
 </head>
 <body class="bg-default">
 
@@ -24,12 +20,10 @@
             <i class="fa-solid fa-earth-americas" style="font-size: 4rem; color: #FFD700; margin-bottom: 15px;"></i>
             <h1 class="brand-text">GLOCARBON</h1>
             <p>Ecosystem Economy</p>
-            
             <div class="role-group" style="margin-top:20px;">
                 <button class="role-btn active" onclick="selectRole('Farmer')">Farmer</button>
                 <button class="role-btn" onclick="selectRole('Buyer')">Buyer</button>
             </div>
-            
             <form onsubmit="handleLogin(event)">
                 <input type="email" placeholder="Email" required>
                 <input type="password" placeholder="Password" required>
@@ -41,9 +35,9 @@
     <div id="main-app" style="display:none;">
         
         <aside class="sidebar" id="sidebar">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
+            <div class="sidebar-header">
                 <span class="brand-text">GLOCARBON</span>
-                <button onclick="toggleSidebar()" style="background:none; border:none; font-size:1.5rem;"><i class="fa-solid fa-xmark"></i></button>
+                <button onclick="toggleSidebar()" class="sidebar-close-btn"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <nav class="side-nav">
                 <a href="#" class="nav-link active" onclick="navTo('home')"><i class="fa-solid fa-house"></i> Home</a>
@@ -60,23 +54,24 @@
             <div onclick="navTo('profile')" style="width:35px; height:35px; background:#FFD700; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer;">U</div>
         </header>
 
-        <main class="content-area">
+        <main class="content-area" id="content-area">
+            
+            <button class="desktop-menu-btn" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i> Menu
+            </button>
             
             <div id="view-home" class="app-view active-view">
                 <div class="card" style="text-align:center; background:none; box-shadow:none;">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Earth_Western_Hemisphere_transparent_background.png" alt="Earth" style="width:180px; height:auto; filter: drop-shadow(0 0 10px rgba(255,215,0,0.4)); animation: float 6s ease-in-out infinite;">
                 </div>
-
                 <div class="card welcome-card">
                     <h2>Welcome, <span style="color:#FFD700;">Partner</span></h2>
                     <p>Track your ecosystem impact.</p>
                 </div>
-                
                 <div class="stats-row" style="display:flex; gap:10px; flex-wrap:wrap;">
                     <div class="card" style="flex:1;"><h3>1,240</h3><p>Trees</p></div>
                     <div class="card" style="flex:1;"><h3>450</h3><p>Credits</p></div>
                 </div>
-                <div class="card" style="margin-top:10px;"><h3>$1,250.00</h3><p>Wallet Balance</p></div>
             </div>
 
             <div id="view-marketplace" class="app-view">
@@ -100,15 +95,13 @@
             <div id="view-learn" class="app-view">
                 <div class="card">
                     <h2>Knowledge Hub</h2>
-                    <p style="margin-bottom:20px;">Mastering the Carbon Economy.</p>
-                    
                     <details style="padding:10px; border-bottom:1px solid #eee;">
                         <summary style="font-weight:bold; cursor:pointer;">What is Carbon?</summary>
-                        <p style="margin-top:10px;">Carbon refers to CO2 that traps heat. Removing it cools the planet.</p>
+                        <p style="margin-top:10px;">Carbon refers to CO2 that traps heat.</p>
                     </details>
                     <details style="padding:10px; border-bottom:1px solid #eee;">
                         <summary style="font-weight:bold; cursor:pointer;">The Credit System</summary>
-                        <p style="margin-top:10px;">One credit = 1 Ton of CO2 removed. Companies buy these to offset emissions.</p>
+                        <p style="margin-top:10px;">One credit = 1 Ton of CO2 removed.</p>
                     </details>
                 </div>
             </div>
@@ -117,7 +110,6 @@
                 <div class="card" style="text-align:center;">
                     <div style="width:80px; height:80px; background:#FFD700; border-radius:50%; margin:0 auto 15px; display:flex; align-items:center; justify-content:center; font-size:2rem;">U</div>
                     <h3>Demo User</h3>
-                    <p>Verified Farmer</p>
                     <button class="btn-cta" style="background:#EF4444; color:white; margin-top:20px;" onclick="location.reload()">Log Out</button>
                 </div>
             </div>
@@ -127,26 +119,19 @@
         <nav class="mobile-bottom-nav">
             <button onclick="navTo('home')" class="nav-item active"><i class="fa-solid fa-house"></i></button>
             <button onclick="navTo('marketplace')" class="nav-item"><i class="fa-solid fa-globe"></i></button>
-            <div class="fab-container">
-                <button onclick="navTo('scan')" class="fab-btn"><i class="fa-solid fa-plus"></i></button>
-            </div>
+            <div class="fab-container"><button onclick="navTo('scan')" class="fab-btn"><i class="fa-solid fa-plus"></i></button></div>
             <button onclick="navTo('learn')" class="nav-item"><i class="fa-solid fa-book-open"></i></button>
             <button onclick="navTo('profile')" class="nav-item"><i class="fa-solid fa-user"></i></button>
         </nav>
     </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="script.js?v=10"></script>
-    
+    <script src="script.js?v=12"></script>
     <script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
-                .then(reg => console.log('SW Registered!', reg))
-                .catch(err => console.log('SW Failed:', err));
-        });
-    }
-</script>
-
+        // Force Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js'); });
+        }
+    </script>
 </body>
 </html>
