@@ -1,20 +1,16 @@
 {
   "name": "GLOCARBON",
-  "short_name": "Glocarbon",
-  "start_url": "/",
+  "short_name": "GLOCARBON",
+  "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#F8F9FA",
-  "theme_color": "#1B5E20",
+  "background_color": "#111827",
+  "theme_color": "#FFD700",
   "icons": [
     {
-      "src": "icon.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "icon.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     }
   ]
 }
