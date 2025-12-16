@@ -154,3 +154,62 @@ input { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd;
     .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .stat-full { grid-column: span 2; }
 }
+
+/* --- NARRATIVE LANDING PAGE STYLES --- */
+
+.narrative-hero {
+    text-align: center; padding: 40px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 40px;
+}
+.hero-earth {
+    width: 180px; height: auto; margin-bottom: 20px;
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3));
+    animation: float 8s ease-in-out infinite;
+}
+@keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+
+.narrative-title {
+    font-size: 2rem; color: #1F2937; margin-bottom: 15px; line-height: 1.2;
+}
+.narrative-subtitle {
+    font-size: 1.1rem; color: #6B7280; max-width: 600px; margin: 0 auto;
+}
+
+.narrative-section { margin-bottom: 50px; }
+
+.section-label {
+    font-size: 0.85rem; color: #10B981; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 15px; font-weight: 700; border-left: 3px solid #FFD700; padding-left: 10px;
+}
+
+.narrative-card {
+    background: white; padding: 30px; border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.05);
+    line-height: 1.8; color: #4B5563;
+}
+.narrative-card h4, .narrative-card h5 {
+    color: #111827; margin-bottom: 10px; font-size: 1.2rem;
+}
+.highlight-card {
+    border-left: 4px solid #10B981; background: #F9FAFB;
+}
+
+.stakeholder-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+.icon-gold { color: #FFD700; font-size: 1.5rem; margin-bottom: 15px; }
+
+.narrative-footer {
+    text-align: center; padding: 40px 0; border-top: 1px solid rgba(0,0,0,0.05);
+    color: #9CA3AF; font-style: italic;
+}
+.trust-badges {
+    display: flex; justify-content: center; gap: 20px; margin-top: 20px;
+    font-style: normal; font-size: 0.85rem; font-weight: 600; color: #10B981;
+}
+
+/* Mobile Adjustments for Narrative */
+@media (max-width: 768px) {
+    .narrative-title { font-size: 1.6rem; }
+    .stakeholder-grid { grid-template-columns: 1fr; } /* Stack cards on phone */
+}
