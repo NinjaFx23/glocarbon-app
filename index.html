@@ -8,7 +8,8 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GLOCARBON</title>
-    
+
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css?v=10">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -138,13 +139,14 @@
     <script src="script.js?v=10"></script>
     
     <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                for(let registration of registrations) {
-                    registration.unregister();
-                }
-            });
-        }
-    </script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(reg => console.log('SW Registered!', reg))
+                .catch(err => console.log('SW Failed:', err));
+        });
+    }
+</script>
+
 </body>
 </html>
