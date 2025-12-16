@@ -4,14 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GLOCARBON - Ecosystem Economy</title>
-    
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#10B981">
     <link rel="apple-touch-icon" href="icon.png">
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
@@ -28,31 +25,18 @@
                     <h1>GLOCARBON</h1>
                     <p class="tagline">Monetize Your Ecosystem</p>
                 </div>
-
                 <div class="role-selector">
                     <label>I am a:</label>
                     <div class="role-options">
-                        <button class="role-btn active" onclick="selectRole('Farmer')">
-                            <i class="fa-solid fa-seedling"></i> Farmer
-                        </button>
-                        <button class="role-btn" onclick="selectRole('Buyer')">
-                            <i class="fa-solid fa-briefcase"></i> Buyer
-                        </button>
+                        <button class="role-btn active" onclick="selectRole('Farmer')"><i class="fa-solid fa-seedling"></i> Farmer</button>
+                        <button class="role-btn" onclick="selectRole('Buyer')"><i class="fa-solid fa-briefcase"></i> Buyer</button>
                     </div>
                 </div>
-
                 <form id="login-form" onsubmit="handleLogin(event)">
-                    <div class="input-group">
-                        <i class="fa-solid fa-envelope"></i>
-                        <input type="email" placeholder="Email Address" required>
-                    </div>
-                    <div class="input-group">
-                        <i class="fa-solid fa-lock"></i>
-                        <input type="password" placeholder="Password" required>
-                    </div>
+                    <div class="input-group"><i class="fa-solid fa-envelope"></i><input type="email" placeholder="Email Address" required></div>
+                    <div class="input-group"><i class="fa-solid fa-lock"></i><input type="password" placeholder="Password" required></div>
                     <button type="submit" class="btn-cta">Access Platform</button>
                 </form>
-                
                 <p class="auth-footer">Aligned with <span class="gold-text">UN SDG 13 & 15</span></p>
             </div>
         </div>
@@ -62,239 +46,91 @@
         
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="brand">
-                    <i class="fa-solid fa-leaf"></i> <span>GLO<b class="blue-text">CARBON</b></span>
-                </div>
+                <div class="brand"><i class="fa-solid fa-leaf"></i> <span>GLO<b class="blue-text">CARBON</b></span></div>
                 <button class="close-sidebar-btn" onclick="toggleSidebar()"><i class="fa-solid fa-xmark"></i></button>
             </div>
-
             <nav class="side-nav">
-                <a href="#" class="nav-link active" onclick="navTo('home')">
-                    <i class="fa-solid fa-chart-pie"></i> <span>Dashboard</span>
-                </a>
-                <a href="#" class="nav-link" onclick="navTo('marketplace')">
-                    <i class="fa-solid fa-globe"></i> <span>Marketplace</span>
-                </a>
-                <a href="#" class="nav-link" onclick="navTo('scan')">
-                    <i class="fa-solid fa-satellite"></i> <span>AI Scan</span>
-                </a>
-                <a href="#" class="nav-link" onclick="navTo('learn')">
-                    <i class="fa-solid fa-book-open"></i> <span>Learn & SDGs</span>
-                </a>
-                <a href="#" class="nav-link" onclick="navTo('profile')">
-                    <i class="fa-solid fa-user-shield"></i> <span>Profile</span>
-                </a>
+                <a href="#" class="nav-link active" onclick="navTo('home')"><i class="fa-solid fa-chart-pie"></i> <span>Dashboard</span></a>
+                <a href="#" class="nav-link" onclick="navTo('marketplace')"><i class="fa-solid fa-globe"></i> <span>Marketplace</span></a>
+                <a href="#" class="nav-link" onclick="navTo('scan')"><i class="fa-solid fa-satellite"></i> <span>AI Scan</span></a>
+                <a href="#" class="nav-link" onclick="navTo('learn')"><i class="fa-solid fa-book-open"></i> <span>Learn & SDGs</span></a>
+                <a href="#" class="nav-link" onclick="navTo('profile')"><i class="fa-solid fa-user-shield"></i> <span>Profile</span></a>
             </nav>
-
             <div class="sidebar-footer-area">
-                <div class="standards-badge">
-                    <i class="fa-solid fa-certificate"></i> Verified by <b>VeraCarbon</b>
-                </div>
+                <div class="standards-badge"><i class="fa-solid fa-certificate"></i> Verified by <b>VeraCarbon</b></div>
             </div>
         </aside>
 
-        <header class="desktop-header" style="display:none;"> <div class="header-right" onclick="navTo('profile')" style="cursor: pointer;">
+        <header class="desktop-header" style="display:none;">
+           <div class="header-right" onclick="navTo('profile')" style="cursor: pointer;">
                <span class="user-name-display">User</span>
-               <div class="user-avatar-small" onclick="navTo('profile')" style="cursor: pointer;">U</div>
+               <div class="avatar-small">U</div>
            </div>
         </header>
 
         <header class="mobile-header">
             <button class="icon-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
             <div class="header-brand">GLO<span class="blue-text">CARBON</span></div>
-            <div class="user-avatar-small">U</div>
+            <div class="user-avatar-small" onclick="navTo('profile')" style="cursor: pointer;">U</div>
         </header>
 
         <main class="content-area">
-            
             <div id="view-home" class="app-view active-view">
-                <div class="welcome-card">
-                    <h2>Welcome back, <span class="gold-text">Partner</span></h2>
-                    <p>Track your contribution to the Paris Agreement goals.</p>
-                </div>
-                
+                <div class="welcome-card"><h2>Welcome back, <span class="gold-text">Partner</span></h2><p>Track your contribution to the Paris Agreement goals.</p></div>
                 <div class="stats-container">
-                    <div class="stat-card">
-                        <div class="icon-box green"><i class="fa-solid fa-tree"></i></div>
-                        <div>
-                            <h3>1,240</h3>
-                            <p>Trees Monitored</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="icon-box gold"><i class="fa-solid fa-coins"></i></div>
-                        <div>
-                            <h3>450</h3>
-                            <p>Carbon Credits</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="icon-box blue"><i class="fa-solid fa-wallet"></i></div>
-                        <div>
-                            <h3>$1,250</h3>
-                            <p>Wallet Balance</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="info-block">
-                    <h4><i class="fa-solid fa-bullhorn"></i> Platform Update</h4>
-                    <p>We have updated our verification protocols to align with <b>VeraCarbon Standard v4.0</b>. Your credits are now tradeable globally.</p>
+                    <div class="stat-card"><div class="icon-box green"><i class="fa-solid fa-tree"></i></div><div><h3>1,240</h3><p>Trees Monitored</p></div></div>
+                    <div class="stat-card"><div class="icon-box gold"><i class="fa-solid fa-coins"></i></div><div><h3>450</h3><p>Carbon Credits</p></div></div>
+                    <div class="stat-card"><div class="icon-box blue"><i class="fa-solid fa-wallet"></i></div><div><h3>$1,250</h3><p>Wallet Balance</p></div></div>
                 </div>
             </div>
 
             <div id="view-marketplace" class="app-view">
-                <div class="section-header">
-                    <h2>Global Marketplace</h2>
-                    <p>Trade credits verified under SDG 13 (Climate Action).</p>
-                </div>
-                <div id="map"></div>
-                <div id="project-grid"></div>
+                <div class="section-header"><h2>Global Marketplace</h2><p>Trade credits verified under SDG 13.</p></div>
+                <div id="map"></div><div id="project-grid"></div>
             </div>
 
             <div id="view-scan" class="app-view">
-                <div class="section-header">
-                    <h2>AI Verification</h2>
-                    <p>Upload drone/satellite imagery for carbon stock analysis.</p>
-                </div>
+                <div class="section-header"><h2>AI Verification</h2><p>Upload drone/satellite imagery for carbon stock analysis.</p></div>
                 <div class="upload-container">
-                    <div class="scan-visual">
-                        <i class="fa-solid fa-drone"></i>
-                    </div>
-                    <button class="btn-cta" onclick="triggerScan()">
-                        <i class="fa-solid fa-cloud-arrow-up"></i> Upload Imagery
-                    </button>
+                    <div class="scan-visual"><i class="fa-solid fa-drone"></i></div>
+                    <button class="btn-cta" onclick="triggerScan()"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Imagery</button>
                     <div id="scan-status" class="status-box">Ready to scan...</div>
                 </div>
             </div>
 
             <div id="view-learn" class="app-view">
-                <div class="section-header">
-                    <h2>Global Knowledge Hub</h2>
-                    <p>Mastering the Carbon Economy & Sustainability.</p>
-                </div>
-                
+                <div class="section-header"><h2>Global Knowledge Hub</h2><p>Mastering the Carbon Economy.</p></div>
                 <div class="faq-group">
                     <h4 class="faq-header">🌱 Carbon 101</h4>
-                    
-                    <details class="faq-item">
-                        <summary>What exactly is "Carbon"?</summary>
-                        <div class="faq-content">
-                            <p>In this context, "Carbon" refers to <b>Carbon Dioxide (CO2)</b> and other greenhouse gases (GHGs) like Methane. These gases trap heat in our atmosphere, acting like a blanket that warms the planet—a phenomenon known as the Greenhouse Effect.</p>
-                        </div>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary>Why must we remove it from the atmosphere?</summary>
-                        <div class="faq-content">
-                            <p>Excess carbon from human activity (burning fossil fuels, deforestation) has tipped nature's balance. This causes:</p>
-                            <ul>
-                                <li>Rising global temperatures (Global Warming).</li>
-                                <li>Extreme weather events (droughts, floods).</li>
-                                <li>Ocean acidification affecting marine life.</li>
-                            </ul>
-                            <p>Removing it allows us to stay below the <b>1.5°C warming limit</b> set by the Paris Agreement.</p>
-                        </div>
-                    </details>
+                    <details class="faq-item"><summary>What is "Carbon"?</summary><div class="faq-content"><p>Carbon refers to CO2 and greenhouse gases that trap heat.</p></div></details>
+                    <details class="faq-item"><summary>Why remove it?</summary><div class="faq-content"><p>To stop global warming and extreme weather.</p></div></details>
                 </div>
-
                 <div class="faq-group">
                     <h4 class="faq-header">💰 The Credit System</h4>
-                    
-                    <details class="faq-item">
-                        <summary>What is a Carbon Credit?</summary>
-                        <div class="faq-content">
-                            <p>Think of a Carbon Credit as a <b>verified certificate</b>. One credit equals <b>one metric ton of CO2</b> that has been either removed from the air (by trees/soil) or prevented from being emitted.</p>
-                            <p>Companies buy these credits to "offset" their own unavoidable emissions.</p>
-                        </div>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary>How does Glocarbon verify my credits?</summary>
-                        <div class="faq-content">
-                            <p>We use a 3-Step Verification Process aligned with VeraCarbon & Gold Standard:</p>
-                            <ol>
-                                <li><b>AI Satellite Scan:</b> Measures biomass density from space.</li>
-                                <li><b>Drone/Ground Data:</b> You upload specific site imagery.</li>
-                                <li><b>Audit:</b> Our algorithm calculates the tonnage and issues a digital certificate.</li>
-                            </ol>
-                        </div>
-                    </details>
-                </div>
-
-                <div class="faq-group">
-                    <h4 class="faq-header">🌍 UN & Paris Agreement</h4>
-                    
-                    <details class="faq-item">
-                        <summary>What are the SDGs?</summary>
-                        <div class="faq-content">
-                            <p>The Sustainable Development Goals (SDGs) are 17 global goals set by the UN. Glocarbon directly impacts:</p>
-                            <ul>
-                                <li><b>SDG 13 (Climate Action):</b> Reducing CO2.</li>
-                                <li><b>SDG 15 (Life on Land):</b> Protecting forests and biodiversity.</li>
-                                <li><b>SDG 1 (No Poverty):</b> Paying farmers for ecosystem services.</li>
-                            </ul>
-                        </div>
-                    </details>
+                    <details class="faq-item"><summary>What is a Credit?</summary><div class="faq-content"><p>One credit = 1 Ton of CO2 removed.</p></div></details>
                 </div>
             </div>
 
             <div id="view-profile" class="app-view">
                 <div class="profile-header-card">
-                    <div class="avatar-large">U</div>
-                    <h3>Demo User</h3>
-                    <span class="badge-gold">Gold Member</span>
+                    <div class="avatar-large">U</div><h3>Demo User</h3><span class="badge-gold">Gold Member</span>
                 </div>
                 <button class="btn-danger" onclick="logout()" style="width:100%; padding:15px; margin-top:20px; background:#EF4444; color:white; border:none; border-radius:12px; font-weight:bold;">Log Out</button>
             </div>
 
-            <footer class="app-footer">
-                <div class="footer-links">
-                    <a href="#">Terms</a>
-                    <a href="#">Privacy</a>
-                    <a href="#">VeraCarbon</a>
-                </div>
-                <div class="social-icons">
-                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                </div>
-                <p>&copy; 2025 GLOCARBON Inc.</p>
-            </footer>
-
+            <footer class="app-footer"><p>&copy; 2025 GLOCARBON Inc.</p></footer>
         </main>
 
         <nav class="mobile-bottom-nav">
-            <button onclick="navTo('home')" class="nav-item active">
-                <i class="fa-solid fa-house"></i>
-            </button>
-            <button onclick="navTo('marketplace')" class="nav-item">
-                <i class="fa-solid fa-globe"></i>
-            </button>
-            
-            <div class="fab-container">
-                <button onclick="navTo('scan')" class="fab-btn">
-                    <i class="fa-solid fa-plus"></i>
-                </button>
-            </div>
-
-            <button onclick="navTo('learn')" class="nav-item">
-                <i class="fa-solid fa-book-open"></i>
-            </button>
-            <button onclick="navTo('profile')" class="nav-item">
-                <i class="fa-solid fa-user"></i>
-            </button>
+            <button onclick="navTo('home')" class="nav-item active"><i class="fa-solid fa-house"></i></button>
+            <button onclick="navTo('marketplace')" class="nav-item"><i class="fa-solid fa-globe"></i></button>
+            <div class="fab-container"><button onclick="navTo('scan')" class="fab-btn"><i class="fa-solid fa-plus"></i></button></div>
+            <button onclick="navTo('learn')" class="nav-item"><i class="fa-solid fa-book-open"></i></button>
+            <button onclick="navTo('profile')" class="nav-item"><i class="fa-solid fa-user"></i></button>
         </nav>
-
     </div>
-
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>
-    <script>
-        // PWA Register
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js'); });
-        }
-    </script>
+    <script>if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js'); }); }</script>
 </body>
 </html>
