@@ -40,11 +40,25 @@
                 <button onclick="toggleSidebar()" class="sidebar-close-btn"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <nav class="side-nav">
-                <a href="#" class="nav-link active" onclick="navTo('home')"><i class="fa-solid fa-house"></i> Home</a>
-                <a href="#" class="nav-link" onclick="navTo('marketplace')"><i class="fa-solid fa-globe"></i> Market</a>
-                <a href="#" class="nav-link" onclick="navTo('scan')"><i class="fa-solid fa-camera"></i> AI Scan</a>
-                <a href="#" class="nav-link" onclick="navTo('learn')"><i class="fa-solid fa-book"></i> Learn</a>
-                <a href="#" class="nav-link" onclick="navTo('profile')"><i class="fa-solid fa-user"></i> Profile</a>
+                <a href="#" class="nav-link active" onclick="navTo('home')">
+                    <i class="fa-solid fa-house"></i> <span>Home</span>
+                </a>
+                
+                <a href="#" class="nav-link" onclick="navTo('learn')">
+                    <i class="fa-solid fa-book-open"></i> <span>Learn & SDGs</span>
+                </a>
+
+                <a href="#" class="nav-link" onclick="navTo('scan')">
+                    <i class="fa-solid fa-satellite"></i> <span>AI Scan</span>
+                </a>
+
+                <a href="#" class="nav-link" onclick="navTo('marketplace')">
+                    <i class="fa-solid fa-globe"></i> <span>Marketplace</span>
+                </a>
+
+                <a href="#" class="nav-link" onclick="navTo('profile')">
+                    <i class="fa-solid fa-user-shield"></i> <span>Profile</span>
+                </a>
             </nav>
         </aside>
 
@@ -154,9 +168,15 @@
 
         <nav class="mobile-bottom-nav">
             <button onclick="navTo('home')" class="nav-item active"><i class="fa-solid fa-house"></i></button>
-            <button onclick="navTo('marketplace')" class="nav-item"><i class="fa-solid fa-globe"></i></button>
-            <div class="fab-container"><button onclick="navTo('scan')" class="fab-btn"><i class="fa-solid fa-plus"></i></button></div>
+            
             <button onclick="navTo('learn')" class="nav-item"><i class="fa-solid fa-book-open"></i></button>
+            
+            <div class="fab-container">
+                <button onclick="navTo('scan')" class="fab-btn"><i class="fa-solid fa-plus"></i></button>
+            </div>
+            
+            <button onclick="navTo('marketplace')" class="nav-item"><i class="fa-solid fa-globe"></i></button>
+            
             <button onclick="navTo('profile')" class="nav-item"><i class="fa-solid fa-user"></i></button>
         </nav>
     </div>
