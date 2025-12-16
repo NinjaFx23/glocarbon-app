@@ -1,146 +1,129 @@
-/* --- GLOCARBON V3 (Glassmorphism & Gold) - FIXED --- */
+/* --- GLOCARBON FINAL FIX (v10) --- */
 
-:root {
-    /* Updated Palette */
-    --primary: #10B981;       /* Nature Green */
-    --secondary: #3B82F6;     /* Sky Blue */
-    --accent: #FFD700;        /* Pure Gold */
-    --accent-dark: #B8860B;   /* Dark Gold */
-    
-    /* GLASSMORPHISM VARIABLES */
-    --glass-surface: rgba(255, 255, 255, 0.85); /* 85% Opacity White */
-    --glass-border: 1px solid rgba(255, 255, 255, 0.3);
-    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-    
-    --text-main: #0F172A;     /* Darker text for contrast */
-    --text-light: #475569;
-    --sidebar-width: 260px;
-}
-
+/* 1. RESET & BASICS */
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
 
-/* DYNAMIC BACKGROUNDS */
-body { 
-    background-color: #f3f4f6; 
+body {
+    background-color: #111827; /* Dark fallback */
+    color: #1F2937;
     min-height: 100vh;
-    /* Default Background if image fails */
-    background: linear-gradient(135deg, #064E3B, #10B981); 
+    overflow-x: hidden; /* Stop horizontal scrolling */
 }
 
+/* 2. BACKGROUNDS */
 .bg-layer {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
     background-size: cover; background-position: center;
-    transition: background-image 0.6s ease-in-out;
+    transition: background-image 0.4s ease;
 }
-/* Dark overlay to ensure text readability on bright images */
 .bg-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-    background: rgba(0, 0, 0, 0.2); /* Slight dark tint */
-    backdrop-filter: blur(3px);      /* Slight blur for depth */
+    background: rgba(0, 0, 0, 0.6); /* Dark tint for text readability */
 }
 
-/* --- GOLDEN BRANDING (FIXED) --- */
+/* 3. LAYOUT FIXES (The "Dumped Page" Killer) */
+.app-view {
+    display: none !important; /* HIDE EVERYTHING BY DEFAULT */
+    padding-bottom: 100px; /* Space for bottom nav */
+}
+.active-view {
+    display: block !important; /* SHOW ONLY ACTIVE */
+    animation: fadeIn 0.4s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* 4. SIDEBAR (Vertical Menu) */
+.sidebar {
+    position: fixed; top: 0; left: 0; bottom: 0; width: 260px;
+    background: white; border-right: 1px solid #ddd;
+    z-index: 2000; padding: 20px;
+    display: flex; flex-direction: column;
+    transform: translateX(0); transition: transform 0.3s ease;
+}
+.side-nav { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.nav-link {
+    display: flex; align-items: center; gap: 15px; padding: 15px;
+    text-decoration: none; color: #4B5563; font-weight: 500; border-radius: 8px;
+}
+.nav-link.active { background: #ECFDF5; color: #10B981; font-weight: bold; }
+
+/* 5. MOBILE HEADER (Gold Brand) */
+.mobile-header {
+    position: fixed; top: 0; left: 0; right: 0; height: 60px;
+    background: white; border-bottom: 1px solid #ddd;
+    display: none; /* Hidden on Desktop */
+    justify-content: space-between; align-items: center;
+    padding: 0 20px; z-index: 1500;
+}
 .brand-text {
-    background: linear-gradient(to right, var(--accent), var(--accent-dark));
-    /* The Fix: Add standard property and text color fallback */
-    -webkit-background-clip: text;
-    background-clip: text; 
-    -webkit-text-fill-color: transparent;
-    color: transparent; 
-    
-    font-weight: 800; font-size: 1.5rem; letter-spacing: 1px;
-    text-shadow: 0px 2px 4px rgba(0,0,0,0.1);
+    font-size: 1.4rem; font-weight: 800;
+    color: #FFD700; /* SOLID GOLD */
+    text-transform: uppercase; letter-spacing: 1px;
 }
 
-/* --- AUTH SECTION --- */
+/* 6. BOTTOM NAV (Grid Layout = Equal Spacing) */
+.mobile-bottom-nav {
+    position: fixed; bottom: 0; left: 0; right: 0; height: 70px;
+    background: white; border-top: 1px solid #ddd;
+    display: none; z-index: 1500;
+    /* GRID SYSTEM */
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    align-items: center; justify-items: center;
+}
+.nav-item {
+    background: none; border: none; font-size: 1.4rem; color: #9CA3AF;
+    width: 100%; height: 100%;
+}
+.nav-item.active { color: #10B981; }
+
+/* FAB Button (Center) */
+.fab-container {
+    position: relative; top: -20px; width: 55px; height: 55px;
+}
+.fab-btn {
+    width: 100%; height: 100%; border-radius: 50%;
+    background: #FFD700; border: 4px solid #fff;
+    color: white; font-size: 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* 7. CARDS & CONTENT */
+.content-area { margin-left: 260px; padding: 30px; padding-top: 80px; }
+.card {
+    background: white; border-radius: 16px; padding: 20px; margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* AUTH SCREEN */
 #auth-section {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2000;
-    /* High quality nature background for login */
-    background: url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 3000;
+    background: url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=2070') center/cover;
     display: flex; align-items: center; justify-content: center;
 }
-.auth-container {
-    background: rgba(20, 20, 20, 0.7); /* Dark Glass for Login */
-    backdrop-filter: blur(15px);
-    padding: 40px; border-radius: 24px; width: 90%; max-width: 400px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    text-align: center; border: 1px solid rgba(255,255,255,0.1);
-    color: white;
+.auth-box {
+    background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 20px;
+    width: 90%; max-width: 350px; text-align: center;
 }
-.auth-container h1 { color: var(--accent); margin-bottom: 5px; }
-.auth-container p { color: #cbd5e1; }
-.auth-container label { color: #e2e8f0; }
-
-.input-group input {
-    background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
-}
-.input-group input::placeholder { color: #94a3b8; }
-.input-group i { color: var(--accent); }
-
-/* --- GLASS LAYOUT --- */
-.sidebar {
-    background: var(--glass-surface);
-    backdrop-filter: blur(12px);
-    border-right: var(--glass-border);
-    position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar-width);
-    padding: 25px; display: flex; flex-direction: column; z-index: 1000;
-    transition: transform 0.3s ease;
-}
-
-.mobile-header {
-    background: var(--glass-surface);
-    backdrop-filter: blur(12px);
-    border-bottom: var(--glass-border);
-    display: none; position: fixed; top: 0; left: 0; right: 0; height: 60px;
-    justify-content: space-between; align-items: center; padding: 0 20px; z-index: 900;
-}
-.mobile-bottom-nav {
-    background: var(--glass-surface);
-    backdrop-filter: blur(12px);
-    border-top: var(--glass-border);
-    display: none; position: fixed; bottom: 0; left: 0; right: 0; height: 70px;
-    justify-content: space-between; padding: 0 10px; z-index: 900;
-}
-
-/* --- CARDS (The Content) --- */
-.content-area { margin-left: var(--sidebar-width); padding: 30px; padding-bottom: 100px; }
-
-/* Common Glass Card Style */
-.stat-card, .welcome-card, .learn-card, .faq-item, .profile-header-card, .upload-container {
-    background: var(--glass-surface);
-    backdrop-filter: blur(8px);
-    border: var(--glass-border);
-    box-shadow: var(--glass-shadow);
-    border-radius: 16px; padding: 20px; margin-bottom: 20px;
-}
-
-/* Typography on Glass */
-h2, h3, h4 { color: var(--text-main); }
-p, span { color: var(--text-light); }
-
-/* Buttons */
 .btn-cta {
-    background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-    color: #000; font-weight: 700; border: none; padding: 12px; border-radius: 12px;
-    width: 100%; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    width: 100%; padding: 14px; background: #FFD700; color: black;
+    border: none; border-radius: 10px; font-weight: bold; margin-top: 15px;
 }
-.role-btn.active {
-    background: rgba(16, 185, 129, 0.2); border: 1px solid var(--primary); color: white;
-}
+.role-group { display: flex; gap: 10px; margin-bottom: 15px; }
+.role-btn { flex: 1; padding: 10px; border: 1px solid #ddd; background: white; border-radius: 8px; }
+.role-btn.active { background: #ECFDF5; border-color: #10B981; color: #10B981; font-weight: bold; }
+input { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px; }
 
-/* FAQ Styles */
-.faq-item summary { font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; }
-.faq-content { margin-top: 10px; line-height: 1.6; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 10px; }
-
-/* Responsive */
+/* RESPONSIVE RESET */
 @media (max-width: 768px) {
-    .sidebar { transform: translateX(-100%); }
-    .sidebar.open { transform: translateX(0); }
-    .mobile-header, .mobile-bottom-nav { display: flex; }
-    .content-area { margin-left: 0; padding-top: 80px; }
+    .sidebar { transform: translateX(-100%); } /* Hide Sidebar */
+    .sidebar.open { transform: translateX(0); } /* Slide In */
+    
+    .content-area { margin-left: 0; padding: 20px; padding-top: 80px; padding-bottom: 90px; }
+    
+    .mobile-header { display: flex; }
+    .mobile-bottom-nav { display: grid; } /* Force Grid */
+    
+    .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .stat-full { grid-column: span 2; }
 }
-
-/* Helper Colors */
-.gold-text { color: var(--accent-dark); font-weight: 800; }
-.blue-text { color: var(--secondary); }
