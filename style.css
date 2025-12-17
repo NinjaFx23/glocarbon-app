@@ -26,15 +26,14 @@ body {
 .active-view { display: block !important; animation: fadeIn 0.4s ease; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* 4. SIDEBAR (The Core Structure) */
 .sidebar {
     position: fixed; top: 0; left: 0; bottom: 0; width: 260px;
-    background: white; border-right: 1px solid #ddd;
+    background: #F0FDF4; /* Changed to Soft Ecosystem Mint */
+    border-right: 1px solid #BBF7D0; /* Softer Green Border */
     z-index: 2000; padding: 20px;
     display: flex; flex-direction: column;
-    transition: transform 0.3s ease; /* Smooth slide for both mobile/desktop */
+    transition: transform 0.3s ease;
 }
-
 /* DESKTOP TOGGLE STATES */
 /* When this class is added, sidebar slides left (hides) */
 .sidebar.desktop-closed { transform: translateX(-100%); }
@@ -51,9 +50,22 @@ body {
 .side-nav { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
 .nav-link {
     display: flex; align-items: center; gap: 15px; padding: 15px;
-    text-decoration: none; color: #4B5563; font-weight: 500; border-radius: 8px;
+    text-decoration: none; 
+    color: #166534; /* Dark Green Text (instead of Gray) */
+    font-weight: 500; border-radius: 8px;
+    transition: background 0.2s;
 }
-.nav-link.active { background: #ECFDF5; color: #10B981; font-weight: bold; }
+
+.nav-link:hover {
+    background: rgba(16, 185, 129, 0.1); /* Slight hover effect */
+}
+
+.nav-link.active { 
+    background: #DCFCE7; /* Brighter Green Highlight */
+    color: #064E3B; /* Deep Forest Text */
+    font-weight: bold; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle lift */
+}
 
 /* 5. CONTENT AREA (Dynamic Resizing) */
 .content-area {
@@ -79,13 +91,15 @@ body {
 /* 7. MOBILE HEADER & BOTTOM NAV */
 .mobile-header {
     position: fixed; top: 0; left: 0; right: 0; height: 60px;
-    background: white; border-bottom: 1px solid #ddd;
-    display: none; /* Hidden on Desktop */
+    background: #F0FDF4; /* Match Sidebar (Soft Mint) */
+    border-bottom: 1px solid #BBF7D0;
+    display: none;
     justify-content: space-between; align-items: center;
     padding: 0 20px; z-index: 1500;
 }
 .brand-text {
-    font-size: 1.4rem; font-weight: 800; color: #FFD700; 
+    font-size: 1.4rem; font-weight: 800;
+    color: #064E3B; /* Changed to Deep Forest Green */
     text-transform: uppercase; letter-spacing: 1px;
 }
 
