@@ -143,17 +143,81 @@
             </div>
 
             <div id="view-learn" class="app-view">
-                <div class="card">
-                    <h2>Knowledge Hub</h2>
-                    <details style="padding:10px; border-bottom:1px solid #eee;">
-                        <summary style="font-weight:bold; cursor:pointer;">What is Carbon?</summary>
-                        <p style="margin-top:10px;">Carbon refers to CO2 that traps heat.</p>
-                    </details>
-                    <details style="padding:10px; border-bottom:1px solid #eee;">
-                        <summary style="font-weight:bold; cursor:pointer;">The Credit System</summary>
-                        <p style="margin-top:10px;">One credit = 1 Ton of CO2 removed.</p>
-                    </details>
+                
+                <div class="academy-header">
+                    <h2><span style="color:#064E3B;">Climate</span> Intelligence</h2>
+                    <p>From carbon curiosity to market mastery.</p>
                 </div>
+
+                <div class="learning-tabs">
+                    <button class="tab-btn active" onclick="switchTab('beginner')">🌱 Basics</button>
+                    <button class="tab-btn" onclick="switchTab('intermediate')">🔬 Science</button>
+                    <button class="tab-btn" onclick="switchTab('advanced')">📈 Market</button>
+                </div>
+
+                <div id="tab-beginner" class="learning-content active-tab">
+                    <div class="lesson-card">
+                        <div class="lesson-icon"><i class="fa-solid fa-leaf"></i></div>
+                        <div class="lesson-text">
+                            <h4>What is a Carbon Credit?</h4>
+                            <p>Think of it as a certificate. One credit equals <strong>1 Ton of CO₂</strong> removed from the air. It's a way to fund nature's ability to heal our atmosphere.</p>
+                        </div>
+                    </div>
+                    <div class="lesson-card">
+                        <div class="lesson-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                        <div class="lesson-text">
+                            <h4>Why do we need them?</h4>
+                            <p>Global warming is caused by too much "heat-trapping" gas. Trees and soil act as sponges. Credits pay farmers to keep those sponges working.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="sdg-section">
+                        <h4 class="sdg-title">Aligned Goals (UN SDGs)</h4>
+                        <div class="sdg-grid">
+                            <div class="sdg-badge sdg-13">
+                                <span>13</span> <small>Climate Action</small>
+                            </div>
+                            <div class="sdg-badge sdg-15">
+                                <span>15</span> <small>Life on Land</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-intermediate" class="learning-content">
+                    <div class="lesson-card">
+                        <div class="lesson-icon"><i class="fa-solid fa-tree"></i></div>
+                        <div class="lesson-text">
+                            <h4>How Nature Captures Carbon</h4>
+                            <p>Through <strong>Photosynthesis</strong>. Plants breathe in CO₂ and turn it into wood (biomass) and roots. This locks the carbon away for decades.</p>
+                        </div>
+                    </div>
+                    <div class="lesson-card">
+                        <div class="lesson-icon"><i class="fa-solid fa-satellite"></i></div>
+                        <div class="lesson-text">
+                            <h4>The Role of AI (MRV)</h4>
+                            <p><strong>M</strong>easure, <strong>R</strong>eport, <strong>V</strong>erify. We use satellites to measure tree density from space, ensuring no one claims credit for a forest that isn't there.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-advanced" class="learning-content">
+                    <div class="lesson-card">
+                        <div class="lesson-icon"><i class="fa-solid fa-chart-line"></i></div>
+                        <div class="lesson-text">
+                            <h4>Value & Pricing</h4>
+                            <p>Not all credits are equal. "High-Quality" credits (like ours) are verified by technology and directly benefit local communities, commanding a higher price.</p>
+                        </div>
+                    </div>
+                    <div class="lesson-card">
+                        <div class="lesson-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div class="lesson-text">
+                            <h4>Avoiding Greenwashing</h4>
+                            <p>Integrity is key. Our ledger ensures <strong>Permanence</strong> (the trees stay protected) and <strong>Additionality</strong> (this impact wouldn't have happened without the project).</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div id="view-profile" class="app-view">

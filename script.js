@@ -50,3 +50,16 @@ function triggerScan() {
     status.innerText = "Analyzing...";
     setTimeout(() => { status.innerText = "Verified! Carbon Density: High"; status.style.color = "#10B981"; }, 2000);
 }
+
+// LEARN SECTION TABS
+function switchTab(tabName) {
+    // 1. Reset all buttons
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // 2. Hide all contents
+    document.querySelectorAll('.learning-content').forEach(content => content.classList.remove('active-tab'));
+
+    // 3. Show selected content
+    document.getElementById('tab-' + tabName).classList.add('active-tab');
+}
