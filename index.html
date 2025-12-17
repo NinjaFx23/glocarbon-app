@@ -124,98 +124,123 @@
 
             </div>
 
-            <div id="view-marketplace" class="app-view">
-                <div class="card">
-                    <h2>Marketplace</h2>
-                    <div id="map" style="height:250px; background:#eee; margin-top:15px; border-radius:10px;"></div>
-                    <div id="project-grid" style="margin-top:20px;"></div>
-                </div>
-            </div>
-
-            <div id="view-scan" class="app-view">
-                <div class="card" style="text-align:center;">
-                    <h2>AI Verification</h2>
-                    <i class="fa-solid fa-drone" style="font-size:3rem; color:#10B981; margin:20px 0;"></i>
-                    <p>Upload imagery for analysis</p>
-                    <button class="btn-cta" onclick="triggerScan()">Upload File</button>
-                    <div id="scan-status" style="margin-top:15px; font-weight:bold;"></div>
-                </div>
-            </div>
-
             <div id="view-learn" class="app-view">
                 
                 <div class="academy-header">
-                    <h2><span style="color:#064E3B;">Climate</span> Intelligence</h2>
+                    <h2>Climate <span style="color:#FFD700;">Intelligence</span></h2>
                     <p>From carbon curiosity to market mastery.</p>
                 </div>
 
                 <div class="learning-tabs">
                     <button class="tab-btn active" onclick="switchTab('beginner')">🌱 Basics</button>
-                    <button class="tab-btn" onclick="switchTab('intermediate')">🔬 Science</button>
-                    <button class="tab-btn" onclick="switchTab('advanced')">📈 Market</button>
+                    <button class="tab-btn" onclick="switchTab('science')">🔬 Science</button>
+                    <button class="tab-btn" onclick="switchTab('market')">📈 Market</button>
+                    <button class="tab-btn" onclick="switchTab('sdg')">🇺🇳 SDGs</button>
                 </div>
 
                 <div id="tab-beginner" class="learning-content active-tab">
-                    <div class="lesson-card">
-                        <div class="lesson-icon"><i class="fa-solid fa-leaf"></i></div>
-                        <div class="lesson-text">
-                            <h4>What is a Carbon Credit?</h4>
-                            <p>Think of it as a certificate. One credit equals <strong>1 Ton of CO₂</strong> removed from the air. It's a way to fund nature's ability to heal our atmosphere.</p>
-                        </div>
-                    </div>
-                    <div class="lesson-card">
-                        <div class="lesson-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                        <div class="lesson-text">
-                            <h4>Why do we need them?</h4>
-                            <p>Global warming is caused by too much "heat-trapping" gas. Trees and soil act as sponges. Credits pay farmers to keep those sponges working.</p>
-                        </div>
-                    </div>
                     
-                    <div class="sdg-section">
-                        <h4 class="sdg-title">Aligned Goals (UN SDGs)</h4>
-                        <div class="sdg-grid">
-                            <div class="sdg-badge sdg-13">
-                                <span>13</span> <small>Climate Action</small>
-                            </div>
-                            <div class="sdg-badge sdg-15">
-                                <span>15</span> <small>Life on Land</small>
-                            </div>
+                    <div class="lesson-card">
+                        <div class="lesson-text">
+                            <h4>The Invisible Threat</h4>
+                            <p>Carbon Dioxide (CO₂) is released when we burn fossil fuels (energy), clear land, or produce industrial materials. It creates a "thermal blanket" around Earth.</p>
+                            <p><strong>The Effect:</strong> This trapped heat drives extreme weather, ocean acidification, and biodiversity loss. We must remove it to stay below 1.5°C warming.</p>
+                        </div>
+                        <div class="lesson-visual">
+                            <img src="https://images.unsplash.com/photo-1611273426761-53c8577a3c97?q=80&w=2070" alt="Industrial Smoke">
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-text">
+                            <h4>What is a Credit?</h4>
+                            <p>A Carbon Credit is a transferable certificate. One credit represents <strong>1 Metric Tonne</strong> of CO₂e either prevented from entering the atmosphere or physically removed from it.</p>
+                        </div>
+                        <div class="lesson-visual">
+                            <img src="https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=987" alt="Balancing Scales">
                         </div>
                     </div>
                 </div>
 
-                <div id="tab-intermediate" class="learning-content">
+                <div id="tab-science" class="learning-content">
+                    
                     <div class="lesson-card">
-                        <div class="lesson-icon"><i class="fa-solid fa-tree"></i></div>
                         <div class="lesson-text">
-                            <h4>How Nature Captures Carbon</h4>
-                            <p>Through <strong>Photosynthesis</strong>. Plants breathe in CO₂ and turn it into wood (biomass) and roots. This locks the carbon away for decades.</p>
+                            <h4>Myth: "Only Trees Count"</h4>
+                            <p>False. While forests are vital, <strong>Grasslands</strong> are often more reliable carbon sinks because they store 90% of their carbon <em>underground</em> in roots and soil, making them resilient to wildfires.</p>
+                        </div>
+                        <div class="lesson-visual">
+                            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070" alt="Vast Grasslands">
                         </div>
                     </div>
+
                     <div class="lesson-card">
-                        <div class="lesson-icon"><i class="fa-solid fa-satellite"></i></div>
                         <div class="lesson-text">
-                            <h4>The Role of AI (MRV)</h4>
-                            <p><strong>M</strong>easure, <strong>R</strong>eport, <strong>V</strong>erify. We use satellites to measure tree density from space, ensuring no one claims credit for a forest that isn't there.</p>
+                            <h4>The Soil & Blue Carbon</h4>
+                            <p><strong>Blue Carbon:</strong> Mangroves and seagrasses can store up to 4x more carbon per hectare than tropical rainforests.</p>
+                            <p><strong>Soil Power:</strong> Healthy soil is the largest terrestrial carbon pool. Our AI scans for soil organic carbon (SOC) alongside vegetation.</p>
+                        </div>
+                        <div class="lesson-visual">
+                            <img src="https://images.unsplash.com/photo-1583373834259-46cc92173cb7?q=80&w=1974" alt="Mangrove Roots">
                         </div>
                     </div>
                 </div>
 
-                <div id="tab-advanced" class="learning-content">
+                <div id="tab-market" class="learning-content">
+                    
                     <div class="lesson-card">
-                        <div class="lesson-icon"><i class="fa-solid fa-chart-line"></i></div>
                         <div class="lesson-text">
-                            <h4>Value & Pricing</h4>
-                            <p>Not all credits are equal. "High-Quality" credits (like ours) are verified by technology and directly benefit local communities, commanding a higher price.</p>
+                            <h4>2024 Market Reality</h4>
+                            <p>The Voluntary Carbon Market (VCM) is valued at over <strong>$1.4 Billion</strong>, with companies retiring approx. <strong>175 Million</strong> credits annually to meet net-zero goals.</p>
+                            <div class="market-stat-grid">
+                                <div class="market-stat"><strong>$1.4B</strong><span>Market Size</span></div>
+                                <div class="market-stat"><strong>175M</strong><span>Retired/Yr</span></div>
+                                <div class="market-stat"><strong>$5-30</strong><span>Price/Ton</span></div>
+                            </div>
+                        </div>
+                        <div class="lesson-visual">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070" alt="Market Graph">
                         </div>
                     </div>
+
                     <div class="lesson-card">
-                        <div class="lesson-icon"><i class="fa-solid fa-shield-halved"></i></div>
                         <div class="lesson-text">
-                            <h4>Avoiding Greenwashing</h4>
-                            <p>Integrity is key. Our ledger ensures <strong>Permanence</strong> (the trees stay protected) and <strong>Additionality</strong> (this impact wouldn't have happened without the project).</p>
+                            <h4>The "VeraCarbon" Standard</h4>
+                            <p>We align with <strong>Verra (VCS)</strong>, the world's leading standard. It is not just about planting; it is about proof.</p>
+                            <div class="verra-step"><strong>1. Additionality:</strong> Would this carbon removal have happened anyway? If yes, no credit.</div>
+                            <div class="verra-step"><strong>2. Permanence:</strong> Will the carbon stay locked away for 100+ years?</div>
+                            <div class="verra-step"><strong>3. Independent Audit:</strong> Third-party auditors (VVBs) must verify our AI data physically.</div>
+                        </div>
+                        <div class="lesson-visual">
+                            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070" alt="Auditing Process">
                         </div>
                     </div>
+                </div>
+
+                <div id="tab-sdg" class="learning-content">
+                    
+                    <div class="lesson-card">
+                        <div class="lesson-text">
+                            <h4><i class="fa-solid fa-earth-americas" style="color:#3F7E44;"></i> SDG 13: Climate Action</h4>
+                            <p><strong>Goal:</strong> "Take urgent action to combat climate change."</p>
+                            <p><strong>Our Role:</strong> By creating a financial value for carbon, we directly fund <strong>Target 13.1</strong> (Strengthening resilience) and <strong>Target 13.3</strong> (Improving institutional capacity). We turn climate action into a viable business model.</p>
+                        </div>
+                        <div class="lesson-visual">
+                            <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=2070" alt="Climate Action">
+                        </div>
+                    </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-text">
+                            <h4><i class="fa-solid fa-leaf" style="color:#56C02B;"></i> SDG 15: Life on Land</h4>
+                            <p><strong>Goal:</strong> "Protect, restore and promote sustainable use of terrestrial ecosystems."</p>
+                            <p><strong>Our Role:</strong> We monitor against <strong>Target 15.3</strong> (Combating desertification). By verifying grasslands and soil, we incentivize the restoration of degraded land, not just forests.</p>
+                        </div>
+                        <div class="lesson-visual">
+                            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2232" alt="Life on Land">
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
