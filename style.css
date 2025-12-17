@@ -28,8 +28,8 @@ body {
 
 .sidebar {
     position: fixed; top: 0; left: 0; bottom: 0; width: 260px;
-    background: #F0FDF4; /* Changed to Soft Ecosystem Mint */
-    border-right: 1px solid #BBF7D0; /* Softer Green Border */
+    background-color: #E8F5E9; /* VISIBLE Soft Sage Green */
+    border-right: 1px solid #C8E6C9; /* Slightly darker green border */
     z-index: 2000; padding: 20px;
     display: flex; flex-direction: column;
     transition: transform 0.3s ease;
@@ -61,12 +61,11 @@ body {
 }
 
 .nav-link.active { 
-    background: #DCFCE7; /* Brighter Green Highlight */
+    background: #FFFFFF; /* White background pops against Sage Green */
     color: #064E3B; /* Deep Forest Text */
     font-weight: bold; 
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle lift */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Soft shadow */
 }
-
 /* 5. CONTENT AREA (Dynamic Resizing) */
 .content-area {
     margin-left: 260px; /* Default Desktop State */
@@ -91,8 +90,8 @@ body {
 /* 7. MOBILE HEADER & BOTTOM NAV */
 .mobile-header {
     position: fixed; top: 0; left: 0; right: 0; height: 60px;
-    background: #F0FDF4; /* Match Sidebar (Soft Mint) */
-    border-bottom: 1px solid #BBF7D0;
+    background-color: #E8F5E9; /* MATCHES SIDEBAR */
+    border-bottom: 1px solid #C8E6C9;
     display: none;
     justify-content: space-between; align-items: center;
     padding: 0 20px; z-index: 1500;
