@@ -370,6 +370,33 @@ input { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd;
 }
 .market-stat strong { display: block; color: #064E3B; }
 
+/* --- AI SCANNER STYLES --- */
+
+/* The Spinner Animation */
+.spinner {
+    width: 50px; height: 50px;
+    border: 5px solid #ECFDF5;
+    border-top: 5px solid #10B981;
+    border-radius: 50%;
+    margin: 0 auto;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* The Progress Bar */
+.progress-bar-bg {
+    width: 100%; height: 10px;
+    background: #E5E7EB;
+    border-radius: 5px;
+    margin-top: 15px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, #10B981, #059669);
+    transition: width 0.3s ease;
+}
+
 /* Mobile Fix for Split Cards */
 @media (max-width: 768px) {
     .lesson-card { grid-template-columns: 1fr; } /* Stack on phone */

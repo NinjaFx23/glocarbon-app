@@ -63,3 +63,63 @@ function switchTab(tabName) {
     // 3. Show selected content
     document.getElementById('tab-' + tabName).classList.add('active-tab');
 }
+
+/* --- AI SCAN LOGIC --- */
+
+function startScanProcess(input) {
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const reader = new FileReader();
+
+        // 1. Show Preview immediately
+        reader.onload = function(e) {
+            document.getElementById('preview-img').src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+
+        // 2. Hide Upload, Show Progress
+        document.querySelector('.upload-zone').parentElement.style.display = 'none';
+        document.getElementById('scan-progress').style.display = 'block';
+
+        // 3. Simulate AI Steps
+        simulateAnalysis();
+    }
+}
+
+function simulateAnalysis() {
+    const steps = [
+        { progress: 20, text: "Uploading to Satellite Node..." },
+        { progress: 50, text: "Identifying Vegetation Species..." },
+        { progress: 80, text: "Calculating Carbon Density..." },
+        { progress: 100, text: "Verifying with ISO 14064..." }
+    ];
+
+    let currentStep = 0;
+    const bar = document.getElementById('progress-fill');
+    const text = document.getElementById('scan-step');
+
+    const timer = setInterval(() => {
+        if (currentStep >= steps.length) {
+            clearInterval(timer);
+            showResults();
+        } else {
+            bar.style.width = steps[currentStep].progress + '%';
+            text.innerText = steps[currentStep].text;
+            currentStep++;
+        }
+    }, 800); // 800ms per step (3.2 seconds total)
+}
+
+function showResults() {
+    // Hide Progress, Show Results
+    document.getElementById('scan-progress').style.display = 'none';
+    document.getElementById('scan-result').style.display = 'block';
+}
+
+function resetScan() {
+    // Reset Everything
+    document.getElementById('scan-result').style.display = 'none';
+    document.querySelector('.upload-zone').parentElement.style.display = 'block';
+    document.getElementById('file-input').value = ""; // Clear file
+    document.getElementById('progress-fill').style.width = '0%';
+}
