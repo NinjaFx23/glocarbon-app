@@ -123,3 +123,68 @@ function resetScan() {
     document.getElementById('file-input').value = ""; // Clear file
     document.getElementById('progress-fill').style.width = '0%';
 }
+
+/* --- MARKETPLACE MAP LOGIC --- */
+
+// We need a variable to hold the map instance
+let mapInstance = null;
+
+function initMap() {
+    // Prevent re-initializing if it already exists
+    if (mapInstance) return;
+
+    // 1. Create the Map (Centered on Equator)
+    mapInstance = L.map('map').setView([0, 20], 2); 
+
+    // 2. Add the "Skin" (CartoDB Voyager - Clean & Professional)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+        subdomains: 'abcd',
+        maxZoom: 19
+    }).addTo(mapInstance);
+
+    // 3. Define Custom Icons (Gold & Green)
+    const goldIcon = L.divIcon({
+        className: 'custom-pin',
+        html: '<i class="fa-solid fa-location-dot" style="color:#FFD700; font-size:24px; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.3));"></i>',
+        iconSize: [24, 24],
+        iconAnchor: [12, 24]
+    });
+
+    const greenIcon = L.divIcon({
+        className: 'custom-pin',
+        html: '<i class="fa-solid fa-location-dot" style="color:#10B981; font-size:24px; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.3));"></i>',
+        iconSize: [24, 24],
+        iconAnchor: [12, 24]
+    });
+
+    // 4. Add Project Pins
+    // Amazon Project (Gold)
+    L.marker([-3.4653, -62.2159], {icon: goldIcon})
+        .addTo(mapInstance)
+        .bindPopup("<b>Amazon Bio-Corridor</b><br>Reforestation • 2023");
+
+    // Kenya Project (Green)
+    L.marker([-1.2921, 36.8219], {icon: greenIcon})
+        .addTo(mapInstance)
+        .bindPopup("<b>Kenya Blue Soil</b><br>Soil Sequestration • 2024");
+        
+    // Indonesia Project (Green)
+    L.marker([-0.7893, 113.9213], {icon: greenIcon})
+        .addTo(mapInstance)
+        .bindPopup("<b>Borneo Peatlands</b><br>Avoided Deforestation");
+}
+
+// TRIGGER MAP LOAD
+// We must wait for the "Marketplace" tab to be clicked, 
+// otherwise the map tries to load in a hidden div and breaks (shows grey box).
+const originalNavTo = window.navTo; // Save old nav function
+
+window.navTo = function(viewId) {
+    originalNavTo(viewId); // Run normal nav
+    
+    if (viewId === 'marketplace') {
+        // Wait 300ms for animation to finish, then load map
+        setTimeout(initMap, 300);
+    }
+}
