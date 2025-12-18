@@ -397,6 +397,36 @@ input { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd;
     transition: width 0.3s ease;
 }
 
+/* --- PROFILE DASHBOARD STYLES --- */
+
+.stat-card {
+    min-width: 240px; /* Ensures horizontal scrolling works */
+    padding: 20px;
+    border-radius: 16px;
+    display: flex; align-items: center; gap: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.stat-icon {
+    width: 50px; height: 50px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; color: white;
+}
+
+/* Menu Items (Settings, History) */
+.menu-item {
+    display: flex; align-items: center; gap: 15px;
+    padding: 20px;
+    border-bottom: 1px solid #F3F4F6;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.menu-item:active { background: #F9FAFB; }
+.menu-item i:first-child { width: 25px; text-align: center; }
+.menu-item span { flex: 1; color: #374151; font-weight: 500; }
+.menu-item .arrow { color: #D1D5DB; font-size: 0.9rem; }
+
 /* Mobile Fix for Split Cards */
 @media (max-width: 768px) {
     .lesson-card { grid-template-columns: 1fr; } /* Stack on phone */

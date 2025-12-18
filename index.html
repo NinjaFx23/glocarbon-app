@@ -309,11 +309,85 @@
             </div>
 
             <div id="view-profile" class="app-view">
-                <div class="card" style="text-align:center;">
-                    <div style="width:80px; height:80px; background:#FFD700; border-radius:50%; margin:0 auto 15px; display:flex; align-items:center; justify-content:center; font-size:2rem;">U</div>
-                    <h3>Demo User</h3>
-                    <button class="btn-cta" style="background:#EF4444; color:white; margin-top:20px;" onclick="handleLogout()">Log Out</button>
+                
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
+                    <div style="display:flex; align-items:center; gap:15px;">
+                        <div style="width:60px; height:60px; background:linear-gradient(135deg, #FFD700, #F59E0B); border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-size:1.5rem; font-weight:bold; box-shadow:0 4px 10px rgba(245, 158, 11, 0.3);">
+                            JD
+                        </div>
+                        <div>
+                            <h3 style="color:#064E3B; margin:0;">John Doe</h3>
+                            <span style="font-size:0.85rem; color:#10B981; background:#ECFDF5; padding:2px 8px; border-radius:12px;">Verified Steward</span>
+                        </div>
+                    </div>
+                    <button onclick="handleLogout()" style="background:none; border:none; color:#EF4444; font-size:1.2rem;"><i class="fa-solid fa-right-from-bracket"></i></button>
                 </div>
+
+                <div style="display:flex; gap:15px; overflow-x:auto; padding-bottom:10px; margin-bottom:20px; scrollbar-width:none;">
+                    
+                    <div class="stat-card" style="background:linear-gradient(135deg, #064E3B, #047857);">
+                        <div class="stat-icon"><i class="fa-solid fa-wallet"></i></div>
+                        <div>
+                            <small style="color:#A7F3D0;">Total Earnings</small>
+                            <h2 style="color:white; margin:5px 0;">$4,250</h2>
+                            <small style="color:#D1FAE5;">+12% this month</small>
+                        </div>
+                    </div>
+
+                    <div class="stat-card" style="background:white; border:1px solid #BBF7D0;">
+                        <div class="stat-icon" style="background:#ECFDF5; color:#10B981;"><i class="fa-solid fa-tree"></i></div>
+                        <div>
+                            <small style="color:#6B7280;">Carbon Locked</small>
+                            <h2 style="color:#064E3B; margin:5px 0;">128t</h2>
+                            <small style="color:#10B981;">~ 450 Trees</small>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card" style="padding:0; overflow:hidden;">
+                    <div class="menu-item">
+                        <i class="fa-solid fa-file-contract" style="color:#F59E0B;"></i>
+                        <span>Smart Contracts</span>
+                        <i class="fa-solid fa-chevron-right arrow"></i>
+                    </div>
+                    <div class="menu-item">
+                        <i class="fa-solid fa-satellite" style="color:#3B82F6;"></i>
+                        <span>Scan History</span>
+                        <i class="fa-solid fa-chevron-right arrow"></i>
+                    </div>
+                    <div class="menu-item" style="border-bottom:none;">
+                        <i class="fa-solid fa-gear" style="color:#6B7280;"></i>
+                        <span>Settings</span>
+                        <i class="fa-solid fa-chevron-right arrow"></i>
+                    </div>
+                </div>
+
+                <h4 style="color:#064E3B; margin:20px 0 10px;">Recent Activity</h4>
+                <div class="card">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:15px;">
+                        <div style="display:flex; gap:15px; align-items:center;">
+                            <div style="background:#ECFDF5; padding:10px; border-radius:8px; color:#10B981;"><i class="fa-solid fa-check"></i></div>
+                            <div>
+                                <h5 style="margin:0; color:#064E3B;">Plot A4 Verification</h5>
+                                <small style="color:#6B7280;">2 hours ago</small>
+                            </div>
+                        </div>
+                        <span style="color:#10B981; font-weight:bold;">+ 12 Credits</span>
+                    </div>
+                    
+                    <div style="display:flex; align-items:center; justify-content:space-between;">
+                        <div style="display:flex; gap:15px; align-items:center;">
+                            <div style="background:#FFFBEB; padding:10px; border-radius:8px; color:#F59E0B;"><i class="fa-solid fa-arrow-up"></i></div>
+                            <div>
+                                <h5 style="margin:0; color:#064E3B;">Marketplace Sale</h5>
+                                <small style="color:#6B7280;">1 day ago</small>
+                            </div>
+                        </div>
+                        <span style="color:#064E3B; font-weight:bold;">+ $340.00</span>
+                    </div>
+                </div>
+
             </div>
 
         </main>
