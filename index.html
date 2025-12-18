@@ -310,18 +310,21 @@
 
             <div id="view-profile" class="app-view">
                 
-                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
-                    <div style="display:flex; align-items:center; gap:15px;">
-                        <div style="width:60px; height:60px; background:linear-gradient(135deg, #FFD700, #F59E0B); border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-size:1.5rem; font-weight:bold; box-shadow:0 4px 10px rgba(245, 158, 11, 0.3);">
-                            JD
+                <div style="display:flex; align-items:center; gap:15px;">
+                        
+                        <div id="profile-avatar" onclick="document.getElementById('profile-upload').click()" 
+                             style="width:60px; height:60px; background:linear-gradient(135deg, #FFD700, #F59E0B); border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-size:1.5rem; font-weight:bold; box-shadow:0 4px 10px rgba(245, 158, 11, 0.3); cursor:pointer; overflow:hidden;">
+                            <span id="avatar-initials">JD</span>
+                            <img id="avatar-img" src="" style="width:100%; height:100%; object-fit:cover; display:none;">
                         </div>
+
+                        <input type="file" id="profile-upload" hidden accept="image/*" onchange="uploadProfilePic(this)">
+
                         <div>
-                            <h3 style="color:#064E3B; margin:0;">John Doe</h3>
+                            <h3 id="user-name" style="color:#064E3B; margin:0;">John Doe</h3>
                             <span style="font-size:0.85rem; color:#10B981; background:#ECFDF5; padding:2px 8px; border-radius:12px;">Verified Steward</span>
                         </div>
                     </div>
-                    <button onclick="handleLogout()" style="background:none; border:none; color:#EF4444; font-size:1.2rem;"><i class="fa-solid fa-right-from-bracket"></i></button>
-                </div>
 
                 <div style="display:flex; gap:15px; overflow-x:auto; padding-bottom:10px; margin-bottom:20px; scrollbar-width:none;">
                     
@@ -351,10 +354,9 @@
                         <span>Smart Contracts</span>
                         <i class="fa-solid fa-chevron-right arrow"></i>
                     </div>
-                    <div class="menu-item">
-                        <i class="fa-solid fa-satellite" style="color:#3B82F6;"></i>
+                    <div class="menu-item" onclick="navTo('scan')"> <i class="fa-solid fa-satellite" style="color:#3B82F6;"></i>
                         <span>Scan History</span>
-                        <i class="fa-solid fa-chevron-right arrow"></i>
+                         <i class="fa-solid fa-chevron-right arrow"></i>
                     </div>
                     <div class="menu-item" style="border-bottom:none;">
                         <i class="fa-solid fa-gear" style="color:#6B7280;"></i>

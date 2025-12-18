@@ -195,3 +195,52 @@ function initMap() {
     L.marker([-0.7893, 113.9213], {icon: greenIcon})
         .addTo(mapInstance).bindPopup("<b>Borneo Peatlands</b><br>Avoided Deforestation");
 }
+
+/* --- PROFILE MANAGEMENT LOGIC --- */
+
+// 1. Load Profile Data on Startup
+document.addEventListener("DOMContentLoaded", () => {
+    loadProfile();
+});
+
+function loadProfile() {
+    // Check for saved photo
+    const savedPic = localStorage.getItem('glocarbon_profile_pic');
+    if (savedPic) {
+        document.getElementById('avatar-initials').style.display = 'none';
+        const img = document.getElementById('avatar-img');
+        img.src = savedPic;
+        img.style.display = 'block';
+        
+        // Also update the small avatar in the top mobile header
+        const mobileHeaderAvatar = document.querySelector('.mobile-header div');
+        if(mobileHeaderAvatar) {
+            mobileHeaderAvatar.innerHTML = `<img src="${savedPic}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`;
+        }
+    }
+}
+
+// 2. Upload New Photo
+function uploadProfilePic(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            const base64Image = e.target.result;
+            
+            // Save to browser memory
+            localStorage.setItem('glocarbon_profile_pic', base64Image);
+            
+            // Update UI immediately
+            loadProfile();
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+// 3. Handle Menu Clicks (Placeholder for now)
+// You can add this onclick="handleMenuClick('Contracts')" to your menu items in HTML if you want
+function handleMenuClick(feature) {
+    alert(feature + " module is currently syncing with the blockchain node. Check back soon.");
+}
