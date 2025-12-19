@@ -291,6 +291,78 @@
                 </div>
             </div>
 
+            <div id="view-contracts" class="app-view">
+                <div class="academy-header" style="text-align:left; margin-bottom:20px;">
+                    <button onclick="navTo('profile')" style="background:none; border:none; color:#6B7280; margin-bottom:10px;">
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </button>
+                    <h2>Asset <span style="color:#F59E0B;">Ledger</span></h2>
+                    <p style="color:#BBF7D0;">Immutable blockchain records.</p>
+                </div>
+
+                <div class="card" style="background:linear-gradient(135deg, #1E293B, #0F172A); color:white; margin-bottom:25px; border:1px solid #334155;">
+                    <div style="display:flex; justify-content:space-between; align-items:start;">
+                        <div>
+                            <small style="color:#94A3B8; text-transform:uppercase; letter-spacing:1px;">Wallet Address (Polygon)</small>
+                            <div style="font-family:monospace; margin-top:5px; color:#F59E0B; font-size:1.1rem;">
+                                0x71C...9A2F <i class="fa-regular fa-copy" style="font-size:0.8rem; color:#64748B; margin-left:5px; cursor:pointer;"></i>
+                            </div>
+                        </div>
+                        <i class="fa-brands fa-ethereum" style="font-size:2rem; color:#334155;"></i>
+                    </div>
+                    <div style="margin-top:20px; display:flex; gap:20px;">
+                        <div>
+                            <small style="color:#94A3B8;">Token Standard</small>
+                            <div style="font-weight:bold;">ERC-1155</div>
+                        </div>
+                        <div>
+                            <small style="color:#94A3B8;">Network Status</small>
+                            <div style="color:#10B981; font-weight:bold;">● Synced</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 style="color:#064E3B; margin-bottom:15px;">Minted Assets</h4>
+
+                <div class="contract-card">
+                    <div class="contract-icon"><i class="fa-solid fa-cube"></i></div>
+                    <div style="flex:1;">
+                        <h4 style="margin:0; color:#064E3B;">Carbon Tonne #4092</h4>
+                        <small style="color:#6B7280;">Vintage 2024 • Plot A4</small>
+                        <div class="hash-id">Hash: 0x82m...99Lq</div>
+                    </div>
+                    <div style="text-align:right;">
+                        <span class="status-badge">Minted</span>
+                        <div style="font-size:0.8rem; color:#6B7280; margin-top:5px;">Block #192440</div>
+                    </div>
+                </div>
+
+                <div class="contract-card">
+                    <div class="contract-icon"><i class="fa-solid fa-cube"></i></div>
+                    <div style="flex:1;">
+                        <h4 style="margin:0; color:#064E3B;">Carbon Tonne #4091</h4>
+                        <small style="color:#6B7280;">Vintage 2024 • Plot A4</small>
+                        <div class="hash-id">Hash: 0x33b...11Xy</div>
+                    </div>
+                    <div style="text-align:right;">
+                        <span class="status-badge">Minted</span>
+                        <div style="font-size:0.8rem; color:#6B7280; margin-top:5px;">Block #192439</div>
+                    </div>
+                </div>
+
+                <div class="contract-card" style="opacity:0.7;">
+                    <div class="contract-icon" style="background:#F3F4F6; color:#9CA3AF;"><i class="fa-solid fa-clock"></i></div>
+                    <div style="flex:1;">
+                        <h4 style="margin:0; color:#4B5563;">Batch Verification</h4>
+                        <small style="color:#6B7280;">Pending Audit...</small>
+                    </div>
+                    <div style="text-align:right;">
+                        <span class="status-badge" style="background:#FEF3C7; color:#D97706;">Processing</span>
+                    </div>
+                </div>
+
+            </div>
+
             <div id="view-marketplace" class="app-view">
                 <div class="academy-header" style="text-align:left; margin-bottom:20px;">
                     <h2>Global <span style="color:#FFD700;">Registry</span></h2>
@@ -366,12 +438,11 @@
 
                 </div>
 
-                <div class="card" style="padding:0; overflow:hidden;">
-                    <div class="menu-item">
-                        <i class="fa-solid fa-file-contract" style="color:#F59E0B;"></i>
-                        <span>Smart Contracts</span>
-                        <i class="fa-solid fa-chevron-right arrow"></i>
-                    </div>
+                <div class="menu-item" onclick="navTo('contracts')">
+                    <i class="fa-solid fa-file-contract" style="color:#F59E0B;"></i>
+                    <span>Smart Contracts</span>
+                    <i class="fa-solid fa-chevron-right arrow"></i>
+                </div>
                     <div class="menu-item" onclick="navTo('history')">
                         <i class="fa-solid fa-satellite" style="color:#3B82F6;"></i>
                         <span>Scan History</span>
