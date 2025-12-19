@@ -146,9 +146,39 @@ function simulateAnalysis() {
     }, 800);
 }
 
+/* --- UPDATED SCANNER LOGIC --- */
+
 function showResults() {
+    // 1. Hide Progress, Show Results
     document.getElementById('scan-progress').style.display = 'none';
     document.getElementById('scan-result').style.display = 'block';
+
+    // 2. CREATE A NEW RECORD OBJECT
+    const newRecord = {
+        id: Date.now(), // Unique ID based on time
+        date: new Date().toLocaleDateString(),
+        time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+        carbon: "12.4t", // Mock value (in real app, this comes from AI)
+        value: "$340",
+        img: document.getElementById('preview-img').src // Save the image source
+    };
+
+    // 3. SAVE TO LOCAL STORAGE
+    saveScanToHistory(newRecord);
+}
+
+function saveScanToHistory(record) {
+    // Get existing history or start empty list
+    let history = JSON.parse(localStorage.getItem('glocarbon_history') || "[]");
+    
+    // Add new record to top of list
+    history.unshift(record);
+    
+    // Save back to storage
+    localStorage.setItem('glocarbon_history', JSON.stringify(history));
+    
+    // Refresh the history view
+    renderHistory();
 }
 
 function resetScan() {
@@ -243,4 +273,49 @@ function uploadProfilePic(input) {
 // You can add this onclick="handleMenuClick('Contracts')" to your menu items in HTML if you want
 function handleMenuClick(feature) {
     alert(feature + " module is currently syncing with the blockchain node. Check back soon.");
+}
+
+/* --- HISTORY VIEW LOGIC --- */
+
+// Load history when app starts
+document.addEventListener("DOMContentLoaded", () => {
+    renderHistory();
+});
+
+function renderHistory() {
+    const listContainer = document.getElementById('history-list');
+    const history = JSON.parse(localStorage.getItem('glocarbon_history') || "[]");
+
+    // If empty, stop (keep the "No records" message)
+    if (history.length === 0) return;
+
+    // Clear the container
+    listContainer.innerHTML = "";
+
+    // Loop through each record and create a card
+    history.forEach(record => {
+        const item = document.createElement('div');
+        item.className = 'lesson-card'; // Re-using our nice card style
+        item.style.gridTemplateColumns = "80px 1fr"; // Adjust layout for small list
+        item.style.padding = "15px";
+        item.style.gap = "15px";
+        
+        item.innerHTML = `
+            <div style="width:80px; height:80px; border-radius:10px; overflow:hidden;">
+                <img src="${record.img}" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div>
+                <div style="display:flex; justify-content:space-between; align-items:start;">
+                    <h4 style="margin:0; font-size:1rem; color:#064E3B;">Plot Scan #${record.id.toString().slice(-4)}</h4>
+                    <span style="background:#ECFDF5; color:#10B981; font-size:0.7rem; padding:2px 6px; border-radius:4px; font-weight:bold;">Verified</span>
+                </div>
+                <p style="font-size:0.8rem; color:#6B7280; margin:5px 0;">${record.date} • ${record.time}</p>
+                <div style="display:flex; gap:15px; margin-top:8px;">
+                    <span style="font-weight:bold; color:#064E3B; font-size:0.9rem;">${record.carbon} CO₂e</span>
+                    <span style="font-weight:bold; color:#059669; font-size:0.9rem;">${record.value}</span>
+                </div>
+            </div>
+        `;
+        listContainer.appendChild(item);
+    });
 }

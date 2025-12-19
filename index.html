@@ -273,6 +273,24 @@
 
             </div>
 
+            <div id="view-history" class="app-view">
+                <div class="academy-header" style="text-align:left; margin-bottom:20px;">
+                    <button onclick="navTo('profile')" style="background:none; border:none; color:#6B7280; margin-bottom:10px;">
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </button>
+                    <h2>Scan <span style="color:#10B981;">Ledger</span></h2>
+                    <p style="color:#BBF7D0;">Your verified measurement history.</p>
+                </div>
+
+                <div id="history-list">
+                    <div class="card" style="text-align:center; padding:40px;">
+                        <i class="fa-solid fa-folder-open" style="font-size:3rem; color:#E5E7EB; margin-bottom:15px;"></i>
+                        <p style="color:#6B7280;">No records found yet.</p>
+                        <button class="btn-cta" style="margin-top:15px; width:auto;" onclick="navTo('scan')">Start New Scan</button>
+                    </div>
+                </div>
+            </div>
+
             <div id="view-marketplace" class="app-view">
                 <div class="academy-header" style="text-align:left; margin-bottom:20px;">
                     <h2>Global <span style="color:#FFD700;">Registry</span></h2>
@@ -354,9 +372,10 @@
                         <span>Smart Contracts</span>
                         <i class="fa-solid fa-chevron-right arrow"></i>
                     </div>
-                    <div class="menu-item" onclick="navTo('scan')"> <i class="fa-solid fa-satellite" style="color:#3B82F6;"></i>
+                    <div class="menu-item" onclick="navTo('history')">
+                        <i class="fa-solid fa-satellite" style="color:#3B82F6;"></i>
                         <span>Scan History</span>
-                         <i class="fa-solid fa-chevron-right arrow"></i>
+                        <i class="fa-solid fa-chevron-right arrow"></i>
                     </div>
                     <div class="menu-item" style="border-bottom:none;">
                         <i class="fa-solid fa-gear" style="color:#6B7280;"></i>
