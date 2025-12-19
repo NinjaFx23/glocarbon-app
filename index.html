@@ -395,13 +395,32 @@
         </main>
 
         <nav class="mobile-bottom-nav">
-            <button onclick="navTo('home')" class="nav-item active"><i class="fa-solid fa-house"></i></button>
-            <button onclick="navTo('learn')" class="nav-item"><i class="fa-solid fa-book-open"></i></button>
+            <button onclick="navTo('home')" class="nav-item active">
+                <div class="nav-icon-container">
+                    <i class="fa-solid fa-house"></i>
+                </div>
+            </button>
+            
+            <button onclick="navTo('learn')" class="nav-item">
+                <div class="nav-icon-container">
+                    <i class="fa-solid fa-layer-group"></i> </div>
+            </button>
+            
             <div class="fab-container">
-                <button onclick="navTo('scan')" class="fab-btn"><i class="fa-solid fa-plus"></i></button>
+                <button onclick="navTo('scan')" class="fab-btn">
+                    <i class="fa-solid fa-leaf"></i>
+                </button>
             </div>
-            <button onclick="navTo('marketplace')" class="nav-item"><i class="fa-solid fa-globe"></i></button>
-            <button onclick="navTo('profile')" class="nav-item"><i class="fa-solid fa-user"></i></button>
+            
+            <button onclick="navTo('marketplace')" class="nav-item">
+                <div class="nav-icon-container">
+                    <i class="fa-solid fa-earth-americas"></i> </div>
+            </button>
+            
+            <button onclick="navTo('profile')" class="nav-item">
+                <div class="nav-icon-container">
+                    <i class="fa-solid fa-user"></i> </div>
+            </button>
         </nav>
     </div>
 

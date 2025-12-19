@@ -109,64 +109,93 @@ body {
 }
 
 /* BOTTOM NAV - STRICTLY HIDDEN ON DESKTOP */
-/* --- NATURE-DRIVEN BOTTOM NAV --- */
+/* --- REFINED CORPORATE BOTTOM NAV --- */
 
-/* The Container (Floating Gradient Surface) */
+/* The Container (Sleek, Low Profile) */
 .mobile-bottom-nav {
-    position: fixed; bottom: 0; left: 0; right: 0; height: 80px;
-    background: linear-gradient(to top, #F0FDF4, #FFFFFF);
-    border-top: 1px solid rgba(16, 185, 129, 0.2);
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
-    box-shadow: 0 -10px 30px rgba(6, 78, 59, 0.08);
+    position: fixed; bottom: 0; left: 0; right: 0; 
+    height: 65px; /* Reduced height for elegance */
+    background: rgba(255, 255, 255, 0.95); /* High-end Glass feel */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid #E5E7EB; /* Subtle corporate border */
     z-index: 1500;
-    display: none; /* Hidden by default (Desktop) */
+    display: none; /* Hidden on Desktop */
+    padding-bottom: env(safe-area-inset-bottom); /* iPhone Safety */
 }
 
-/* The Icons */
+/* The Grid Layout */
+@media (max-width: 768px) {
+    .mobile-bottom-nav { 
+        display: grid; 
+        grid-template-columns: 1fr 1fr 1.2fr 1fr 1fr; /* Center gets slightly more space */
+        align-items: center; justify-items: center;
+    }
+}
+
+/* The Icons (Minimalist Glyphs) */
 .nav-item {
     background: none; border: none; 
-    font-size: 1.4rem; 
-    color: #94A3B8; 
     width: 100%; height: 100%;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    padding: 0;
 }
 
-/* Active State */
-.nav-item.active { 
-    color: #064E3B; 
-    transform: translateY(-4px); 
+/* Icon Container - Controls size and alignment */
+.nav-icon-container {
+    font-size: 1.25rem; /* Smaller, sharper icons */
+    color: #94A3B8; /* Corporate Slate Grey */
+    transition: all 0.3s ease;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
 }
+
+/* ACTIVE STATE (Subtle & Professional) */
+.nav-item.active .nav-icon-container { 
+    color: #15803D; /* Institutional Green (Darker, Trustworthy) */
+    transform: translateY(0); /* No jumping */
+}
+
+/* The Active Indicator (A subtle dot or pill, very Apple-like) */
 .nav-item.active::after {
     content: '';
-    width: 6px; height: 6px;
-    background: #10B981; 
-    border-radius: 50%;
-    margin-top: 4px;
-    animation: popIn 0.3s ease;
+    position: absolute; top: 0;
+    width: 40px; height: 3px;
+    background: #15803D;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
-@keyframes popIn { from { transform: scale(0); } to { transform: scale(1); } }
 
-/* The FAB (Emerald Action Button) */
+/* THE CENTER BUTTON (Refined, not floating) */
 .fab-container {
-    position: relative; top: -28px;
-    width: 64px; height: 64px;
-    justify-self: center;
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    top: -12px; /* Slight lift, but grounded */
 }
 
 .fab-btn {
-    width: 100%; height: 100%; 
-    border-radius: 50%;
-    background: linear-gradient(135deg, #10B981, #047857);
-    border: 5px solid #FFFFFF; 
-    color: white; font-size: 1.6rem;
+    width: 50px; height: 50px; /* Smaller, ergonomic size */
+    border-radius: 16px; /* Squircle (Modern Tech Look) */
+    
+    /* Deep Ecosystem Gradient */
+    background: linear-gradient(135deg, #166534, #14532D);
+    
+    border: 4px solid #FFFFFF; /* White Stroke to separate from bar */
+    color: white; font-size: 1.3rem;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
-    transition: transform 0.3s ease;
+    
+    /* Refined, Tight Shadow */
+    box-shadow: 0 4px 12px rgba(22, 101, 52, 0.25);
+    
+    transition: all 0.2s ease;
 }
-.fab-btn:active { transform: scale(0.9); }
+
+.fab-btn:active {
+    transform: scale(0.95);
+    background: #064E3B;
+}
 
 /* 8. CARDS & AUTH */
 /* GLASS CARD EFFECT */
