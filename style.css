@@ -115,19 +115,33 @@ body {
 }
 
 /* BOTTOM NAV - STRICTLY HIDDEN ON DESKTOP */
-/* --- REFINED CORPORATE BOTTOM NAV --- */
+/* CLEANER NAV ITEM (No Backgrounds) */
+.nav-item {
+    background: transparent !important; /* Forces no background block */
+    border: none; 
+    width: 100%; height: 100%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    padding: 0;
+}
 
-/* The Container (Sleek, Low Profile) */
-.mobile-bottom-nav {
-    position: fixed; bottom: 0; left: 0; right: 0; 
-    height: 65px; /* Reduced height for elegance */
-    background: rgba(255, 255, 255, 0.95); /* High-end Glass feel */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-top: 1px solid #E5E7EB; /* Subtle corporate border */
-    z-index: 1500;
-    display: none; /* Hidden on Desktop */
-    padding-bottom: env(safe-area-inset-bottom); /* iPhone Safety */
+/* ACTIVE STATE (Icon Color Only) */
+.nav-item.active .nav-icon-container { 
+    color: #D97706 !important; /* Gold/Orange Color */
+    transform: translateY(-2px); /* Slight lift */
+}
+
+/* THE BOLD LINE (Top Indicator) */
+.nav-item.active::after {
+    content: '';
+    position: absolute; top: 0;
+    width: 50%; /* Wider, nicer line */
+    height: 4px; /* Thicker bold line */
+    background: #D97706 !important; /* Matches Icon */
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 2px 4px rgba(217, 119, 6, 0.4); /* Glow effect */
 }
 
 /* --- SMART CONTRACT STYLES --- */
