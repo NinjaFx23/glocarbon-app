@@ -1,13 +1,14 @@
-/* --- GLOCARBON LOGIC V13 (With Auto-Login) --- */
+/* --- GLOCARBON LOGIC V13 (With Auto-Login Fix) --- */
 
 // 1. GLOBAL VARIABLES
 let selectedRole = 'Farmer'; // Default role
 
 // 2. AUTO-LOGIN CHECK (The Doorman)
 document.addEventListener("DOMContentLoaded", () => {
-    // Check if user has a key in their pocket
-    const session = localStorage.getItem('glocarbon_session');
-    const savedRole = localStorage.getItem('glocarbon_role');
+    // CHANGE: Check sessionStorage (Temporary) instead of localStorage (Permanent)
+    // This ensures if they close the browser, they have to log in again.
+    const session = sessionStorage.getItem('glocarbon_session');
+    const savedRole = sessionStorage.getItem('glocarbon_role');
 
     if (session === 'active') {
         console.log("Welcome back, " + savedRole);
@@ -19,6 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('auth-section').style.display = 'none';
         document.getElementById('main-app').style.display = 'block';
     }
+    
+    // Load Profile Picture (This stays in localStorage because it's data, not auth)
+    loadProfile();
 });
 
 // 3. NAVIGATION
@@ -31,7 +35,6 @@ function navTo(viewId) {
     // Update Icons
     document.querySelectorAll('.nav-item, .nav-link').forEach(el => el.classList.remove('active'));
     // Highlight active nav item (simple match)
-    // Note: In a complex app, we'd ID specific buttons, but this works for now.
     
     // Auto-Close Mobile Sidebar
     if (window.innerWidth <= 768) {
@@ -68,7 +71,7 @@ function selectRole(role) {
 function handleLogin(e) {
     e.preventDefault();
     
-    // CHANGE THIS: Use sessionStorage (Temporary) instead of localStorage (Permanent)
+    // CHANGE: Use sessionStorage (Temporary) instead of localStorage (Permanent)
     sessionStorage.setItem('glocarbon_session', 'active');
     sessionStorage.setItem('glocarbon_role', selectedRole);
 
@@ -77,11 +80,12 @@ function handleLogin(e) {
     document.getElementById('main-app').style.display = 'block';
     navTo('home');
     
+    // Force Resize (Fixes map bugs)
     setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 100);
 }
 
 function handleLogout() {
-    // DESTROY SESSION
+    // DESTROY SESSION (Only the auth key)
     sessionStorage.removeItem('glocarbon_session');
     sessionStorage.removeItem('glocarbon_role');
     
@@ -227,13 +231,8 @@ function initMap() {
 
 /* --- PROFILE MANAGEMENT LOGIC --- */
 
-// 1. Load Profile Data on Startup
-document.addEventListener("DOMContentLoaded", () => {
-    loadProfile();
-});
-
 function loadProfile() {
-    // Check for saved photo
+    // Check for saved photo (This stays in localStorage)
     const savedPic = localStorage.getItem('glocarbon_profile_pic');
     if (savedPic) {
         document.getElementById('avatar-initials').style.display = 'none';
@@ -269,17 +268,11 @@ function uploadProfilePic(input) {
 }
 
 // 3. Handle Menu Clicks (Placeholder for now)
-// You can add this onclick="handleMenuClick('Contracts')" to your menu items in HTML if you want
 function handleMenuClick(feature) {
     alert(feature + " module is currently syncing with the blockchain node. Check back soon.");
 }
 
 /* --- HISTORY VIEW LOGIC --- */
-
-// Load history when app starts
-document.addEventListener("DOMContentLoaded", () => {
-    renderHistory();
-});
 
 function renderHistory() {
     const listContainer = document.getElementById('history-list');

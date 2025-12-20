@@ -71,84 +71,118 @@
             </button>
             
             <div id="view-home" class="app-view active-view">
-                <section class="narrative-hero">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Earth_Western_Hemisphere_transparent_background.png" alt="Global Impact" class="hero-earth">
-                    <h1 class="narrative-title">The Digital Infrastructure for <span style="color:#FFD700;">Nature Assets</span></h1>
-                    <p class="narrative-subtitle">Measuring, verifying, and monetizing ecosystem services with institutional-grade transparency.</p>
-                </section>
-
-                <section class="narrative-section">
-                    <h3 class="section-label">THE CHALLENGE</h3>
-                    <div class="narrative-card">
-                        <h4>The Trust Deficit in Carbon Markets</h4>
-                        <p>Traditional carbon markets suffer from opacity, double-counting, and manual verification bottlenecks. This has led to a crisis of confidence for global investors and undervalued assets for project developers.</p>
+                
+                <div class="hero-section" style="position:relative; padding:40px 20px; border-radius:24px; overflow:hidden; color:white; margin-bottom:30px; box-shadow:0 10px 30px rgba(0,0,0,0.2);">
+                    
+                    <div style="position:absolute; top:0; left:0; right:0; bottom:0; z-index:-1; background:url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=2070&auto=format&fit=crop'); background-size:cover; background-position:center; filter:brightness(0.6);"></div>
+                    
+                    <span style="background:rgba(255,255,255,0.2); backdrop-filter:blur(4px); padding:4px 12px; border-radius:20px; font-size:0.75rem; text-transform:uppercase; letter-spacing:1px; border:1px solid rgba(255,255,255,0.3);">
+                        Global Soil Initiative
+                    </span>
+                    
+                    <h1 style="font-size:2.2rem; line-height:1.2; margin-top:15px; text-shadow:0 2px 4px rgba(0,0,0,0.5);">
+                        The World's Largest Carbon Sink isn't a Forest.
+                    </h1>
+                    <p style="font-size:1.1rem; opacity:0.9; margin:15px 0 25px;">
+                        It's a Grassland. Unlock the value of the <strong style="color:#FFD700;">Inverted Forest</strong> beneath your feet.
+                    </p>
+                    
+                    <div style="display:flex; gap:10px;">
+                        <button class="btn-cta" onclick="navTo('scan')" style="background:#FFD700; color:#3F2E05; border:none; font-weight:800;">
+                            Calculate Potential
+                        </button>
                     </div>
-                </section>
+                </div>
 
-                <section class="narrative-section">
-                    <h3 class="section-label">THE SOLUTION</h3>
-                    <div class="narrative-card highlight-card">
-                        <h4>AI-Powered Verification</h4>
-                        <p>GLOCARBON replaces manual estimates with <strong>Digital MRV (Measurement, Reporting, Verification)</strong>. We utilize satellite imagery and AI computer vision to continuously monitor biomass density, ensuring every credit represents real, sequestered carbon.</p>
+                <h3 style="color:#3F2E05; margin-bottom:15px;">Why Soil Carbon?</h3>
+                
+                <div class="card" style="padding:0; overflow:hidden; display:grid; grid-template-columns:1fr 1fr; margin-bottom:30px;">
+                    <div style="padding:20px; background:#FEF2F2; border-right:1px solid #FEE2E2;">
+                        <div style="font-size:2rem; margin-bottom:10px;">🌲</div>
+                        <h4 style="margin:0; color:#991B1B;">Forests</h4>
+                        <ul style="padding-left:15px; font-size:0.8rem; color:#7F1D1D; margin-top:10px; line-height:1.6;">
+                            <li>Vulnerable to Fire</li>
+                            <li>Above Ground</li>
+                            <li>20yr Maturity</li>
+                        </ul>
                     </div>
-                </section>
 
-                <section class="narrative-section">
-                    <h3 class="section-label">ECOSYSTEM STAKEHOLDERS</h3>
-                    <div class="stakeholder-grid">
-                        <div class="narrative-card">
-                            <i class="fa-solid fa-seedling icon-gold"></i>
-                            <h5>Project Stewards</h5>
-                            <p>Farmers and landowners gain direct access to global finance without intermediaries absorbing value.</p>
+                    <div style="padding:20px; background:#ECFDF5;">
+                        <div style="font-size:2rem; margin-bottom:10px;">🌾</div>
+                        <h4 style="margin:0; color:#064E3B;">Grasslands</h4>
+                        <ul style="padding-left:15px; font-size:0.8rem; color:#065F46; margin-top:10px; line-height:1.6;">
+                            <li>Fire Resilient</li>
+                            <li><strong>Stored in Soil</strong></li>
+                            <li>Annual Pay</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; align-items:end; margin-bottom:15px;">
+                    <h3 style="color:#3F2E05; margin:0;">Global Impact</h3>
+                    <span onclick="navTo('marketplace')" style="font-size:0.9rem; color:#D97706; font-weight:bold; cursor:pointer;">View Map -></span>
+                </div>
+
+                <div style="display:flex; gap:15px; overflow-x:auto; padding-bottom:10px; scrollbar-width:none;">
+                    <div class="narrative-card" style="min-width:160px; height:180px; background-image:url('https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=2068&auto=format&fit=crop');">
+                        <div class="narrative-content">
+                            <h4>Maasai Mara</h4>
+                            <p>Kenya • Savannah</p>
                         </div>
-                        <div class="narrative-card">
-                            <i class="fa-solid fa-briefcase icon-gold"></i>
-                            <h5>Institutional Buyers</h5>
-                            <p>Corporations access high-integrity, audit-ready credits aligned with Paris Agreement (SDG 13) compliance.</p>
+                    </div>
+                    <div class="narrative-card" style="min-width:160px; height:180px; background-image:url('https://images.unsplash.com/photo-1461301214746-1e790926d323?q=80&w=2000&auto=format&fit=crop');">
+                        <div class="narrative-content">
+                            <h4>Great Plains</h4>
+                            <p>USA • Prairie</p>
                         </div>
                     </div>
-                </section>
-
-                <section class="narrative-footer">
-                    <p><em>"We are not just selling credits. We are building the ledger for the Earth's recovery."</em></p>
-                    <div class="trust-badges">
-                        <span><i class="fa-solid fa-check-circle"></i> ISO 14064 Compliant</span>
-                        <span><i class="fa-solid fa-link"></i> Traceable Registry</span>
+                    <div class="narrative-card" style="min-width:160px; height:180px; background-image:url('https://images.unsplash.com/photo-1621845217965-0f622416b772?q=80&w=1974&auto=format&fit=crop');">
+                        <div class="narrative-content">
+                            <h4>The Pampas</h4>
+                            <p>Argentina • Steppe</p>
+                        </div>
                     </div>
-                </section>
+                </div>
+
             </div>
-
+            
             <div id="view-learn" class="app-view">
                 <div class="academy-header">
                     <h2>Climate <span style="color:#FFD700;">Intelligence</span></h2>
                     <p>From carbon curiosity to market mastery.</p>
                 </div>
                 <div class="learning-tabs">
-                    <button class="tab-btn active" onclick="switchTab('beginner')">🌱 Basics</button>
+                    <button class="tab-btn active" onclick="switchTab('academy')">🌱 Basics</button>
                     <button class="tab-btn" onclick="switchTab('science')">🔬 Science</button>
                     <button class="tab-btn" onclick="switchTab('market')">📈 Market</button>
-                    <button class="tab-btn" onclick="switchTab('sdg')">🇺🇳 SDGs</button>
                 </div>
 
-                <div id="tab-beginner" class="learning-content active-tab">
-                    <div class="lesson-card">
-                        <div class="lesson-text">
-                            <h4>The Invisible Threat</h4>
-                            <p>Carbon Dioxide (CO₂) creates a "thermal blanket" around Earth. We must remove it to stay below 1.5°C warming.</p>
-                        </div>
-                        <div class="lesson-visual">
-                            <img src="https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?auto=format&fit=crop&w=1000&q=80" alt="Industrial Emissions">
-                        </div>
-                    </div>
-                    <div class="lesson-card">
-                        <div class="lesson-text">
-                            <h4>What is a Credit?</h4>
-                            <p>One credit represents <strong>1 Metric Tonne</strong> of CO₂e either prevented or removed from the atmosphere.</p>
-                        </div>
-                        <div class="lesson-visual">
-                            <img src="https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=987" alt="Balancing Scales">
+                <div style="display:flex; gap:10px; margin-bottom:25px; overflow-x:auto; padding-bottom:5px;">
+                    <div class="sdg-badge" style="background:#E5243B;">SDG 13<br>Climate</div>
+                    <div class="sdg-badge" style="background:#56C02B;">SDG 15<br>Life on Land</div>
+                    <div class="sdg-badge" style="background:#DDA63A;">SDG 2<br>Zero Hunger</div>
+                </div>
+
+                <div id="tab-academy" class="learning-content active-tab">
+                    
+                    <div class="lesson-card" onclick="alert('Module loading: Soil Biology 101')">
+                        <div class="lesson-icon" style="background:#FEF3C7; color:#D97706;"><i class="fa-solid fa-layer-group"></i></div>
+                        <div>
+                            <h4 style="margin:0; color:#064E3B;">The Inverted Forest</h4>
+                            <p style="font-size:0.8rem; color:#6B7280; margin:5px 0;">Why roots matter more than trunks.</p>
+                            <div class="progress-bar"><div class="fill" style="width:0%"></div></div>
                         </div>
                     </div>
+
+                    <div class="lesson-card" onclick="alert('Module loading: Measuring SOC')">
+                        <div class="lesson-icon" style="background:#ECFDF5; color:#10B981;"><i class="fa-solid fa-flask"></i></div>
+                        <div>
+                            <h4 style="margin:0; color:#064E3B;">Measuring Soil Carbon</h4>
+                            <p style="font-size:0.8rem; color:#6B7280; margin:5px 0;">Understanding Bulk Density & SOC.</p>
+                            <div class="progress-bar"><div class="fill" style="width:0%"></div></div>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div id="tab-science" class="learning-content">
@@ -159,15 +193,6 @@
                         </div>
                         <div class="lesson-visual">
                             <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070" alt="Vast Grasslands">
-                        </div>
-                    </div>
-                    <div class="lesson-card">
-                        <div class="lesson-text">
-                            <h4>The Soil & Blue Carbon</h4>
-                            <p><strong>Blue Carbon:</strong> Mangroves store 4x more carbon than rainforests. <strong>Soil</strong> is the largest terrestrial carbon pool.</p>
-                        </div>
-                        <div class="lesson-visual">
-                            <img src="https://images.unsplash.com/photo-1583373834259-46cc92173cb7?q=80&w=1974" alt="Mangrove Roots">
                         </div>
                     </div>
                 </div>
@@ -185,36 +210,6 @@
                         </div>
                         <div class="lesson-visual">
                             <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070" alt="Market Graph">
-                        </div>
-                    </div>
-                    <div class="lesson-card">
-                        <div class="lesson-text">
-                            <h4>The "VeraCarbon" Standard</h4>
-                            <p>We align with Verra. Credits must prove <strong>Additionality</strong>, <strong>Permanence</strong>, and pass <strong>Independent Audits</strong>.</p>
-                        </div>
-                        <div class="lesson-visual">
-                            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070" alt="Auditing Process">
-                        </div>
-                    </div>
-                </div>
-
-                <div id="tab-sdg" class="learning-content">
-                    <div class="lesson-card">
-                        <div class="lesson-text">
-                            <h4><i class="fa-solid fa-earth-americas" style="color:#3F7E44;"></i> SDG 13: Climate Action</h4>
-                            <p>We fund Target 13.1 (Resilience) by turning climate action into a viable business model.</p>
-                        </div>
-                        <div class="lesson-visual">
-                            <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=2070" alt="Climate Action">
-                        </div>
-                    </div>
-                    <div class="lesson-card">
-                        <div class="lesson-text">
-                            <h4><i class="fa-solid fa-leaf" style="color:#56C02B;"></i> SDG 15: Life on Land</h4>
-                            <p>We verify grasslands and soil to incentivize the restoration of degraded land (Target 15.3).</p>
-                        </div>
-                        <div class="lesson-visual">
-                            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2232" alt="Life on Land">
                         </div>
                     </div>
                 </div>
@@ -438,11 +433,12 @@
 
                 </div>
 
-                <div class="menu-item" onclick="navTo('contracts')">
-                    <i class="fa-solid fa-file-contract" style="color:#F59E0B;"></i>
-                    <span>Smart Contracts</span>
-                    <i class="fa-solid fa-chevron-right arrow"></i>
-                </div>
+                <div class="card" style="padding:0; overflow:hidden;">
+                    <div class="menu-item" onclick="navTo('contracts')">
+                        <i class="fa-solid fa-file-contract" style="color:#F59E0B;"></i>
+                        <span>Smart Contracts</span>
+                        <i class="fa-solid fa-chevron-right arrow"></i>
+                    </div>
                     <div class="menu-item" onclick="navTo('history')">
                         <i class="fa-solid fa-satellite" style="color:#3B82F6;"></i>
                         <span>Scan History</span>
@@ -479,6 +475,8 @@
                         <span style="color:#064E3B; font-weight:bold;">+ $340.00</span>
                     </div>
                 </div>
+
+                <button class="btn-cta" style="background:#EF4444; color:white; margin-top:20px;" onclick="handleLogout()">Log Out</button>
 
             </div>
 
