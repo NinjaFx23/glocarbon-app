@@ -68,25 +68,24 @@ function selectRole(role) {
 function handleLogin(e) {
     e.preventDefault();
     
-    // SAVE SESSION (The "Cookie")
-    localStorage.setItem('glocarbon_session', 'active');
-    localStorage.setItem('glocarbon_role', selectedRole);
+    // CHANGE THIS: Use sessionStorage (Temporary) instead of localStorage (Permanent)
+    sessionStorage.setItem('glocarbon_session', 'active');
+    sessionStorage.setItem('glocarbon_role', selectedRole);
 
     // Enter App
     document.getElementById('auth-section').style.display = 'none';
     document.getElementById('main-app').style.display = 'block';
     navTo('home');
     
-    // Force Resize (Fixes map bugs)
     setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 100);
 }
 
 function handleLogout() {
     // DESTROY SESSION
-    localStorage.removeItem('glocarbon_session');
-    localStorage.removeItem('glocarbon_role');
+    sessionStorage.removeItem('glocarbon_session');
+    sessionStorage.removeItem('glocarbon_role');
     
-    // Refresh Page (restarts at login)
+    // Refresh Page
     location.reload();
 }
 
