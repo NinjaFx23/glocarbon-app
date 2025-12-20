@@ -181,11 +181,24 @@ body {
 
 /* The Grid Layout */
 @media (max-width: 768px) {
-    .mobile-bottom-nav { 
-        display: grid; 
-        grid-template-columns: 1fr 1fr 1.2fr 1fr 1fr; /* Center gets slightly more space */
-        align-items: center; justify-items: center;
-    }
+.mobile-bottom-nav {
+    position: fixed !important; /* Force it to stay */
+    bottom: 0; left: 0; right: 0;
+    height: 70px; /* Slight height increase for comfort */
+    background: rgba(255, 255, 255, 0.98); /* Less transparent to prevent bleed */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-top: 1px solid #E5E7EB;
+    z-index: 9999 !important; /* Sit on top of EVERYTHING */
+    display: none; /* Hidden on Desktop */
+    padding-bottom: env(safe-area-inset-bottom); /* iPhone Home Bar Space */
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.05); /* Upward shadow */
+}
+
+/* Ensure Content doesn't hide behind the bar */
+.app-view {
+    padding-bottom: 120px !important; /* Extra padding at bottom of pages */
+}
 }
 
 /* The Icons (Minimalist Glyphs) */

@@ -27,6 +27,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // 3. NAVIGATION
 function navTo(viewId) {
+    // 1. INSTANTLY SCROLL TO TOP
+    window.scrollTo(0, 0);
+
+    // ... rest of your code ...
+    document.querySelectorAll('.app-view').forEach(el => el.classList.remove('active-view'));
+    // ...
+    
     // Hide all views
     document.querySelectorAll('.app-view').forEach(el => el.classList.remove('active-view'));
     // Show target view
