@@ -596,3 +596,25 @@ input { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd;
     .narrative-title { font-size: 1.6rem; }
     .stakeholder-grid { grid-template-columns: 1fr; } /* Stack cards on phone */
 }
+
+/* --- ACCESSIBILITY BOOST --- */
+/* High contrast focus ring for keyboard navigation */
+button:focus, a:focus, input:focus, .upload-zone:focus {
+    outline: 3px solid #F59E0B;
+    outline-offset: 2px;
+}
+
+/* Ensure text is readable on mobile */
+p, h1, h2, h3, h4, span {
+    letter-spacing: 0.02em; /* slightly improves readability */
+}
+
+/* Screen Reader Only Class (for making icons accessible) */
+.sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}

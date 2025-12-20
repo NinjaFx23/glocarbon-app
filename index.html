@@ -118,6 +118,36 @@
                     </div>
                 </div>
 
+                <h3 style="color:#3F2E05; margin: 30px 0 15px;">How You Earn</h3>
+                
+                <div class="card" style="padding:20px; display:flex; flex-direction:column; gap:20px;">
+                    
+                    <div style="display:flex; gap:15px;">
+                        <div style="min-width:40px; height:40px; background:#F0FDF4; color:#10B981; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.2rem;">1</div>
+                        <div>
+                            <h4 style="margin:0; color:#064E3B;">Map Your Land</h4>
+                            <p style="font-size:0.85rem; color:#4B5563; margin-top:5px;">Use the <strong>AI Scan</strong> tab to take a photo. Our satellite node verifies your GPS and vegetation health.</p>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; gap:15px;">
+                        <div style="min-width:40px; height:40px; background:#FFFBEB; color:#D97706; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.2rem;">2</div>
+                        <div>
+                            <h4 style="margin:0; color:#064E3B;">Mint Assets</h4>
+                            <p style="font-size:0.85rem; color:#4B5563; margin-top:5px;">Verified carbon is tokenized on the Polygon blockchain as an immutable asset.</p>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; gap:15px;">
+                        <div style="min-width:40px; height:40px; background:#EFF6FF; color:#2563EB; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.2rem;">3</div>
+                        <div>
+                            <h4 style="margin:0; color:#064E3B;">Get Paid</h4>
+                            <p style="font-size:0.85rem; color:#4B5563; margin-top:5px;">Buyers purchase your credits. Funds are deposited directly to your mobile wallet.</p>
+                        </div>
+                    </div>
+
+                </div>
+
                 <div style="display:flex; justify-content:space-between; align-items:end; margin-bottom:15px;">
                     <h3 style="color:#3F2E05; margin:0;">Global Impact</h3>
                     <span onclick="navTo('marketplace')" style="font-size:0.9rem; color:#D97706; font-weight:bold; cursor:pointer;">View Map -></span>
@@ -146,72 +176,106 @@
 
             </div>
             
-            <div id="view-learn" class="app-view">
+           <div id="view-learn" class="app-view">
                 <div class="academy-header">
-                    <h2>Climate <span style="color:#FFD700;">Intelligence</span></h2>
-                    <p>From carbon curiosity to market mastery.</p>
+                    <h2>Soil <span style="color:#FFD700;">Intelligence</span></h2>
+                    <p>The science of the Inverted Forest.</p>
                 </div>
-                <div class="learning-tabs">
-                    <button class="tab-btn active" onclick="switchTab('academy')">🌱 Basics</button>
-                    <button class="tab-btn" onclick="switchTab('science')">🔬 Science</button>
-                    <button class="tab-btn" onclick="switchTab('market')">📈 Market</button>
-                </div>
-
-                <div style="display:flex; gap:10px; margin-bottom:25px; overflow-x:auto; padding-bottom:5px;">
-                    <div class="sdg-badge" style="background:#E5243B;">SDG 13<br>Climate</div>
-                    <div class="sdg-badge" style="background:#56C02B;">SDG 15<br>Life on Land</div>
-                    <div class="sdg-badge" style="background:#DDA63A;">SDG 2<br>Zero Hunger</div>
+                
+                <div class="learning-tabs" role="tablist" aria-label="Learning Modules">
+                    <button class="tab-btn active" onclick="switchTab('academy')" role="tab" aria-selected="true">🌱 Roots</button>
+                    <button class="tab-btn" onclick="switchTab('science')" role="tab" aria-selected="false">🔬 Science</button>
+                    <button class="tab-btn" onclick="switchTab('sdg')" role="tab" aria-selected="false">🇺🇳 Impact</button>
                 </div>
 
-                <div id="tab-academy" class="learning-content active-tab">
+                <div id="tab-academy" class="learning-content active-tab" role="tabpanel">
                     
-                    <div class="lesson-card" onclick="alert('Module loading: Soil Biology 101')">
-                        <div class="lesson-icon" style="background:#FEF3C7; color:#D97706;"><i class="fa-solid fa-layer-group"></i></div>
-                        <div>
-                            <h4 style="margin:0; color:#064E3B;">The Inverted Forest</h4>
-                            <p style="font-size:0.8rem; color:#6B7280; margin:5px 0;">Why roots matter more than trunks.</p>
-                            <div class="progress-bar"><div class="fill" style="width:0%"></div></div>
+                    <div class="lesson-card">
+                        <div class="lesson-text">
+                            <h4>The "Inverted Forest"</h4>
+                            <p><strong>Fact:</strong> 80% of a grassland's biomass is underground.</p>
+                            <p>Unlike trees, which store carbon in trunks (vulnerable to fire), grasses store carbon in deep root systems. When grass is grazed, it sheds roots, depositing carbon <strong>permanently into the soil</strong>.</p>
+                        </div>
+                        <div class="lesson-visual">
+                            <img src="https://images.unsplash.com/photo-1598512752271-33f913a5af13?q=80&w=2070" alt="Diagram showing deep roots of native grass versus shallow crops">
                         </div>
                     </div>
 
-                    <div class="lesson-card" onclick="alert('Module loading: Measuring SOC')">
-                        <div class="lesson-icon" style="background:#ECFDF5; color:#10B981;"><i class="fa-solid fa-flask"></i></div>
-                        <div>
-                            <h4 style="margin:0; color:#064E3B;">Measuring Soil Carbon</h4>
-                            <p style="font-size:0.8rem; color:#6B7280; margin:5px 0;">Understanding Bulk Density & SOC.</p>
-                            <div class="progress-bar"><div class="fill" style="width:0%"></div></div>
+                    <div class="lesson-card">
+                        <div class="lesson-text">
+                            <h4>Soil Organic Carbon (SOC)</h4>
+                            <p>Soil holds <strong>3x more carbon</strong> than the atmosphere and all living plants combined.</p>
+                            <p>By increasing SOC by just 0.4% per year, we can halt the annual increase in atmospheric CO2. This is the "4 per 1000" initiative.</p>
+                        </div>
+                        <div class="lesson-visual">
+                            <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?q=80&w=2070" alt="Close up of rich, dark, carbon-heavy soil in a hand">
                         </div>
                     </div>
 
                 </div>
 
-                <div id="tab-science" class="learning-content">
+                <div id="tab-science" class="learning-content" role="tabpanel">
+                    
                     <div class="lesson-card">
                         <div class="lesson-text">
-                            <h4>Myth: "Only Trees Count"</h4>
-                            <p>False. <strong>Grasslands</strong> store 90% of their carbon underground in roots, making them resilient to wildfires.</p>
+                            <h4>Remote Sensing (NDVI)</h4>
+                            <p>We use satellites to measure <strong>NDVI (Normalized Difference Vegetation Index)</strong>.</p>
+                            <p>Healthy, carbon-sequestering grass reflects near-infrared light. Our AI analyzes this light to estimate biomass without needing expensive lab tests.</p>
                         </div>
                         <div class="lesson-visual">
-                            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070" alt="Vast Grasslands">
+                            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072" alt="Satellite view of earth showing vegetation density heat map">
                         </div>
                     </div>
+
+                    <div class="lesson-card">
+                        <div class="lesson-text">
+                            <h4>Bulk Density & Depth</h4>
+                            <p>To calculate tonnage, we measure soil density.</p>
+                            <p><code>Carbon (t/ha) = Depth x Density x %SOC</code></p>
+                            <p>Compacted (overgrazed) soil holds less carbon. Regenerative grazing aerates soil, increasing capacity.</p>
+                        </div>
+                        <div class="lesson-visual">
+                            <img src="https://images.unsplash.com/photo-1629807577583-0c46522c7a52?q=80&w=2070" alt="Soil sampling core tool extracting earth">
+                        </div>
+                    </div>
+
                 </div>
 
-                <div id="tab-market" class="learning-content">
-                    <div class="lesson-card">
+                <div id="tab-sdg" class="learning-content" role="tabpanel">
+                    
+                    <div class="lesson-card" style="border-left: 5px solid #56C02B;">
                         <div class="lesson-text">
-                            <h4>2024 Market Reality</h4>
-                            <p>The Voluntary Carbon Market is valued at over <strong>$1.4 Billion</strong>. Companies retire 175M+ credits annually.</p>
-                            <div class="market-stat-grid">
-                                <div class="market-stat"><strong>$1.4B</strong><span>Size</span></div>
-                                <div class="market-stat"><strong>175M</strong><span>Retired</span></div>
-                                <div class="market-stat"><strong>$30</strong><span>Price</span></div>
-                            </div>
+                            <h4 style="color:#56C02B; border:none; padding:0;"><i class="fa-solid fa-leaf"></i> SDG 15: Life on Land</h4>
+                            <p><strong>Target 15.3:</strong> Land Degradation Neutrality.</p>
+                            <p>We combat desertification. By assigning value to grass, farmers stop overgrazing, allowing the "Green Shield" to return and hold the soil together against erosion.</p>
                         </div>
                         <div class="lesson-visual">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070" alt="Market Graph">
+                            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2232" alt="Healthy green grassland ecosystem">
                         </div>
                     </div>
+
+                    <div class="lesson-card" style="border-left: 5px solid #3F7E44;">
+                        <div class="lesson-text">
+                            <h4 style="color:#3F7E44; border:none; padding:0;"><i class="fa-solid fa-cloud"></i> SDG 13: Climate Action</h4>
+                            <p><strong>Target 13.1:</strong> Resilience to climate hazards.</p>
+                            <p>Grasslands are fire-resilient. When a forest burns, the carbon is lost instantly. When a grassland burns, the roots survive, and the carbon stays safely underground.</p>
+                        </div>
+                        <div class="lesson-visual">
+                            <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=2070" alt="Storm clouds over a resilient landscape">
+                        </div>
+                    </div>
+
+                    <div class="lesson-card" style="border-left: 5px solid #DDA63A;">
+                        <div class="lesson-text">
+                            <h4 style="color:#DDA63A; border:none; padding:0;"><i class="fa-solid fa-wheat-awn"></i> SDG 2: Zero Hunger</h4>
+                            <p><strong>Target 2.4:</strong> Sustainable food production.</p>
+                            <p>Carbon-rich soil holds more water. This means better grass for cattle and better crops for humans, directly fighting drought-induced famine.</p>
+                        </div>
+                        <div class="lesson-visual">
+                            <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=2070" alt="Wheat field representing food security">
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -476,7 +540,12 @@
                     </div>
                 </div>
 
-                <button class="btn-cta" style="background:#EF4444; color:white; margin-top:20px;" onclick="handleLogout()">Log Out</button>
+                <button class="btn-cta" 
+                        onclick="handleLogout()" 
+                        aria-label="Log out of your account"
+                         style="background:#EF4444; color:white; margin-top:30px; display:flex; align-items:center; justify-content:center; gap:10px;">
+                    <i class="fa-solid fa-right-from-bracket"></i> Secure Log Out
+                </button>
 
             </div>
 
