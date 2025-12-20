@@ -1,12 +1,11 @@
-/* --- GLOCARBON LOGIC V13 (With Auto-Login Fix) --- */
+/* --- GLOCARBON LOGIC V15 (Production Logic) --- */
 
 // 1. GLOBAL VARIABLES
 let selectedRole = 'Farmer'; // Default role
 
 // 2. AUTO-LOGIN CHECK (The Doorman)
 document.addEventListener("DOMContentLoaded", () => {
-    // CHANGE: Check sessionStorage (Temporary) instead of localStorage (Permanent)
-    // This ensures if they close the browser, they have to log in again.
+    // Check sessionStorage (Temporary)
     const session = sessionStorage.getItem('glocarbon_session');
     const savedRole = sessionStorage.getItem('glocarbon_role');
 
@@ -19,25 +18,20 @@ document.addEventListener("DOMContentLoaded", () => {
         // Skip Login Screen
         document.getElementById('auth-section').style.display = 'none';
         document.getElementById('main-app').style.display = 'block';
-        if (session === 'active') {
-        // ... existing code ...
-        document.querySelector('.mobile-bottom-nav').classList.add('nav-active'); // <--- ADD THIS
-}
+        
+        // VITAL: Unlock the Mobile Navbar because we are logged in
+        document.querySelector('.mobile-bottom-nav').classList.add('nav-active');
     }
     
     // Load Profile Picture (This stays in localStorage because it's data, not auth)
     loadProfile();
 });
 
-// 3. NAVIGATION
+// 3. NAVIGATION (With Scroll Fix)
 function navTo(viewId) {
     // 1. INSTANTLY SCROLL TO TOP
     window.scrollTo(0, 0);
 
-    // ... rest of your code ...
-    document.querySelectorAll('.app-view').forEach(el => el.classList.remove('active-view'));
-    // ...
-    
     // Hide all views
     document.querySelectorAll('.app-view').forEach(el => el.classList.remove('active-view'));
     // Show target view
@@ -45,7 +39,7 @@ function navTo(viewId) {
     
     // Update Icons
     document.querySelectorAll('.nav-item, .nav-link').forEach(el => el.classList.remove('active'));
-    // Highlight active nav item (simple match)
+    // Highlight active nav item (simple match) - You can add logic to highlight specific buttons here if needed
     
     // Auto-Close Mobile Sidebar
     if (window.innerWidth <= 768) {
@@ -82,15 +76,17 @@ function selectRole(role) {
 function handleLogin(e) {
     e.preventDefault();
     
-    // CHANGE: Use sessionStorage (Temporary) instead of localStorage (Permanent)
+    // Use sessionStorage (Temporary)
     sessionStorage.setItem('glocarbon_session', 'active');
     sessionStorage.setItem('glocarbon_role', selectedRole);
 
     // Enter App
     document.getElementById('auth-section').style.display = 'none';
     document.getElementById('main-app').style.display = 'block';
-    // Show Mobile Nav
+    
+    // VITAL: Show Mobile Nav
     document.querySelector('.mobile-bottom-nav').classList.add('nav-active');
+    
     navTo('home');
     
     // Force Resize (Fixes map bugs)
@@ -98,9 +94,12 @@ function handleLogin(e) {
 }
 
 function handleLogout() {
-    // DESTROY SESSION (Only the auth key)
+    // DESTROY SESSION
     sessionStorage.removeItem('glocarbon_session');
     sessionStorage.removeItem('glocarbon_role');
+    
+    // VITAL: Hide Mobile Nav
+    document.querySelector('.mobile-bottom-nav').classList.remove('nav-active');
     
     // Refresh Page
     location.reload();
@@ -162,8 +161,6 @@ function simulateAnalysis() {
     }, 800);
 }
 
-/* --- UPDATED SCANNER LOGIC --- */
-
 function showResults() {
     // 1. Hide Progress, Show Results
     document.getElementById('scan-progress').style.display = 'none';
@@ -213,7 +210,7 @@ function initMap() {
     mapInstance = L.map('map').setView([0, 20], 2); 
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+        attribution: '&copy; CARTO',
         subdomains: 'abcd',
         maxZoom: 19
     }).addTo(mapInstance);
