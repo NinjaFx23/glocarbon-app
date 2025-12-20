@@ -19,6 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
         // Skip Login Screen
         document.getElementById('auth-section').style.display = 'none';
         document.getElementById('main-app').style.display = 'block';
+        if (session === 'active') {
+        // ... existing code ...
+        document.querySelector('.mobile-bottom-nav').classList.add('nav-active'); // <--- ADD THIS
+}
     }
     
     // Load Profile Picture (This stays in localStorage because it's data, not auth)
@@ -85,6 +89,8 @@ function handleLogin(e) {
     // Enter App
     document.getElementById('auth-section').style.display = 'none';
     document.getElementById('main-app').style.display = 'block';
+    // Show Mobile Nav
+    document.querySelector('.mobile-bottom-nav').classList.add('nav-active');
     navTo('home');
     
     // Force Resize (Fixes map bugs)
